@@ -29,7 +29,7 @@ The latest version introduces a comprehensive **Professional Design & UX Audit**
 - `src/store/`: State management with `zustand` for progress.
 
 ## 🛠️ Tech Stack
-- **Framework**: React 18 + Vite
+- **Framework**: React 19 + Vite
 - **Styling**: Tailwind CSS v4 + Professional tokens
 - **Animations**: Framer Motion
 - **Core Engine**: `vim-wasm`

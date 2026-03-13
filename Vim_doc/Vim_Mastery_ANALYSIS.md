@@ -40,12 +40,11 @@ Inspired by Salvatore Sanfilippo (antirez) for its pedagogical depth and clarity
 6.  **Final Project**: Building a personalized IDE using only Vim.
 
 ## 4. Technical Architecture
-- **Frontend**: Vite + React 19 + Tailwind CSS 4.
-- **Animations**: Framer Motion for UI and state-driven interactive components.
-- **Core Engine**: `react-vim-wasm` for the real Vim experience.
-- **Content Management**: MDX for flexible lesson layouts with embedded interactive components (`GrammarBuilder`, `SpeedRacer`, `HJKLMaze`).
-- **State Management**: **Zustand** with persistent storage for user progress and preferences.
-- **Bilingual Engine**: `i18next` with dynamic content switching.
+- **Frontend**: Vite + React 19 + Tailwind CSS v4.
+- **Animations**: Framer Motion for tactile feedback and state transitions.
+- **Core Engine**: `vim-wasm` for the real Vim experience.
+- **Content Management**: MDX v3 with custom didactic components.
+- **State Management**: **Zustand** with persistent storage.
 
 ## 5. User Interface (UI) Concepts
 - **The Dashboard**: A dynamic progression system (Level 1-3).
