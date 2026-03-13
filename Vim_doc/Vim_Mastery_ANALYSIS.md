@@ -6,7 +6,7 @@ Inspired by Salvatore Sanfilippo (antirez) for its pedagogical depth and clarity
 
 ## 2. Core Pillars
 - **Interactive Terminal**: No more "reading about it". Users type commands directly in a browser-based Vim.
-- **Gamification**: Learning through movement. Games inspired by Vim-Adventures but with modern aesthetics.
+- **Gamification**: Learning through movement and interactive challenges (Speed Racer, etc.).
 - **Aesthetic Excellence**: A premium, "Cyber-Terminal" look with glassmorphism, neon highlights, and buttery-smooth animations.
 - **Bilingual (EN/IT)**: Full support for both languages in UI and content.
 
@@ -47,16 +47,17 @@ Inspired by Salvatore Sanfilippo (antirez) for its pedagogical depth and clarity
 - **State Management**: **Zustand** with persistent storage.
 
 ## 5. User Interface (UI) Concepts
-- **The Dashboard**: A dynamic progression system (Level 1-3).
-- **The Terminal Window**: Premium glassmorphism window integrated with the content area.
-- **Interactive Layers**: Real-time feedback for motions and grammar construction.
-- **Summary Cards**: Beautifully designed flashcards at the end of each lesson.
+- **VimTerminal Integration**: Integrated terminal with responsive stacking.
+- **Outfit Branding**: High-end display typography for a professional look.
+- **Glassmorphism 2.0**: Refined visual tokens and hover interactions.
 
 ## 6. Status & Roadmap
 - [x] Phase 1: Core Engine & Navigation (hjkl Maze).
 - [x] Phase 2: Vim Grammar & Keystroke Efficiency (Speed Racer).
 - [x] Phase 3: Advanced Automation (Macros, Registers, Text Objects).
-- [ ] Phase 4: Project Expansion (Vim Golf Global, Advanced Scripting).
+- [x] Phase 4: Full Curriculum Deployment (12 Lessons).
+- [x] Phase 5: Design Systems and Gamification.
+- [x] Phase 6: Professional Design & UX Audit (v0.5).
 
 ---
-*Updated on 2026-03-13 - Project is in Active Development (Phase 3 Complete)*
+*Updated on 2026-03-13 - Project is in Production Ready State (v0.5)*
