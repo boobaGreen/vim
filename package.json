@@ -35,5 +35,11 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^4.0.0",
     "vite": "^6.0.0"
+  },
+  "overrides": {
+    "react-vim-wasm": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }
