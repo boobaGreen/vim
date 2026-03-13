@@ -1,28 +1,32 @@
-# WALKTHROUGH: The Vim Mastery Experience
+# WALKTHROUGH: The Vim Mastery Experience (v0.5)
 
-Welcome to the detailed walkthrough of how a student experiences the **Vim Mastery** course.
+Welcome to the definitive walkthrough of the **Vim Mastery** platform, now refined for a professional, production-ready audience.
 
 ---
 
-## 1. The Entrance: "The Terminal Boot"
-- **Visuals**: A black screen with a green cursor. It types: `VIM MASTERY v1.0 - INITIALIZING...`.
-- **Interaction**: The user is asked to type `:help` to start. This immediately teaches the most important Vim command.
-- **Design**: Premium dark theme with a "cyber" aesthetic.
+## 1. The Entrance: "Cyber-Landing"
+- **Visuals**: A premium animated hero section using **Outfit** black typography.
+- **Micro-interactions**: Magnetic hover buttons and glassmorphism cards that respond to user focus.
+- **Call to Action**: Quick jump into lessons or exploration of levels.
 
-## 2. Level 1: The Neophyte (Il Neofita)
-- **The Journey**: The student starts in a "locked" terminal. Only `h`, `j`, `k`, `l` move the character.
-- **The Game**: "The hjkl Maze". You are a cursor lost in a maze of semicolon (;) walls. You must reach the `$` (end of line) to exit the level.
-- **Animation**: When you hit a wall, the screen glitches slightly. When you reach the exit, a neon blast clears the screen.
+## 2. The Curriculum: 12 Steps to Mastery
+- **Level 1: Survival**: Basic moves (hjkl), insert mode, and essential saves.
+- **Level 2: Efficiency**: Vim Grammar (Verbs + Motions), counts, and visual selection.
+- **Level 3: Wizardry**: Text objects, powerful Macros, and the Global command.
 
-## 3. Level 2: The Efficient User
-- **Experience**: The student learns the "Vim Grammar". 
-- **The Grammar Builder**: A visual tool where you snap together Verbs, Counts, and Motions to see the command result.
-- **Speed Racer**: A high-stakes race where you must refactor text in the terminal using the absolute minimum of keystrokes. Every key counts!
+## 3. The Professional Environment
+- **Interactive WASM Terminal**: A real Vim instance running in the browser, now optimized for **Mobile** screens with responsive stacking.
+- **Tactile Learning**: Keyboard shortcuts are highlighted with custom `Kbd` units, and concepts are chunked into clear `Steps`.
+- **Persistent Feedback**: Progress is tracked using a sticky terminal view on desktop, keeping exercise results always visible.
 
-## 4. Level 3: The Vim Wizard
-- **Experience**: Total automation.
-- **The Automation Suite**: Lessons on Text Objects (`ci"`), Macros (`qa...q`), and Registers (`"ayw`).
-- **Refactoring Power**: Using the Global command (`:g`) to transform large blocks of code in milliseconds.
+## 4. Gamification: Achievements
+- **Progress Visualization**: A high-impact circular progress ring in the Achievements view.
+- **Milestones**: Glowing cards represent mastered skills (e.g., "Motion Master", "Grammar Builder").
+- **State Persistence**: Progress is saved across sessions via persistent Zustand state.
 
-## 5. Conclusion: Project Status
-The v1.0 core of **Vim Mastery** is fully operational across 12 lessons. The platform provides a seamless transition from basic survival to advanced text orchestration.
+## 5. Mobile Experience
+- **Fluid Layout**: The same premium desktop experience, condensed for small screens.
+- **Responsive Terminal**: Dynamic terminal sizing and touch-optimized navigation menus.
+
+---
+*Project Status: Completed Phase 6 Implementation Audit.*

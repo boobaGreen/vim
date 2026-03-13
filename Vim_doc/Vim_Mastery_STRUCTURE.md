@@ -2,20 +2,23 @@
 
 ```text
 vim-mastery/
-├── public/                 # Static assets
+├── public/                 # Static assets (favicons, etc.)
 ├── src/
 │   ├── components/
 │   │   ├── terminal/       # VimTerminal.jsx
-│   │   ├── layout/         # Breadcrumb.jsx, LessonLayout.jsx
-│   │   ├── ui/             # Button, Card, Badge (index.jsx)
+│   │   ├── views/          # Landing.jsx, Achievements.jsx
+│   │   ├── ui/             # MDXComponents.jsx, index.jsx (Button, etc.)
 │   │   └── interactive/    # HJKLMaze, GrammarBuilder, SpeedRacer
 │   ├── content/
-│   │   ├── en/             # English MDX (level-1, level-2, level-3)
-│   │   └── it/             # Italian MDX (level-1, level-2, level-3)
+│   │   ├── en/             # English MDX (12 lessons)
+│   │   └── it/             # Italian MDX (12 lessons)
 │   ├── store/              # useProgressStore.js
 │   ├── LessonRenderer.jsx  # MDX Provider & Component Mapping
 │   ├── App.jsx             # Main Routing & Layout
+│   ├── index.css           # Global Styles (Tailwind v4 tokens)
 │   └── main.jsx
+├── Vim_doc/                # Comprehensive Project Documentation
+├── dist/                   # Production Build
 ├── package.json
 └── vite.config.js
 ```
@@ -23,21 +26,26 @@ vim-mastery/
 ## Key Files Detail
 
 ### `src/components/terminal/VimTerminal.jsx`
-The heart of the application. Integrates `react-vim-wasm` and provides callbacks for lesson progress detection (e.g., detecting when a user correctly identifies a motion).
+The terminal heart. Integrates `vim-wasm` worker and manages interactivity with lesson content.
+
+### `src/components/ui/MDXComponents.jsx`
+Premium didactic components:
+- `Kbd`: Keyboard shortcut styling.
+- `InfoBox`: Glowing glassmorphism callouts.
+- `Step`: Bold sequence indicators.
+- `CommandTable`: Interactive syntax guides.
 
 ### `src/content/**/*.mdx`
-Lesson files. They use custom components like `<VimExercise />`, `<CheatSheet />`, and `<InteractiveDiagram />`.
+The 12-lesson core curriculum. Balanced between theory and interactive practicing.
 
 ### `src/store/useProgressStore.js`
 Handles:
-- Completion status of lessons.
-- Achievements unlocked.
-- Language preference.
-- Terminal preferences (theme, font).
+- Completion status & Achievements.
+- Bilingual state (EN/IT).
+- User preferences.
 
-### `src/styles/theme.css`
-Defines the "Cyber-Terminal" aesthetic:
-- Background: Deep Obsidian (`#0A0A0B`)
-- Primary: Neon Teal (`#2DD4BF`)
-- Accent: Electric Purple (`#A855F7`)
-- Effect: Backdrop blur 12px for glassmorphism.
+### `src/index.css`
+Advanced Cyber-Midnight Design System:
+- **Tailwind CSS v4** base.
+- Custom **Glassmorphism 2.0** utilities.
+- Professional typography tokens (**Outfit** & **Inter**).
