@@ -7,25 +7,33 @@
 
 **Vim Mastery** is a premium, gamified educational platform designed to turn neophytes into Vim Wizards using a full WASM-powered Vim terminal directly in the browser.
 
-## 🚀 Experience
-- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm`.
-- **Gamified Journey**: Track progress through 12 levels of increasing complexity.
-- **Achievements System**: Unlock badges as you master motions, operators, and macros.
-- **Bi-lingual Support**: Full curriculum in Italian and English.
-- **Cyber-Terminal Aesthetic**: High-end UI with glassmorphism, neon accents, and tactile feedback.
+## 🌟 Professional Audit (v0.5)
+The latest version introduces a comprehensive **Professional Design & UX Audit**:
+- **Outfit High-End Typography**: A new consistent visual language for a premium feel.
+- **Cyber-Midnight Palette**: Refined bioactive colors for immersion and eye comfort.
+- **Mobile Fidelity**: Full WASM Terminal support on smartphones and tablets.
+- **Glassmorphism 2.0**: Enhanced tactile feedback and micro-animations.
+
+## 🚀 Key Features
+- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm` (Now on Mobile!).
+- **12 Lesson Curriculum**: Progress from basic survival (hjkl) to advanced text orchestration (Macros/Registers).
+- **Achievements System**: Unlock badges as you master the language of productivity.
+- **Bi-lingual Support**: Seamless switching between English and Italian.
+- **Responsive UX**: Optimized workflow with "Click-Outside" menu closure and persistent terminal views.
 
 ## 📂 Project Structure
-- `src/content/`: MDX-based curriculum with high-impact educational components.
+- `src/content/`: MDX-based curriculum with bilingual support.
+- `src/components/views/`: Main application screens (Landing, Achievements).
 - `src/components/terminal/`: Bridge to the Vim WASM worker.
-- `src/store/`: Global state management with `zustand` for progress and achievements.
-- `src/components/ui/`: Custom design system using Tailwind CSS and Framer Motion.
+- `src/components/ui/`: Custom design system (Kbd, InfoBox, Step).
+- `src/store/`: State management with `zustand` for progress.
 
 ## 🛠️ Tech Stack
 - **Framework**: React 18 + Vite
-- **Styling**: Tailwind CSS + Vanilla CSS (Cyber System)
+- **Styling**: Tailwind CSS v4 + Professional tokens
 - **Animations**: Framer Motion
 - **Core Engine**: `vim-wasm`
-- **Content**: MDX v3
+- **Typography**: Inter & Outfit (Google Fonts)
 
 ## 📜 License
 This project is licensed under the **GNU General Public License**.
@@ -37,4 +45,4 @@ Developed with ❤️ by **Claudio Dall'Ara**.
 - 💼 [LinkedIn](https://www.linkedin.com/in/claudio-dall-ara-730aa0302/)
 
 ---
-*SYS_READY // VIM_MASTERY_V0.11*
+*SYS_READY // VIM_MASTERY_V0.5*

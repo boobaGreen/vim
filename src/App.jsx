@@ -31,39 +31,52 @@ function App() {
   return (
     <div className="min-h-screen bg-brand-bg text-white selection:bg-brand-primary/30 flex flex-col">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass-morphism border-b-0 py-3 px-6 md:px-10 flex justify-between items-center h-14">
+      <nav className="fixed top-0 w-full z-50 glass-morphism border-b-0 py-3 px-4 md:px-10 flex justify-between items-center h-14">
         <button 
           onClick={() => setView('home')}
-          className="flex items-center space-x-2.5 group outline-none cursor-pointer"
+          className="flex items-center space-x-2 md:space-x-2.5 group outline-none cursor-pointer"
         >
-          <div className="bg-brand-primary/10 p-1.5 rounded-lg border border-brand-primary/20 group-hover:scale-110 transition-transform">
-            <Terminal className="text-brand-primary w-4 h-4" />
+          <div className="bg-brand-primary/10 p-1 md:p-1.5 rounded-lg border border-brand-primary/20 group-hover:scale-110 transition-transform">
+            <Terminal className="text-brand-primary w-3.5 h-3.5 md:w-4 md:h-4" />
           </div>
-          <span className="font-display font-black text-lg tracking-tight uppercase italic group-hover:text-brand-primary transition-colors">VIM<span className="text-brand-primary group-hover:text-white">MASTERY</span></span>
+          <span className="font-display font-black text-base md:text-lg tracking-tight uppercase italic group-hover:text-brand-primary transition-colors">VIM<span className="text-brand-primary group-hover:text-white">MASTERY</span></span>
         </button>
         
-        <div className="flex items-center space-x-4 md:space-x-10 text-[11px] font-bold uppercase tracking-widest">
+        <div className="flex items-center space-x-3 md:space-x-10 text-[10px] md:text-[11px] font-bold uppercase tracking-widest">
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`hover:text-brand-primary transition-all flex items-center space-x-2 cursor-pointer ${isMenuOpen ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
+            className={`hover:text-brand-primary transition-all flex items-center space-x-1.5 md:space-x-2 cursor-pointer ${isMenuOpen ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
           >
-            <BookOpen size={14} /> <span>{language === 'it' ? 'Lezioni' : 'Lessons'}</span>
+            <BookOpen size={12} className="md:w-[14px] md:h-[14px]" /> <span>{language === 'it' ? 'Lezioni' : 'Lessons'}</span>
           </button>
           <button 
             onClick={() => setView('achievements')}
-            className={`hover:text-brand-primary transition-all flex items-center space-x-2 cursor-pointer ${view === 'achievements' ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
+            className={`hover:text-brand-primary transition-all flex items-center space-x-1.5 md:space-x-2 cursor-pointer ${view === 'achievements' ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
           >
-            <Trophy size={14} /> <span>{language === 'it' ? 'Obiettivi' : 'Achievements'}</span>
+            <Trophy size={12} className="md:w-[14px] md:h-[14px]" /> <span>{language === 'it' ? 'Obiettivi' : 'Achievements'}</span>
           </button>
-          <div className="h-4 w-px bg-white/10"></div>
+          <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
           <button 
             onClick={() => setLanguage(language === 'it' ? 'en' : 'it')}
-            className="border border-white/20 rounded-full w-8 h-8 flex items-center justify-center hover:bg-white/5 hover:border-brand-primary/50 transition-all cursor-pointer"
+            className="border border-white/20 rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center hover:bg-white/5 hover:border-brand-primary/50 transition-all cursor-pointer"
           >
-            <span className="text-[9px] uppercase">{language}</span>
+            <span className="text-[8px] md:text-[9px] uppercase">{language}</span>
           </button>
         </div>
       </nav>
+
+      {/* Dropdown Menu Backdrop */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsMenuOpen(false)}
+            className="fixed inset-0 bg-brand-bg/60 backdrop-blur-sm z-40"
+          />
+        )}
+      </AnimatePresence>
 
       {/* Lesson Index Dropdown */}
       <AnimatePresence>
@@ -72,15 +85,15 @@ function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-16 left-0 w-full bg-brand-bg/95 backdrop-blur-2xl border-b border-white/10 z-40 p-8 max-h-[70vh] overflow-y-auto custom-scrollbar"
+            className="fixed top-14 left-0 w-full bg-brand-bg/95 backdrop-blur-2xl border-b border-white/10 z-50 p-6 md:p-10 max-h-[80vh] overflow-y-auto custom-scrollbar shadow-4xl"
           >
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
               {['level-1', 'level-2', 'level-3'].map((lvl, lIdx) => (
                 <div key={lvl} className="space-y-4">
-                  <h4 className="text-[10px] font-black tracking-[0.2em] text-white/30 uppercase border-b border-white/5 pb-2">
+                  <h4 className="text-[10px] font-display font-black tracking-[0.3em] text-brand-primary/50 uppercase border-b border-white/5 pb-2 italic">
                     {language === 'it' ? `LIVELLO ${lIdx + 1}` : `LEVEL ${lIdx + 1}`}
                   </h4>
-                  <div className="flex flex-col space-y-1">
+                  <div className="flex flex-col space-y-1.5">
                     {lessons.slice(lIdx * 4, (lIdx + 1) * 4).map((l, i) => {
                       const absoluteIndex = lIdx * 4 + i;
                       const isCompleted = completedLessons.includes(l);
@@ -89,13 +102,13 @@ function App() {
                         <button
                           key={l}
                           onClick={() => { goToLesson(absoluteIndex); setIsMenuOpen(false); }}
-                          className={`flex items-center justify-between p-3 rounded-lg text-left transition-all cursor-pointer ${
-                            isActive ? 'bg-brand-primary/20 text-brand-primary border border-brand-primary/20' : 
-                            'hover:bg-white/5 text-white/60 hover:text-white'
+                          className={`flex items-center justify-between p-3.5 rounded-xl text-left transition-all cursor-pointer group border ${
+                            isActive ? 'bg-brand-primary/10 text-brand-primary border-brand-primary/30' : 
+                            'hover:bg-white/5 border-transparent text-white/50 hover:text-white'
                           }`}
                         >
-                          <span className="text-xs font-bold uppercase tracking-wide truncate pr-4">{l.replace(/^[0-9]+-/, '').replace(/-/g, ' ')}</span>
-                          {isCompleted && <Trophy size={12} className="text-brand-primary" />}
+                          <span className="text-[11px] font-display font-bold uppercase tracking-wide truncate pr-4">{l.replace(/^[0-9]+-/, '').replace(/-/g, ' ')}</span>
+                          {isCompleted ? <Trophy size={14} className="text-brand-primary opacity-80" /> : <div className="w-1 h-1 rounded-full bg-white/10 group-hover:bg-brand-primary/40 transition-colors" />}
                         </button>
                       );
                     })}
@@ -169,21 +182,22 @@ function App() {
             </div>
 
             {/* Right: Terminal Area */}
+            {/* Terminal Area */}
             <MMotionDiv
-               initial={{ opacity: 0, x: 20 }}
-               animate={{ opacity: 1, x: 0 }}
-               className="h-full hidden lg:flex flex-col space-y-6"
+               initial={{ opacity: 0, scale: 0.95 }}
+               animate={{ opacity: 1, scale: 1 }}
+               className="h-full flex flex-col space-y-6 lg:sticky lg:top-24"
             >
               <div className="glass-morphism rounded-3xl p-1 overflow-hidden shadow-2xl border-white/5 bg-white/[0.01]">
                 <VimTerminal />
               </div>
               
               {/* Quick Shortcuts Hint */}
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 gap-3 md:gap-4">
                 {['h', 'j', 'k', 'l'].map(key => (
-                  <div key={key} className="glass-morphism py-3 px-2 flex flex-col items-center justify-center rounded-2xl border-white/5 bg-white/[0.02] group hover:bg-brand-primary/10 transition-all cursor-default">
-                    <span className="text-brand-primary font-display font-black text-xl group-hover:scale-110 transition-transform">{key}</span>
-                    <span className="text-[9px] text-white/20 uppercase tracking-widest font-bold mt-1">
+                  <div key={key} className="glass-morphism py-2.5 md:py-3 px-2 flex flex-col items-center justify-center rounded-2xl border-white/5 bg-white/[0.02] group hover:bg-brand-primary/10 transition-all cursor-default">
+                    <span className="text-brand-primary font-display font-black text-lg md:text-xl group-hover:scale-110 transition-transform">{key}</span>
+                    <span className="text-[7px] md:text-[9px] text-white/20 uppercase tracking-widest font-bold mt-1">
                       {key === 'h' ? (language === 'it' ? 'SX' : 'Left') : 
                        key === 'j' ? (language === 'it' ? 'GIÙ' : 'Down') : 
                        key === 'k' ? (language === 'it' ? 'SU' : 'Up') : 
