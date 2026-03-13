@@ -1,0 +1,28 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "Comandi Globali e Refactoring",
+  level: "03",
+  id: "3-4"
+};
+
+# Potenza Senza Limiti.
+
+Siamo arrivati alla vetta. L'ultimo segreto del Mago è il comando **Global** (`:g`), che ti permette di eseguire azioni su ogni riga che corrisponde a un pattern.
+
+### Il Comando `:g`
+- `:g/TODO/d`: Cancella tutte le righe che contengono la parola "TODO".
+- `:g/console.log/s/log/error/g`: Cambia tutti i `console.log` in `console.error` in tutto il file.
+
+### Sostituzione Potente (`:s`)
+- `:%s/vecchio/nuovo/gc`: Cerca "vecchio" e sostituiscilo con "nuovo" in tutto il file (`%`), chiedendo conferma (`c`).
+
+### Diventare un Architetto
+Combinando Oggetti di Testo, Macro e Comandi Globali, puoi refactorizzare un intero progetto in pochi secondi. Non stai più solo scrivendo; stai dirigendo un'orchestra di testo.
+
+<Card title="Sfida Finale">
+  Hai una lista di 100 variabili? Usa `:g` per rinominarle tutte o una Macro per trasformarle in un oggetto JSON. Il limite è solo la tua immaginazione.
+</Card>
+
+> [!IMPORTANT]
+> Il viaggio non finisce qui. Vim è una competenza che si affina in anni. Continua a esplorare, personalizzare il tuo `.vimrc` e, soprattutto, divertiti!

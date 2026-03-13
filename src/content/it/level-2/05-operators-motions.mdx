@@ -1,0 +1,33 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "Operatori e Movimenti",
+  level: "02",
+  id: "2-1"
+};
+
+# La Danza degli Operatori.
+
+Benvenuto nel Livello 2. Ora che conosci le basi, è tempo di imparare a "parlare" fluentemente. In Vim, un **Operatore** definisce *cosa* fare, e un **Movimento** definisce *su cosa* farlo.
+
+### I Tre Grandi Operatori
+Impariamo i verbi principali:
+1. `d` (**Delete**): Cancella il testo.
+2. `c` (**Change**): Cancella il testo e ti mette in *Insert Mode*.
+3. `y` (**Yank**): Copia il testo (senza cancellarlo).
+
+### I Movimenti di Parola
+Per ora, usiamo questi bersagli:
+- `w`: Salta all'inizio della parola successiva (**Word**).
+- `e`: Salta alla fine della parola corrente (**End**).
+- `b`: Salta all'inizio della parola precedente (**Back**).
+
+### La Combinazione Magica
+Prova a combinare un operatore con un movimento nel terminale:
+- `dw`: Cancella fino alla prossima parola.
+- `cw`: Cambia la parola corrente (cancella e scrivi).
+- `yw`: Copia la parola.
+
+<Card title="Sfida Rapida">
+  Se scrivi `de`, cosa pensi che succederà? Prova nel terminale! Cancellerà fino alla fine della parola corrente.
+</Card>

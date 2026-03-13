@@ -1,8 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Vim } from 'react-vim-wasm';
 
-const VimTerminal = ({ onCommand, initialText = '', readOnly = false }) => {
-  const vimRef = useRef(null);
+const VimTerminal = () => {
 
   useEffect(() => {
     // Basic interaction logic with the Vim instance could go here
@@ -26,6 +25,7 @@ const VimTerminal = ({ onCommand, initialText = '', readOnly = false }) => {
         <Vim
           worker="./vim.worker.js" 
           onVimExit={() => console.log('Vim Exited')}
+          onError={(err) => console.error('Vim Error:', err)}
           className="w-full h-full"
           // In a real implementation, we'd need to handle web worker paths correctly
           // For now, this acts as the UI shell

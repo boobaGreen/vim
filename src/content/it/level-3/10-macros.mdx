@@ -1,0 +1,28 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "Il Potere delle Macro",
+  level: "03",
+  id: "3-2"
+};
+
+# Automazione Istantanea.
+
+Hai mai dovuto fare la stessa modifica su 50 righe diverse? Invece di diventare pazzo, usa le **Macro**. Le macro ti permettono di registrare una sequenza di tasti e riprodurla quante volte vuoi.
+
+### Come Registrare una Macro
+1. Premi `q` seguito da una lettera (es. `qa`). La registrazione inizia nel registro `a`.
+2. Esegui le tue azioni (es. `I` per andare a inizio riga, scrivi qualcosa, premi `<ESC>`).
+3. Premi di nuovo `q` per fermare la registrazione.
+
+### Come Riprodurre una Macro
+- `@a`: Esegue la macro registrata in `a`.
+- `@@`: Ripete l'ultima macro eseguita.
+- `10@a`: Esegue la macro 10 volte.
+
+> [!IMPORTANT]
+> Quando registri una macro, termina sempre con un movimento che porti il cursore nella posizione corretta per la riga successiva (es. `j` o `0`).
+
+<Card title="Sfida delle Macro">
+  Nel terminale, crea 5 righe di testo. Registra una macro che aggiunge un prefisso a una riga e poi usala per le altre 4 con `4@q`.
+</Card>

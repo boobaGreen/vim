@@ -1,0 +1,31 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "Registers: Multiple Memory",
+  level: "03",
+  id: "3-3"
+};
+
+# Beyond Copy-Paste.
+
+In a normal editor, you have only one "clipboard". In Vim, you have dozens. These are called **Registers**.
+
+### Types of Registers
+- `"` (Unnamed): The default register where everything you delete or yank ends up.
+- `0-9`: Historical registers of your last deletions.
+- `a-z`: Named registers you can use to save text long-term.
+- `+` and `*`: The bridge to your operating system's clipboard.
+
+### How to Use a Register
+The formula is: **`"` + [REGISTER_NAME] + [ACTION]**
+
+- `"ayw`: Yank a word into register `a`.
+- `"ap`: Paste the content of register `a`.
+- `"+y`: Copy selected text to the system clipboard.
+
+### Why is it useful?
+You can copy a piece of code into register `f` (for 'function') and another into register `v` (for 'variable'), and paste them whenever you want without one overwriting the other.
+
+<Card title="Exercise">
+  Try copying three different words into three different registers (`a`, `b`, `c`) in the terminal, and then paste them in reverse order.
+</Card>

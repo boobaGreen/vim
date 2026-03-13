@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const VERBS = [
   { id: 'd', label: 'DELETE', color: 'bg-red-500' },
@@ -17,12 +17,14 @@ const MOTIONS = [
 const GrammarBuilder = () => {
   const [verb, setVerb] = useState(null);
   const [count, setCount] = useState('');
-  const [motion, setMotion] = useState(null);
+  const [vimMotion, setVimMotion] = useState(null);
+
+  const MMotionDiv = motion.div;
 
   const reset = () => {
     setVerb(null);
     setCount('');
-    setMotion(null);
+    setVimMotion(null);
   };
 
   return (
@@ -30,38 +32,38 @@ const GrammarBuilder = () => {
       <div className="flex justify-center items-center space-x-4 min-h-[100px]">
         <AnimatePresence mode="wait">
           {verb && (
-            <motion.div 
+            <MMotionDiv 
               initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
               className={`${verb.color} px-4 py-2 rounded font-black text-brand-bg text-xl italic`}
             >
               {verb.label}
-            </motion.div>
+            </MMotionDiv>
           )}
         </AnimatePresence>
 
         <AnimatePresence mode="wait">
           {count && (
-            <motion.div 
+            <MMotionDiv 
               initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }}
               className="bg-white/10 px-4 py-2 rounded font-black text-white text-xl"
             >
               {count} TIMES
-            </motion.div>
+            </MMotionDiv>
           )}
         </AnimatePresence>
 
         <AnimatePresence mode="wait">
-          {motion && (
-            <motion.div 
+          {vimMotion && (
+            <MMotionDiv 
               initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }}
               className="bg-brand-primary px-4 py-2 rounded font-black text-brand-bg text-xl italic"
             >
-              {motion.label}
-            </motion.div>
+              {vimMotion.label}
+            </MMotionDiv>
           )}
         </AnimatePresence>
 
-        {!verb && !count && !motion && (
+        {!verb && !count && !vimMotion && (
           <div className="text-white/20 font-black text-2xl tracking-tighter uppercase italic italic">Build a Command...</div>
         )}
       </div>
@@ -93,7 +95,7 @@ const GrammarBuilder = () => {
           <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">3. Motion (Target)</p>
           <div className="flex flex-wrap gap-2">
             {MOTIONS.map(m => (
-              <button key={m.id} onClick={() => setMotion(m)} className={`px-3 py-1 rounded text-xs font-bold border ${motion?.id === m.id ? 'bg-white/20 border-white' : 'border-white/10 hover:bg-white/5'}`}>
+              <button key={m.id} onClick={() => setVimMotion(m)} className={`px-3 py-1 rounded text-xs font-bold border ${vimMotion?.id === m.id ? 'bg-white/20 border-white' : 'border-white/10 hover:bg-white/5'}`}>
                 {m.id}
               </button>
             ))}
@@ -104,7 +106,7 @@ const GrammarBuilder = () => {
       <div className="flex justify-between items-center pt-4 border-t border-white/5">
         <div className="text-sm font-black text-brand-primary">
           RESULT: <span className="text-white bg-white/5 px-2 py-1 rounded ml-2 fon-mono">
-            {verb?.id || ''}{count}{motion?.id || ''}
+            {verb?.id || ''}{count}{vimMotion?.id || ''}
           </span>
         </div>
         <button onClick={reset} className="text-[10px] font-bold text-white/40 hover:text-white uppercase tracking-widest">Reset</button>

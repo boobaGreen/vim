@@ -1,0 +1,31 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "I Registri: Memoria Multipla",
+  level: "03",
+  id: "3-3"
+};
+
+# Oltre il Copia-Incolla.
+
+In un editor normale, hai un solo "appunti" (clipboard). In Vim, ne hai dozzine. Questi si chiamano **Registri**.
+
+### Tipi di Registri
+- `"` (Unnamed): Il registro predefinito dove finisce tutto ciò che cancelli o copi.
+- `0-9`: Registri storici delle tue ultime cancellazioni.
+- `a-z`: Registri nominati che puoi usare per salvare testo a lungo termine.
+- `+` e `*`: Il ponte verso la clipboard del tuo sistema operativo.
+
+### Come usare un registro
+La formula è: **`"` + [NOME_REGISTRO] + [AZIONE]**
+
+- `"ayw`: Copia (yank) una parola nel registro `a`.
+- `"ap`: Incolla il contenuto del registro `a`.
+- `"+y`: Copia il testo selezionato nella clipboard di Windows/Mac/Linux.
+
+### Perché è utile?
+Puoi copiare un pezzo di codice nel registro `f` (per 'funzione') e un altro nel registro `v` (per 'variabile'), e incollarli quando vuoi senza che uno sovrascriva l'altro.
+
+<Card title="Esercizio">
+  Prova a copiare tre parole diverse in tre registri diversi (`a`, `b`, `c`) nel terminale, e poi incollale in ordine inverso.
+</Card>

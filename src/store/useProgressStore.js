@@ -22,6 +22,9 @@ export const useProgressStore = create(
         })),
 
       nextLesson: () => set((state) => ({ currentLessonIndex: state.currentLessonIndex + 1 })),
+      prevLesson: () => set((state) => ({ currentLessonIndex: Math.max(0, state.currentLessonIndex - 1) })),
+      goToLesson: (index) => set({ currentLessonIndex: index }),
+      resetProgress: () => set({ currentLessonIndex: 0, completedLessons: [] }),
       
       unlockAchievement: (achievementId) =>
         set((state) => ({

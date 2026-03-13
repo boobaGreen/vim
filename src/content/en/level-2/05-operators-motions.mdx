@@ -1,0 +1,33 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "Operators and Motions",
+  level: "02",
+  id: "2-1"
+};
+
+# The Dance of Operators.
+
+Welcome to Level 2. Now that you know the basics, it's time to learn how to "speak" fluently. In Vim, an **Operator** defines *what* to do, and a **Motion** defines *what to do it on*.
+
+### The Big Three Operators
+Let's learn the primary verbs:
+1. `d` (**Delete**): Deletes text.
+2. `c` (**Change**): Deletes text and puts you in *Insert Mode*.
+3. `y` (**Yank**): Copies (yanks) text.
+
+### Word Motions
+For now, let's use these targets:
+- `w`: Jump to the start of the next word (**Word**).
+- `e`: Jump to the end of the current word (**End**).
+- `b`: Jump to the start of the previous word (**Back**).
+
+### The Magic Combination
+Try combining an operator with a motion in the terminal:
+- `dw`: Delete until the next word.
+- `cw`: Change the current word (delete and start typing).
+- `yw`: Copy the word.
+
+<Card title="Quick Challenge">
+  If you type `de`, what do you think will happen? Try it in the terminal! It will delete until the end of the current word.
+</Card>

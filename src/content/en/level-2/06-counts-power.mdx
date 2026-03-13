@@ -1,0 +1,27 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "The Power of Counts",
+  level: "02",
+  id: "2-2"
+};
+
+# Multiplying the Action.
+
+Vim is not just precise; it is scalable. By inserting a number (**Count**) before a command, you can repeat it as many times as you want without effort.
+
+### The Full Formula
+Remember the grammar? `[VERB] + [COUNT] + [MOTION]`
+
+- `3w`: Jump forward 3 words.
+- `d2w`: Delete the next 2 words.
+- `c3e`: Change until the end of the 3rd following word.
+
+### When to use Counts?
+Counts are perfect when you see an obvious repetition. Instead of pressing `dw` three times, press `d3w`. Save keys, save time, reduce cognitive friction.
+
+<Card title="Exercise">
+  Use the terminal to navigate a long text. Try using `5j` to go down 5 lines or `d2w` to quickly clean up a sentence.
+</Card>
+
+*Tip: If you mistype the number, press `<ESC>` to reset your mind and the command.*

@@ -1,0 +1,32 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "Gli Oggetti di Testo",
+  level: "03",
+  id: "3-1"
+};
+
+# Precisione Chirurgica.
+
+Fino ad ora abbiamo usato i movimenti (`w`, `e`, `b`) come bersagli. Ma Vim ha un segreto ancora più potente: gli **Oggetti di Testo** (Text Objects). Questi ti permettono di operare su strutture logiche: parole, frasi, paragrafi o blocchi di codice racchiusi tra parentesi.
+
+### La Grammatica Avanzata
+La formula si evolve in:
+**[OPERATORE] + [i o a] + [OGGETTO]**
+
+- `i` (**Inner**): "Dentro" l'oggetto (escluse le delimitazioni).
+- `a` (**Around**): "Attorno" all'oggetto (incluse delimitazioni e spazi).
+
+### Esempi Comuni
+Imagina di essere dentro una stringa `"Hello World"`.
+- `ci"`: **Change Inner Quotes**. Cancella il contenuto tra virgolette e ti mette in Insert Mode.
+- `da(`: **Delete Around Parentheses**. Cancella le parentesi e tutto il loro contenuto.
+- `diw`: **Delete Inner Word**. Cancella la parola corrente ovunque si trovi il cursore al suo interno.
+
+### Perché usarli?
+Non devi più posizionarti all'inizio di una parola per cancellarla. Se il cursore è su una lettera qualsiasi, `diw` la cancellerà tutta.
+
+<Card title="Esercizio">
+  Nel terminale, scrivi una funzione JS: `function test() { console.log("hi"); }`. 
+  Posiziona il cursore su `hi` e premi `ci"`. Magia, vero?
+</Card>

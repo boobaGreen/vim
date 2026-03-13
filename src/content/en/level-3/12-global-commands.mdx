@@ -1,0 +1,28 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "Global Commands and Refactoring",
+  level: "03",
+  id: "3-4"
+};
+
+# Limitless Power.
+
+We have reached the summit. The Wizard's final secret is the **Global** command (`:g`), which allows you to perform actions on every line that matches a pattern.
+
+### The `:g` Command
+- `:g/TODO/d`: Delete all lines containing the word "TODO".
+- `:g/console.log/s/log/error/g`: Change all `console.log` to `console.error` throughout the file.
+
+### Powerful Substitution (`:s`)
+- `:%s/old/new/gc`: Search for "old" and replace it with "new" in the entire file (`%`), asking for confirmation (`c`).
+
+### Becoming an Architect
+By combining Text Objects, Macros, and Global Commands, you can refactor an entire project in seconds. You are no longer just typing; you are conducting an orchestra of text.
+
+<Card title="Final Challenge">
+  Have a list of 100 variables? Use `:g` to rename them all or a Macro to transform them into a JSON object. The limit is only your imagination.
+</Card>
+
+> [!IMPORTANT]
+> The journey doesn't end here. Vim is a skill that is refined over years. Keep exploring, customize your `.vimrc`, and most importantly, have fun!

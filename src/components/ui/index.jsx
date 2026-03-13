@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const Button = ({ children, onClick, variant = 'primary', className = '' }) => {
   const variants = {
@@ -7,15 +8,17 @@ export const Button = ({ children, onClick, variant = 'primary', className = '' 
     outline: 'border border-brand-primary text-brand-primary hover:bg-brand-primary/10',
   };
 
+  const MButton = motion.button;
+
   return (
-    <motion.button
+    <MButton
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
       className={`px-4 py-2 rounded font-bold uppercase tracking-widest text-xs transition-all ${variants[variant]} ${className}`}
     >
       {children}
-    </motion.button>
+    </MButton>
   );
 };
 

@@ -1,0 +1,32 @@
+import LessonLayout from '../../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "Text Objects",
+  level: "03",
+  id: "3-1"
+};
+
+# Surgical Precision.
+
+Until now, we've used motions (`w`, `e`, `b`) as targets. But Vim has an even more powerful secret: **Text Objects**. These allow you to operate on logical structures: words, sentences, paragraphs, or blocks of code enclosed in parentheses.
+
+### Advanced Grammar
+The formula evolves into:
+**[OPERATOR] + [i or a] + [OBJECT]**
+
+- `i` (**Inner**): "Inside" the object (excluding boundaries).
+- `a` (**Around**): "Around" the object (including boundaries and spaces).
+
+### Common Examples
+Imagine you are inside a string `"Hello World"`.
+- `ci"`: **Change Inner Quotes**. Clears the content inside quotes and puts you in Insert Mode.
+- `da(`: **Delete Around Parentheses**. Deletes the parentheses and all their content.
+- `diw`: **Delete Inner Word**. Deletes the current word wherever the cursor is located within it.
+
+### Why Use Them?
+You no longer need to position yourself at the start of a word to delete it. If the cursor is on any letter, `diw` will delete the whole thing.
+
+<Card title="Exercise">
+  In the terminal, type a JS function: `function test() { console.log("hi"); }`. 
+  Place the cursor on `hi` and press `ci"`. Magic, right?
+</Card>

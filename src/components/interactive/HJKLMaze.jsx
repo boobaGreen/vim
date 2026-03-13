@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const GRID_SIZE = 8;
 const INITIAL_POS = { x: 0, y: 0 };
@@ -8,6 +8,7 @@ const GOAL_POS = { x: 7, y: 7 };
 const HJKLMaze = ({ onComplete }) => {
   const [pos, setPos] = useState(INITIAL_POS);
   const [moves, setMoves] = useState(0);
+  const MMotionDiv = motion.div;
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -54,7 +55,7 @@ const HJKLMaze = ({ onComplete }) => {
             >
               <AnimatePresence>
                 {isPlayer && (
-                  <motion.div
+                  <MMotionDiv
                     layoutId="player"
                     className="w-4 h-6 bg-brand-primary neo-shadow ring-2 ring-brand-primary/50"
                     initial={{ scale: 0 }}
