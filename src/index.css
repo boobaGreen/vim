@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --background: 10 10 11;
+  --primary: 45 212 191;
+  --accent: 168 85 247;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+@theme {
+  --color-brand-bg: rgb(var(--background));
+  --color-brand-primary: rgb(var(--primary));
+  --color-brand-accent: rgb(var(--accent));
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-brand-primary/20 rounded-full hover:bg-brand-primary/40 transition-colors;
+}
+
+body {
+  @apply bg-brand-bg text-white antialiased;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.glass-morphism {
+  @apply backdrop-blur-xl bg-white/5 border border-white/10;
+}
+
+.neo-shadow {
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.15);
+}
+
+pre, code {
+  font-family: 'JetBrains Mono', monospace;
+}
