@@ -1,54 +1,37 @@
 # CURRICULUM: Vim Mastery - Zero to Wizard (EN/IT)
 
-## Introduction: The Sanfilippo Method
-Inspired by Salvatore Sanfilippo (antirez), this course rejects "glue-code" learning. Each lesson is a terminal-first deep dive. We don't just use Vim; we understand its internal state machines and "stratagems" for text manipulation.
+## Introduction: The "Antirez" Pedagogy
+Inspired by the technical depth and clarity of Salvatore Sanfilippo (antirez), this course rejects surface-level tutorials. Each lesson is a deep dive into the Vim state machine. We don't just "use" Vim; we orchestrate text through precise motions and operators.
 
 ---
 
 ## LEVEL 1: THE NEOPHYTE (IL NEOFITA)
-*Objective: Survive and navigate without fear.*
+*Objective: Survival and precise navigation.*
 
-### 1-1. The Zen of Modality (Lo Zen della Modalità)
-- **Technical Core**: Why Vim is modal. Normal vs Insert vs Command.
-- **Interactive Drill**: Toggle modes to unlock "doors" in the terminal.
-- **Animation**: A 3D "Dungeon Switcher" that changes the terminal's neon highlight based on the mode.
-- **Quiz**: "If you want to type, which mode? If you want to move, which mode?"
-
-### 1-2. The hjkl Maze (Il Labirinto hjkl)
-- **Technical Core**: Moving without arrow keys. Muscle memory for fingers.
-- **Interactive Component**: `HJKLMaze` - A retro-style navigation game where the cursor is the character.
-- **Challenge**: Navigate the maze in under 30 seconds without hitting walls.
-
-### 1-3. Basic CRUD (Operazioni Base)
-- **Technical Core**: `i` (insert), `a` (append), `u` (undo), `Ctrl-r` (redo).
-- **Interactive Drill**: Editing text files and reversing mistakes.
+1.  **The Zen of Modality**: Understanding why Vim has modes. Transitioning between Normal and Insert.
+2.  **The hjkl Maze**: Developing muscle memory for the primary navigation keys without arrow keys.
+3.  **Basic CRUD**: Mastering `i` (insert), `x` (delete), `u` (undo), and `Ctrl-r` (redo).
+4.  **Vim Grammar Intro**: The first taste of "Verbs + Objects". Understanding the logic behind commands.
 
 ---
 
 ## LEVEL 2: THE EFFICIENT (L'UTENTE EFFICIENTE)
-*Objective: Editing at the speed of thought.*
+*Objective: Speed of thought and refactoring power.*
 
-### 2-1. The Vim Grammar (La Grammatica di Vim)
-- **Technical Core**: Verb + Count + Motion. Commands as sentences (e.g., `d3w`).
-- **Interactive Component**: `GrammarBuilder` - Visual "connecting pieces" showing Verb, Count, and Motion coming together.
-
-### 2-2. Keystroke Efficiency (L'Efficienza)
-- **Technical Core**: Operators and basic motions (`w`, `e`, `b`).
-- **Interactive Component**: `SpeedRacer` - A gamified challenge that tracks keystrokes for refactoring tasks.
+5.  **Operators & Motions**: Combining `d`, `c`, `y` with basic motions like `w` (word) and `e` (end).
+6.  **Counts & Multipliers**: Leveraging numbers to multiply the impact of a single keystroke.
+7.  **Speed Racer Challenges**: High-stakes exercises to refactor code with minimal keystrokes.
+8.  **Visual Selection**: Mastering `v`, `V`, and `Ctrl-v` for block-level manipulations.
 
 ---
 
 ## LEVEL 3: THE WIZARD (IL MAGO)
-*Objective: Total automation and customization.*
+*Objective: Total automation and text orchestration.*
 
-### 3-1. Text Objects & Inside/Around (Oggetti di Testo)
-- **Technical Core**: The `i` and `a` modifiers. `ciw`, `da(`, `ci"`.
-- **Interactive Drill**: Changing the content inside blocks and brackets with single commands.
+9.  **Text Objects**: Acting on structured text with "Inside" (`i`) and "Around" (`a`) modifiers.
+10. **Macros Mastery**: Recording sequences with `q` to automate complex refactoring forever.
+11. **Registers & Memory**: Utilizing the 26 user registers to manage multiple snippets and buffers.
+12. **Global Power**: Unleashing the power of `:g` (Global) and `:s` (Substitute) for bulk transforms.
 
-### 3-2. Macros & Registers (Macro e Registri)
-- **Technical Core**: The 26 registers. `q` for recording. `@` for playing.
-- **Scenario**: Automate a repetitive refactoring task on multiple lines.
-
-### 3-3. Global Commands (Potere Globale)
-- **Technical Core**: `:g` and `:s`. Complex refactoring across entire files.
-- **BOSS BATTLE**: Transforming data lists using advanced Vim patterns.
+---
+*Status: All 12 lessons are fully implemented with interactive WASM support and professional UX audit.*
