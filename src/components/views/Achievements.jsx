@@ -13,43 +13,87 @@ const ACHIEVEMENTS = [
 
 const Achievements = ({ unlockedList, language }) => {
   const MMotionDiv = motion.div;
+  const total = ACHIEVEMENTS.length;
+  const unlockedCount = unlockedList.length;
+  const percentage = Math.round((unlockedCount / total) * 100);
 
   return (
-    <div className="flex-1 max-w-4xl mx-auto w-full py-12 px-4 space-y-8">
-      <div className="text-center space-y-2">
-        <h2 className="text-4xl font-black uppercase tracking-tighter italic text-white flex items-center justify-center gap-3">
-          <Trophy className="text-brand-primary" size={32} />
-          {language === 'it' ? 'I TUOI OBIETTIVI' : 'YOUR ACHIEVEMENTS'}
-        </h2>
-        <p className="text-white/40 uppercase tracking-[0.3em] text-[10px] font-bold">Progress: {unlockedList.length} / {ACHIEVEMENTS.length}</p>
-      </div>
+    <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 pb-16">
+      <div className="max-w-4xl mx-auto space-y-12 pt-6 px-4">
+        {/* Progress Header */}
+        <div className="glass-morphism rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-12 border-white/5 bg-white/[0.02]">
+          <div className="text-center md:text-left space-y-3">
+            <h2 className="text-4xl font-display font-black uppercase italic tracking-tight">
+              {language === 'it' ? 'I Tuoi Traguardi' : 'Your Achievements'}
+            </h2>
+            <p className="text-white/40 text-[10px] font-bold uppercase tracking-[0.4em]">
+              {unlockedCount} / {total} {language === 'it' ? 'SBLOCCATI' : 'UNLOCKED'}
+            </p>
+          </div>
+          
+          <div className="relative w-44 h-44 flex items-center justify-center">
+             <svg className="w-full h-full transform -rotate-90">
+               <circle cx="88" cy="88" r="78" stroke="currentColor" strokeWidth="10" fill="transparent" className="text-white/5" />
+               <motion.circle 
+                 cx="88" cy="88" r="78" stroke="currentColor" strokeWidth="10" fill="transparent" 
+                 className="text-brand-primary"
+                 strokeDasharray={490}
+                 initial={{ strokeDashoffset: 490 }}
+                 animate={{ strokeDashoffset: 490 - (490 * percentage) / 100 }}
+                 transition={{ duration: 1.5, ease: "circOut" }}
+               />
+             </svg>
+             <div className="absolute flex flex-col items-center">
+                <span className="text-5xl font-display font-black leading-none">{percentage}%</span>
+             </div>
+          </div>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {ACHIEVEMENTS.map((a, i) => {
-          const isUnlocked = unlockedList.includes(a.id);
-          return (
-            <MMotionDiv
-              key={a.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.05 }}
-              className={`glass-morphism p-6 rounded-2xl border transition-all ${
-                isUnlocked ? 'border-brand-primary/30 bg-brand-primary/5' : 'border-white/5 opacity-50 grayscale'
-              }`}
-            >
-              <div className="flex items-center space-x-6">
-                <div className={`w-16 h-16 rounded-xl flex items-center justify-center ${isUnlocked ? 'bg-brand-primary/20 text-brand-primary' : 'bg-white/5 text-white/20'}`}>
-                  {isUnlocked ? <a.icon size={32} /> : <Lock size={32} />}
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {ACHIEVEMENTS.map((a, i) => {
+            const isUnlocked = unlockedList.includes(a.id);
+            const Icon = a.icon;
+            
+            return (
+              <MMotionDiv
+                key={a.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={isUnlocked ? { scale: 1.02, y: -5 } : {}}
+                className={`relative group rounded-2xl p-8 border transition-all ${
+                  isUnlocked 
+                  ? 'glass-morphism border-brand-primary/30 bg-brand-primary/5' 
+                  : 'bg-white/[0.02] border-white/5 opacity-40 grayscale'
+                }`}
+              >
+                <div className="flex items-center space-x-6">
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all shadow-xl ${
+                    isUnlocked 
+                    ? 'bg-brand-primary text-brand-bg shadow-[0_0_30px_rgba(45,212,191,0.2)]' 
+                    : 'bg-white/5 text-white/20'
+                  }`}>
+                    {isUnlocked ? <Icon size={32} /> : <Lock size={32} />}
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className={`font-display font-black uppercase italic tracking-widest text-base ${isUnlocked ? 'text-white' : 'text-white/30'}`}>
+                      {a.title}
+                    </h4>
+                    <p className={`text-xs font-bold font-sans ${isUnlocked ? 'text-white/50' : 'text-white/20'}`}>
+                      {a.desc}
+                    </p>
+                    {isUnlocked && (
+                      <div className="inline-flex mt-2 px-2 py-0.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[8px] font-black tracking-widest uppercase">
+                        Mastered
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="space-y-1">
-                  <h4 className="font-black text-white uppercase italic tracking-widest text-sm">{a.title}</h4>
-                  <p className="text-xs text-white/40 font-bold">{a.desc}</p>
-                  {isUnlocked && <Badge color="primary">UNLOCKED</Badge>}
-                </div>
-              </div>
-            </MMotionDiv>
-          );
-        })}
+              </MMotionDiv>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

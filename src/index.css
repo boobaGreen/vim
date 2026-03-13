@@ -1,21 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: 10 10 11;
+  --background: 8 8 9;
   --primary: 45 212 191;
-  --accent: 168 85 247;
-  --glass: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --primary-glow: rgba(45, 212, 191, 0.4);
+  --accent: 139 92 246; /* Electric Violet */
+  --surface: 15 15 17;
+  --glass: rgba(255, 255, 255, 0.025);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 @theme {
   --color-brand-bg: rgb(var(--background));
+  --color-brand-surface: rgb(var(--surface));
   --color-brand-primary: rgb(var(--primary));
   --color-brand-accent: rgb(var(--accent));
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -23,18 +26,23 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  @apply bg-brand-primary/20 rounded-full hover:bg-brand-primary/40 transition-colors;
-}
-
-body {
-  @apply bg-brand-bg text-white antialiased;
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  overflow-x: hidden;
+  @apply bg-brand-primary/10 rounded-full hover:bg-brand-primary/30 transition-colors border border-white/5;
 }
 
 @utility glass-morphism {
-  @apply backdrop-blur-xl bg-white/5 border border-white/10;
+  @apply backdrop-blur-2xl bg-white/[0.03] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+}
+
+@utility font-display { font-family: 'Outfit', sans-serif; }
+@utility font-sans { font-family: 'Inter', sans-serif; }
+@utility font-mono { font-family: 'JetBrains Mono', monospace; }
+
+body {
+  @apply bg-brand-bg text-white antialiased selection:bg-brand-primary/30;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
 }
 
 .neo-shadow {
@@ -46,44 +54,23 @@ pre, code {
 }
 
 /* MDX Lesson Styling */
-.prose h1 { @apply text-3xl font-black uppercase tracking-tighter italic mb-6 text-white; }
-.prose h2 { @apply text-xl font-bold uppercase tracking-tight mb-4 text-brand-primary/90 mt-8; }
-.prose h3 { @apply text-sm font-black uppercase tracking-widest mb-2 text-brand-primary; }
-.prose p { @apply text-white/80 leading-relaxed mb-4 text-sm; }
+.prose h1 { @apply font-display text-4xl font-black uppercase tracking-tighter italic mb-8 text-white leading-none; }
+.prose h2 { @apply font-display text-2xl font-black uppercase tracking-tight mb-5 text-brand-primary/90 mt-12 italic; }
+.prose h3 { @apply font-display text-xs font-black uppercase tracking-[0.3em] mb-3 text-brand-primary/60; }
+.prose p { @apply text-white/50 leading-relaxed mb-6 text-base font-sans; }
 
 .prose blockquote {
-  @apply border-l-4 border-brand-primary bg-brand-primary/5 p-4 rounded-r-lg mb-6 italic text-brand-primary/80;
+  @apply border-l-2 border-brand-primary/40 bg-brand-primary/[0.03] p-6 rounded-r-2xl mb-8 italic text-white/60 font-sans text-sm;
 }
 
-.prose ul { @apply list-none space-y-2 mb-6; }
-.prose li { @apply flex items-start space-x-2 text-sm text-white/70; }
+.prose ul { @apply list-none space-y-3 mb-8 pl-1; }
+.prose li { @apply flex items-start space-x-3 text-sm text-white/50 font-sans leading-relaxed; }
 .prose li::before {
-  content: "»";
-  @apply text-brand-primary font-bold mr-1;
-}
-
-/* Cyber-Terminal Tables */
-.prose table {
-  @apply w-full border-collapse mb-8 glass-morphism rounded-lg overflow-hidden;
-}
-
-.prose th {
-  @apply bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase tracking-widest p-3 text-left border-b border-white/10;
-}
-
-.prose td {
-  @apply p-3 text-sm text-white/60 border-b border-white/5 font-mono;
-}
-
-.prose tr:last-child td {
-  @apply border-b-0;
-}
-
-.prose tr:hover td {
-  @apply bg-white/5 text-white transition-colors;
+  content: "→";
+  @apply text-brand-primary font-bold opacity-50;
 }
 
 /* Code Blocks */
 .prose code:not(pre code) {
-  @apply bg-brand-primary/10 text-brand-primary px-1.5 py-0.5 rounded text-xs font-bold border border-brand-primary/20;
+  @apply bg-white/[0.03] text-brand-primary px-2 py-0.5 rounded-lg text-[13px] font-bold border border-white/5 font-mono;
 }

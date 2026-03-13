@@ -31,35 +31,36 @@ function App() {
   return (
     <div className="min-h-screen bg-brand-bg text-white selection:bg-brand-primary/30 flex flex-col">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass-morphism border-b-0 py-4 px-4 md:px-8 flex justify-between items-center h-16">
+      <nav className="fixed top-0 w-full z-50 glass-morphism border-b-0 py-3 px-6 md:px-10 flex justify-between items-center h-14">
         <button 
           onClick={() => setView('home')}
-          className="flex items-center space-x-2 group outline-none cursor-pointer"
+          className="flex items-center space-x-2.5 group outline-none cursor-pointer"
         >
-          <Terminal className="text-brand-primary w-6 h-6 group-hover:animate-pulse" />
-          <span className="font-black text-xl tracking-tighter uppercase italic group-hover:text-brand-primary transition-colors">VIM<span className="text-brand-primary group-hover:text-white">MASTERY</span></span>
+          <div className="bg-brand-primary/10 p-1.5 rounded-lg border border-brand-primary/20 group-hover:scale-110 transition-transform">
+            <Terminal className="text-brand-primary w-4 h-4" />
+          </div>
+          <span className="font-display font-black text-lg tracking-tight uppercase italic group-hover:text-brand-primary transition-colors">VIM<span className="text-brand-primary group-hover:text-white">MASTERY</span></span>
         </button>
         
-        <div className="flex items-center space-x-3 md:space-x-8 text-sm font-medium">
+        <div className="flex items-center space-x-4 md:space-x-10 text-[11px] font-bold uppercase tracking-widest">
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`hover:text-brand-primary transition-colors flex items-center space-x-2 cursor-pointer ${isMenuOpen ? 'text-brand-primary' : ''}`}
+            className={`hover:text-brand-primary transition-all flex items-center space-x-2 cursor-pointer ${isMenuOpen ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
           >
-            <BookOpen size={16} /> <span className="hidden sm:inline">{language === 'it' ? 'Lezioni' : 'Lessons'}</span>
+            <BookOpen size={14} /> <span>{language === 'it' ? 'Lezioni' : 'Lessons'}</span>
           </button>
           <button 
             onClick={() => setView('achievements')}
-            className={`hover:text-brand-primary transition-colors flex items-center space-x-2 cursor-pointer ${view === 'achievements' ? 'text-brand-primary' : ''}`}
+            className={`hover:text-brand-primary transition-all flex items-center space-x-2 cursor-pointer ${view === 'achievements' ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
           >
-            <Trophy size={16} /> <span className="hidden sm:inline">{language === 'it' ? 'Obiettivi' : 'Achievements'}</span>
+            <Trophy size={14} /> <span>{language === 'it' ? 'Obiettivi' : 'Achievements'}</span>
           </button>
-          <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
+          <div className="h-4 w-px bg-white/10"></div>
           <button 
             onClick={() => setLanguage(language === 'it' ? 'en' : 'it')}
-            className="text-xs border border-white/20 rounded-full px-3 py-1 hover:bg-white/5 transition-all flex items-center space-x-2 cursor-pointer"
+            className="border border-white/20 rounded-full w-8 h-8 flex items-center justify-center hover:bg-white/5 hover:border-brand-primary/50 transition-all cursor-pointer"
           >
-            <Globe size={12} />
-            <span className="uppercase">{language}</span>
+            <span className="text-[9px] uppercase">{language}</span>
           </button>
         </div>
       </nav>
@@ -107,7 +108,7 @@ function App() {
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <main className="flex-1 pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto w-full flex flex-col overflow-hidden">
+      <main className="flex-1 pt-20 pb-12 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col overflow-hidden">
         {view === 'home' && (
           <Landing 
             language={language} 
@@ -122,41 +123,45 @@ function App() {
         />}
 
         {view === 'lesson' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start h-full">
             {/* Left: Lesson Content Area */}
-            <div className="h-full overflow-y-auto pr-0 md:pr-4 custom-scrollbar">
-              <Breadcrumb 
-                level={currentModule.split('-')[1].padStart(2, '0')} 
-                chapter={
-                  currentLessonIndex < 4 ? (language === 'it' ? 'Livello 1: Il Neofita' : 'Level 1: The Neophyte') :
-                  currentLessonIndex < 8 ? (language === 'it' ? 'Livello 2: Utente Efficiente' : 'Level 2: Efficient User') :
-                  (language === 'it' ? 'Livello 3: Il Mago di Vim' : 'Level 3: The Vim Wizard')
-                } 
-              />
+            <div className="h-full overflow-y-auto pr-0 lg:pr-6 custom-scrollbar space-y-8">
+              <div className="space-y-4">
+                <Breadcrumb 
+                  level={currentModule.split('-')[1].padStart(2, '0')} 
+                  chapter={
+                    currentLessonIndex < 4 ? (language === 'it' ? 'Livello 1: Il Neofita' : 'Level 1: The Neophyte') :
+                    currentLessonIndex < 8 ? (language === 'it' ? 'Livello 2: Utente Efficiente' : 'Level 2: Efficient User') :
+                    (language === 'it' ? 'Livello 3: Il Mago di Vim' : 'Level 3: The Vim Wizard')
+                  } 
+                />
+                <div className="h-px bg-white/5 w-full" />
+              </div>
               
               <LessonRenderer path={currentPath} />
 
-              <div className="mt-12 p-6 rounded-xl border border-brand-primary/20 bg-brand-primary/5 neo-shadow flex flex-col sm:flex-row justify-between items-center gap-6">
-                <div className="text-center sm:text-left">
-                  <h3 className="text-brand-primary font-bold mb-2 flex items-center justify-center sm:justify-start space-x-2 text-xs tracking-widest uppercase">
+              <div className="mt-16 p-8 rounded-[2rem] border border-brand-primary/20 bg-brand-primary/[0.03] shadow-2xl flex flex-col sm:flex-row justify-between items-center gap-8 relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-1 h-full bg-brand-primary/30" />
+                <div className="text-center sm:text-left relative z-10">
+                  <h3 className="text-brand-primary font-display font-black mb-2 flex items-center justify-center sm:justify-start space-x-2 text-[10px] tracking-[0.3em] uppercase italic">
                     <span className="animate-pulse">●</span>
-                    <span>{language === 'it' ? 'TASKS DIDATTICI' : 'DIDACTIC TASK'}</span>
+                    <span>{language === 'it' ? 'MISSION STATUS' : 'MISSION STATUS'}</span>
                   </h3>
-                  <p className="text-sm text-white/90 leading-snug max-w-xs">
+                  <p className="text-white/60 text-sm leading-relaxed max-w-xs font-sans">
                     {language === 'it'
-                      ? 'Naviga le lezioni e usa il terminale per sbloccare la gloria.'
-                      : 'Navigate through lessons and use the terminal to unlock glory.'}
+                      ? 'Espandi la tua mente. Pratica i comandi nel terminale per sbloccare il prossimo livello.'
+                      : 'Expand your mind. Practice the commands in the terminal to unlock the next level.'}
                   </p>
                 </div>
-                <div className="flex space-x-3 w-full sm:w-auto">
+                <div className="flex space-x-4 w-full sm:w-auto relative z-10">
                   {currentLessonIndex > 0 && (
-                    <Button onClick={prevLesson} variant="secondary" className="flex-1 sm:flex-none cursor-pointer">
+                    <Button onClick={prevLesson} variant="secondary" className="flex-1 sm:flex-none cursor-pointer font-display font-bold px-8 py-3 rounded-xl bg-white/5 hover:bg-white/10 border-white/5 transition-all">
                       &larr; {language === 'it' ? 'Indietro' : 'Back'}
                     </Button>
                   )}
                   {currentLessonIndex < lessons.length - 1 && (
-                    <Button onClick={nextLesson} variant="outline" className="flex-1 sm:flex-none cursor-pointer">
-                      {language === 'it' ? 'Avanti' : 'Next'} &rarr;
+                    <Button onClick={nextLesson} className="flex-1 sm:flex-none cursor-pointer font-display font-bold px-8 py-3 rounded-xl shadow-[0_4px_15px_rgba(45,212,191,0.2)]">
+                      {language === 'it' ? 'Prossimo Rango' : 'Next Rank'} &rarr;
                     </Button>
                   )}
                 </div>
@@ -165,18 +170,20 @@ function App() {
 
             {/* Right: Terminal Area */}
             <MMotionDiv
-               initial={{ opacity: 0, scale: 0.95 }}
-               animate={{ opacity: 1, scale: 1 }}
-               className="h-full hidden lg:flex flex-col"
+               initial={{ opacity: 0, x: 20 }}
+               animate={{ opacity: 1, x: 0 }}
+               className="h-full hidden lg:flex flex-col space-y-6"
             >
-              <VimTerminal />
+              <div className="glass-morphism rounded-3xl p-1 overflow-hidden shadow-2xl border-white/5 bg-white/[0.01]">
+                <VimTerminal />
+              </div>
               
               {/* Quick Shortcuts Hint */}
-              <div className="mt-4 grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-4 gap-4">
                 {['h', 'j', 'k', 'l'].map(key => (
-                  <div key={key} className="glass-morphism py-2 flex flex-col items-center justify-center rounded-lg border-white/5">
-                    <span className="text-brand-primary font-black text-lg">{key}</span>
-                    <span className="text-[8px] text-white/30 uppercase tracking-tighter">
+                  <div key={key} className="glass-morphism py-3 px-2 flex flex-col items-center justify-center rounded-2xl border-white/5 bg-white/[0.02] group hover:bg-brand-primary/10 transition-all cursor-default">
+                    <span className="text-brand-primary font-display font-black text-xl group-hover:scale-110 transition-transform">{key}</span>
+                    <span className="text-[9px] text-white/20 uppercase tracking-widest font-bold mt-1">
                       {key === 'h' ? (language === 'it' ? 'SX' : 'Left') : 
                        key === 'j' ? (language === 'it' ? 'GIÙ' : 'Down') : 
                        key === 'k' ? (language === 'it' ? 'SU' : 'Up') : 

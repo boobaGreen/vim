@@ -13,28 +13,28 @@ const Landing = ({ onStart, onExplore, language }) => {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-6 max-w-3xl"
       >
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-black uppercase tracking-widest">
+        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-black uppercase tracking-[0.2em]">
           <Zap size={12} className="animate-pulse" />
-          <span>Vim Mastery v0.11 Ready</span>
+          <span>Vim Mastery v0.12 System Online</span>
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter italic uppercase text-white leading-none">
+        <h1 className="text-6xl md:text-8xl font-display font-black tracking-tighter italic uppercase text-white leading-[0.9]">
           {language === 'it' ? 'Evolviti in un' : 'Evolve into a'} <br />
-          <span className="text-brand-primary block mt-2 drop-shadow-[0_0_15px_rgba(45,212,191,0.3)]">VIM WIZARD</span>
+          <span className="text-brand-primary block mt-4 drop-shadow-[0_0_20px_rgba(45,212,191,0.25)]">VIM WIZARD</span>
         </h1>
 
-        <p className="text-lg text-white/60 max-w-xl mx-auto leading-relaxed">
+        <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed font-sans">
           {language === 'it' 
-            ? 'Dimentica il mouse. Smetti di digitare, inizia a manipolare. Il linguaggio segreto della produttività estrema ti aspetta.'
-            : 'Forget the mouse. Stop typing, start manipulating. The secret language of extreme productivity awaits you.'}
+            ? 'Domina il linguaggio segreto della produttività. Smetti di editare testo, inizia a scolpirlo alla velocità del pensiero.'
+            : 'Master the secret language of productivity. Stop editing text, start carving it at the speed of thought.'}
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
-          <Button onClick={onStart} className="px-10 py-4 text-lg w-full sm:w-auto flex items-center justify-center space-x-3 group cursor-pointer">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-10">
+          <Button onClick={onStart} className="px-12 py-5 text-lg w-full sm:w-auto flex items-center justify-center space-x-3 group cursor-pointer font-display font-bold tracking-wide rounded-2xl shadow-[0_0_20px_rgba(45,212,191,0.1)]">
             <Play size={20} className="fill-current group-hover:scale-110 transition-transform" />
             <span>{language === 'it' ? 'INIZIA IL VIAGGIO' : 'START JOURNEY'}</span>
           </Button>
-          <Button onClick={onExplore} variant="secondary" className="px-10 py-4 text-lg w-full sm:w-auto cursor-pointer">
+          <Button onClick={onExplore} variant="secondary" className="px-12 py-5 text-lg w-full sm:w-auto cursor-pointer font-display font-bold tracking-wide rounded-2xl border-white/5 bg-white/5 hover:bg-white/10 transition-all">
              {language === 'it' ? 'ESPLORA LIVELLI' : 'EXPLORE LEVELS'}
           </Button>
         </div>
