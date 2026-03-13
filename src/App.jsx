@@ -1,5 +1,6 @@
-import React from 'react';
 import { Terminal, BookOpen, Trophy, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Button } from './components/ui';
 import VimTerminal from './components/terminal/VimTerminal';
 import { useProgressStore } from './store/useProgressStore';
 
