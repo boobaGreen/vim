@@ -33,7 +33,7 @@ body {
   overflow-x: hidden;
 }
 
-.glass-morphism {
+@utility glass-morphism {
   @apply backdrop-blur-xl bg-white/5 border border-white/10;
 }
 
