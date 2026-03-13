@@ -9,11 +9,14 @@ export const useProgressStore = create(
       completedLessons: [],
       achievements: [],
       language: 'it',
+      view: 'home', // 'home', 'lesson', 'achievements'
       settings: {
         theme: 'cyber-dark',
         terminalFont: 'JetBrains Mono',
       },
 
+      setView: (view) => set({ view }),
+      
       completeLesson: (lessonId) =>
         set((state) => ({
           completedLessons: state.completedLessons.includes(lessonId)
@@ -21,10 +24,10 @@ export const useProgressStore = create(
             : [...state.completedLessons, lessonId],
         })),
 
-      nextLesson: () => set((state) => ({ currentLessonIndex: state.currentLessonIndex + 1 })),
-      prevLesson: () => set((state) => ({ currentLessonIndex: Math.max(0, state.currentLessonIndex - 1) })),
-      goToLesson: (index) => set({ currentLessonIndex: index }),
-      resetProgress: () => set({ currentLessonIndex: 0, completedLessons: [] }),
+      nextLesson: () => set((state) => ({ currentLessonIndex: state.currentLessonIndex + 1, view: 'lesson' })),
+      prevLesson: () => set((state) => ({ currentLessonIndex: Math.max(0, state.currentLessonIndex - 1), view: 'lesson' })),
+      goToLesson: (index) => set({ currentLessonIndex: index, view: 'lesson' }),
+      resetProgress: () => set({ currentLessonIndex: 0, completedLessons: [], view: 'home' }),
       
       unlockAchievement: (achievementId) =>
         set((state) => ({

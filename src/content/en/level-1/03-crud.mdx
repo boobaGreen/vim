@@ -10,20 +10,32 @@ export const metadata = {
 
 In Vim, you don't just type. You manipulate text with precise gestures.
 
-### Fundamental CRUD Commands
+<InfoBox type="tip" title="TODAY'S MANTRA">
+Forget arrows. Start thinking in actions. Every key is a transformation command.
+</InfoBox>
+
+<Step number="1" title="Fundamental CRUD Commands">
 Here's how to interact with text in **Normal Mode**:
+</Step>
 
-- `i`: **Insert** before the cursor. (Enters Insert Mode)
-- `x`: **Delete** the character under the cursor.
-- `u`: **Undo** the last action. (Vital!)
-- `Ctrl + r`: **Redo** the undone action.
+<CommandTable 
+  headers={["Command", "Action", "Result"]}
+  data={[
+    ["i", "Insert", "Insert before the cursor. (Enters Insert Mode)"],
+    ["x", "Delete", "Delete the character under the cursor."],
+    ["u", "Undo", "Undo the last action. Your best friend."],
+    ["Ctrl + r", "Redo", "Redo the undone action."],
+  ]}
+/>
 
-### Practical Practice
-Move the cursor to the terminal on the right. Try deleting a word with `x` and then restoring it with `u`.
+<Step number="2" title="Practical Practice">
+Move the cursor to the terminal on the right. Try deleting a word with <Kbd>x</Kbd> and then restoring it with <Kbd>u</Kbd>.
+</Step>
 
-> [!TIP]
-> Remember: to return to **Normal Mode** after using `i`, always press `<ESC>`.
+<InfoBox type="warning" title="ATTENTION">
+To return to **Normal Mode** after using <Kbd>i</Kbd>, always press <Kbd>ESC</Kbd>. Without it, you'll keep typing instead of commanding.
+</InfoBox>
 
 <Card title="Exercise">
-  Try typing "Vim is King" in the terminal and then use `u` to travel back in time.
+  Try typing "Vim is King" in the terminal and then use <Kbd>u</Kbd> to travel back in time.
 </Card>

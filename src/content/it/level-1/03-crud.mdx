@@ -10,20 +10,32 @@ export const metadata = {
 
 In Vim, non si scrive solo. Si manipola la materia testuale con gesti precisi.
 
-### I Comandi CRUD Fondamentali
-Ecco come interagire con il testo in **Normal Mode**:
+<InfoBox type="tip" title="IL MANTRA DI OGGI">
+Dimentica le frecce. Inizia a pensare per azioni. Ogni tasto è un comando di trasformazione.
+</InfoBox>
 
-- `i`: **Insert** prima del cursore. (Entra in Insert Mode)
-- `x`: **Delete** il carattere sotto il cursore.
-- `u`: **Undo** l'ultima azione. (Fondamentale!)
-- `Ctrl + r`: **Redo** l'azione annullata.
+<Step number="1" title="Comandi CRUD Fondamentali">
+Ecco come interagire con il testo nella memoria di Vim mentre sei in **Normal Mode**:
+</Step>
 
-### Didattica Pratica
-Sposta il cursore sul terminale a destra. Prova a cancellare una parola con `x` e poi a ripristinarla con `u`. 
+<CommandTable 
+  headers={["Comando", "Azione", "Risultato"]}
+  data={[
+    ["i", "Insert", "Inserisce testo prima del cursore. (Entra in Insert Mode)"],
+    ["x", "Delete", "Elimina il carattere sotto il cursore."],
+    ["u", "Undo", "Annulla l'ultima azione. Il tuo miglior amico."],
+    ["Ctrl + r", "Redo", "Ripristina l'azione annullata."],
+  ]}
+/>
 
-> [!TIP]
-> Ricorda: per tornare in **Normal Mode** dopo aver usato `i`, premi sempre `<ESC>`.
+<Step number="2" title="Didattica Pratica">
+Sposta il cursore sul terminale a destra. Prova a cancellare una parola con <Kbd>x</Kbd> e poi a ripristinarla con <Kbd>u</Kbd>.
+</Step>
+
+<InfoBox type="warning" title="ATTENZIONE">
+Per tornare in **Normal Mode** dopo aver usato <Kbd>i</Kbd>, premi sempre <Kbd>ESC</Kbd>. Senza questo tasto, continuerai a scrivere invece di comandare.
+</InfoBox>
 
 <Card title="Esercizio">
-  Prova a scrivere "Vim is King" nel terminale e poi usa `u` per tornare indietro nel tempo.
+  Prova a scrivere "Vim is King" nel terminale e poi usa <Kbd>u</Kbd> per tornare indietro nel tempo.
 </Card>

@@ -1,16 +1,40 @@
-# React + Vite
+# 🧙‍♂️ Vim Mastery: Zero to Wizard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Vim Mastery Banner](https://img.shields.io/badge/VIM-MASTERY-2dd4bf?style=for-the-badge&logo=vim&logoColor=white)
+![Build Status](https://img.shields.io/badge/VITE-BEYOND_FAST-646cff?style=for-the-badge&logo=vite&logoColor=white)
+![Platform](https://img.shields.io/badge/PLATFORM-WASM-FFD700?style=for-the-badge&logo=webassembly&logoColor=black)
+![License](https://img.shields.io/badge/LICENSE-GNU_GPL-red?style=for-the-badge)
 
-Currently, two official plugins are available:
+**Vim Mastery** is a premium, gamified educational platform designed to turn neophytes into Vim Wizards using a full WASM-powered Vim terminal directly in the browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Experience
+- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm`.
+- **Gamified Journey**: Track progress through 12 levels of increasing complexity.
+- **Achievements System**: Unlock badges as you master motions, operators, and macros.
+- **Bi-lingual Support**: Full curriculum in Italian and English.
+- **Cyber-Terminal Aesthetic**: High-end UI with glassmorphism, neon accents, and tactile feedback.
 
-## React Compiler
+## 📂 Project Structure
+- `src/content/`: MDX-based curriculum with high-impact educational components.
+- `src/components/terminal/`: Bridge to the Vim WASM worker.
+- `src/store/`: Global state management with `zustand` for progress and achievements.
+- `src/components/ui/`: Custom design system using Tailwind CSS and Framer Motion.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
+- **Framework**: React 18 + Vite
+- **Styling**: Tailwind CSS + Vanilla CSS (Cyber System)
+- **Animations**: Framer Motion
+- **Core Engine**: `vim-wasm`
+- **Content**: MDX v3
 
-## Expanding the ESLint configuration
+## 📜 License
+This project is licensed under the **GNU General Public License**.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 👤 Credits
+Developed with ❤️ by **Claudio Dall'Ara**.
+- 🌐 [claudiodallara.it](https://www.claudiodallara.it/)
+- 🐙 [Github: boobaGreen](https://github.com/boobaGreen)
+- 💼 [LinkedIn](https://www.linkedin.com/in/claudio-dall-ara-730aa0302/)
+
+---
+*SYS_READY // VIM_MASTERY_V0.11*
