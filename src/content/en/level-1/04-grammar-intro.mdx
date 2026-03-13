@@ -1,0 +1,29 @@
+import LessonLayout from '../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "The Vim Grammar",
+  level: "01",
+  id: "1-4"
+};
+
+# Speaking with Code.
+
+The true power of Vim lies not in individual keys, but in its **Grammar**. Just like a human language, Vim combines elements to form complex sentences.
+
+### The Magic Formula
+Almost every advanced command follows this pattern:
+**VERB + COUNT + MOTION**
+
+- **VERB**: What do you want to do? (e.g., `d` for Delete)
+- **COUNT**: How many times? (e.g., `2`)
+- **MOTION**: Where do you want to do it? (e.g., `w` for Word)
+
+### Example: `d2w`
+It means: *Delete (`d`) the next two (`2`) words (`w`)*.
+
+### Explored with the Command Builder
+Use the tool below to visualize how commands are constructed. Try different combinations and observe the result.
+
+<GrammarBuilder />
+
+*In the next Level 2 lessons, we will learn how to use this grammar to edit code at the speed of thought.*

@@ -3,13 +3,15 @@ import { MDXProvider } from '@mdx-js/react';
 import LessonLayout from './components/layout/LessonLayout';
 import { Card, Badge, Button } from './components/ui';
 import HJKLMaze from './components/interactive/HJKLMaze';
+import GrammarBuilder from './components/interactive/GrammarBuilder';
 
 const components = {
   wrapper: ({ children }) => <LessonLayout {...children.props}>{children}</LessonLayout>,
   Card,
   Badge,
   Button,
-  HJKLMaze
+  HJKLMaze,
+  GrammarBuilder
 };
 
 const LessonRenderer = ({ path }) => {

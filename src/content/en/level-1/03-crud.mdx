@@ -1,0 +1,29 @@
+import LessonLayout from '../../components/layout/LessonLayout';
+
+export const metadata = {
+  title: "The Art of Creation and Destruction",
+  level: "01",
+  id: "1-3"
+};
+
+# Create and Destroy.
+
+In Vim, you don't just type. You manipulate text with precise gestures.
+
+### Fundamental CRUD Commands
+Here's how to interact with text in **Normal Mode**:
+
+- `i`: **Insert** before the cursor. (Enters Insert Mode)
+- `x`: **Delete** the character under the cursor.
+- `u`: **Undo** the last action. (Vital!)
+- `Ctrl + r`: **Redo** the undone action.
+
+### Practical Practice
+Move the cursor to the terminal on the right. Try deleting a word with `x` and then restoring it with `u`.
+
+> [!TIP]
+> Remember: to return to **Normal Mode** after using `i`, always press `<ESC>`.
+
+<Card title="Exercise">
+  Try typing "Vim is King" in the terminal and then use `u` to travel back in time.
+</Card>
