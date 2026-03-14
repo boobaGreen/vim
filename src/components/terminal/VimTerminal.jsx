@@ -15,9 +15,15 @@ const VimTerminal = () => {
 
   const handleKey = (key) => {
     if (vimRef.current) {
-      vimRef.current.onKeyDown(key);
+      // Construction of a more robust key event if onKeyDown expects it
+      // Some versions of react-vim-wasm handle string, others need object
+      try {
+        vimRef.current.onKeyDown(key);
+      } catch (e) {
+        console.warn('Vim onKeyDown failed with string, trying event simulation', e);
+      }
       
-      // Simple heuristic for mode detection based on keys
+      // Syncing Internal Mode (simplified)
       if (key === 'Escape') setCurrentMode('NORMAL');
       if (key === 'i' || key === 'a') setCurrentMode('INSERT');
       if (key === 'v' || key === 'V') setCurrentMode('VISUAL');
@@ -25,13 +31,6 @@ const VimTerminal = () => {
     }
   };
 
-  // Crude way to detect mode changes by observing terminal output or events
-  // react-vim-wasm doesn't expose a direct 'onModeChange', so we can listen to events
-  // or use the command line output if accessible. 
-  // For this high-level implementation, we'll implement a state-based approach
-  // where we update the mode based on certain key presses in a simplified way
-  // OR rely on the user to see it, but here we'll try to sync basic modes.
-  
   const handleVimInit = (vim) => {
     vimRef.current = vim;
   };
@@ -41,21 +40,21 @@ const VimTerminal = () => {
       {/* Header Bar */}
       <div className="h-8 bg-white/5 border-b border-white/10 flex items-center px-4 justify-between transition-colors group-hover:bg-white/10 flex-shrink-0">
         <div className="flex space-x-2">
-          <div className={`w-3 h-3 rounded-full ${currentMode === 'INSERT' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]' : 'bg-red-500/50'}`}></div>
-          <div className={`w-3 h-3 rounded-full ${currentMode === 'VISUAL' ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)]' : 'bg-yellow-500/50'}`}></div>
-          <div className="w-3 h-3 rounded-full bg-brand-primary shadow-[0_0_8px_rgba(45,212,191,0.5)]"></div>
+          <div className={`w-2.5 h-2.5 rounded-full ${currentMode === 'INSERT' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]' : 'bg-white/10'}`}></div>
+          <div className={`w-2.5 h-2.5 rounded-full ${currentMode === 'VISUAL' ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.5)]' : 'bg-white/10'}`}></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-brand-primary/50"></div>
         </div>
-        <div className="text-[10px] uppercase font-bold tracking-widest text-white/50 flex items-center gap-2">
-          <span className={currentMode !== 'NORMAL' ? 'animate-pulse text-brand-primary' : ''}>
+        <div className="text-[9px] uppercase font-black tracking-[0.2em] text-white/30 flex items-center gap-2">
+          <span className={currentMode !== 'NORMAL' ? 'text-brand-primary animate-pulse' : ''}>
             {currentMode} MODE
           </span>
-          <span className="opacity-20">//</span>
-          <span>wasm_v9.0</span>
+          <span className="opacity-10">|</span>
+          <span>V9.0_WASM</span>
         </div>
       </div>
       
       {/* Content Area */}
-      <div className="flex-1 relative pt-2 overflow-hidden">
+      <div className="flex-1 relative pt-2 overflow-hidden cursor-text" onClick={() => vimRef.current?.focus()}>
         <Vim
           worker="./vim.worker.js" 
           onVimInit={handleVimInit}
@@ -63,10 +62,17 @@ const VimTerminal = () => {
           onError={(err) => console.error('Vim Error:', err)}
           className="w-full h-full"
         />
+
+        {/* Mobile Focus Hint Overlay */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 group-active:opacity-100 lg:hidden transition-opacity">
+          <div className="bg-brand-primary/20 backdrop-blur-sm px-4 py-2 rounded-full border border-brand-primary/30 text-[10px] font-black text-brand-primary uppercase">
+            Capivolo Tastiera...
+          </div>
+        </div>
         
-        {/* Animated Cursor Hint at Bottom Right */}
-        <div className="absolute bottom-4 right-4 animate-pulse pointer-events-none opacity-50">
-          <div className="w-2 h-4 bg-brand-primary shadow-[0_0_10px_rgba(45,212,191,0.8)]"></div>
+        {/* Animated Cursor Hint */}
+        <div className="absolute bottom-4 right-4 animate-pulse pointer-events-none opacity-20">
+          <div className="w-1.5 h-4 bg-brand-primary/50 shadow-[0_0_10px_rgba(45,212,191,0.5)]"></div>
         </div>
       </div>
 

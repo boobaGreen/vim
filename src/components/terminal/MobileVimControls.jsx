@@ -26,35 +26,41 @@ const MobileVimControls = ({ onKey, currentMode = 'NORMAL' }) => {
   };
 
   return (
-    <div className="flex flex-col space-y-4 p-4 lg:hidden">
-      {/* Mode Indicator & Quick Keys */}
-      <div className="flex items-center justify-between gap-2 overflow-x-auto pb-2 custom-scrollbar">
-        <div className={`text-[10px] font-black uppercase tracking-widest px-3 py-2 border rounded-lg bg-white/5 border-white/10 ${modeColors[currentMode] || modeColors.NORMAL}`}>
+    <div className="flex flex-col space-y-4 p-4 lg:hidden bg-brand-bg/50 backdrop-blur-md border-t border-white/5">
+      {/* Mode Indicator & Quick Keys - Always Visible Grid */}
+      <div className="grid grid-cols-4 gap-2">
+        <div className={`col-span-1 flex items-center justify-center text-[9px] font-black uppercase tracking-tighter px-1 py-2 border rounded-xl bg-white/5 border-white/10 ${modeColors[currentMode] || modeColors.NORMAL} truncate`}>
           {currentMode}
         </div>
         
-        <div className="h-6 w-px bg-white/10 mx-1 flex-shrink-0" />
+        <ControlButton onClick={() => onKey('Escape')} label="Esc" className="border-brand-primary/30 bg-brand-primary/5">
+          <X size={16} className="text-brand-primary" />
+        </ControlButton>
+        
+        <ControlButton onClick={() => onKey(':')} label="Cmd">
+          <span className="text-lg font-display font-black leading-none">:</span>
+        </ControlButton>
 
-        <div className="flex gap-2">
-          <ControlButton onClick={() => onKey('Escape')} label="Esc" className="border-brand-primary/30">
-            <X size={16} className="text-brand-primary" />
-          </ControlButton>
-          <ControlButton onClick={() => onKey(':')} label="Cmd">
-            <span className="text-lg font-display font-black leading-none">:</span>
-          </ControlButton>
-          <ControlButton onClick={() => onKey('/')} label="Find">
-             <span className="text-lg font-display font-black leading-none">/</span>
-          </ControlButton>
-          <ControlButton onClick={() => onKey('u')} label="Undo">
-            <span className="text-lg font-display font-black leading-none">u</span>
-          </ControlButton>
-          <ControlButton onClick={() => onKey('i')} label="Ins">
-            <span className="text-lg font-display font-black leading-none">i</span>
-          </ControlButton>
-          <ControlButton onClick={() => onKey('Tab')} label="Tab">
-             <Command size={16} />
-          </ControlButton>
-        </div>
+        <ControlButton onClick={() => onKey('Tab')} label="Tab">
+           <Command size={16} className="text-white/60" />
+        </ControlButton>
+
+        {/* Second Row of Quick Keys if needed, but we can fit more in 4 columns */}
+        <ControlButton onClick={() => onKey('/')} label="Find">
+           <span className="text-lg font-display font-black leading-none">/</span>
+        </ControlButton>
+
+        <ControlButton onClick={() => onKey('u')} label="Undo">
+          <span className="text-lg font-display font-black leading-none italic">u</span>
+        </ControlButton>
+        
+        <ControlButton onClick={() => onKey('i')} label="Ins">
+          <span className="text-lg font-display font-black leading-none italic">i</span>
+        </ControlButton>
+
+        <ControlButton onClick={() => onKey('Enter')} label="Enter">
+          <CornerDownLeft size={16} className="text-white/40" />
+        </ControlButton>
       </div>
 
       {/* Navigation D-Pad */}
