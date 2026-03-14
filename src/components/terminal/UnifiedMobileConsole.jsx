@@ -74,7 +74,7 @@ const UnifiedMobileConsole = ({ onKey, currentMode }) => {
   };
 
   return (
-    <div className="flex flex-col bg-[#0A0A0B]/90 backdrop-blur-2xl border-t border-white/10 select-none overflow-hidden h-full">
+    <div className="lg:hidden flex flex-col bg-[#0A0A0B]/90 backdrop-blur-2xl border-t border-white/10 select-none overflow-hidden h-full">
       {/* Tab Switcher & Status */}
       <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/5 relative">
         <div className={`text-[9px] font-black uppercase tracking-widest ${modeColors[currentMode] || modeColors.NORMAL} flex-shrink-0`}>

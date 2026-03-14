@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { Vim } from 'react-vim-wasm';
 import { useProgressStore } from '../../store/useProgressStore';
-import { X } from 'lucide-react';
+import { X, Move } from 'lucide-react';
 import UnifiedMobileConsole from './UnifiedMobileConsole';
 
 const VimTerminal = () => {
   const [currentMode, setCurrentMode] = useState('NORMAL');
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const vimRef = useRef(null);
 
   const modeColors = {
@@ -63,7 +64,7 @@ const VimTerminal = () => {
   };
 
   return (
-    <div className={`flex flex-col w-full h-[600px] lg:h-[600px] glass-morphism rounded-lg overflow-hidden neo-shadow group bg-[#0A0A0B] border-2 transition-all duration-500 mobile-full-screen ${modeColors[currentMode]}`}>
+    <div className={`flex flex-col w-full glass-morphism rounded-lg overflow-hidden neo-shadow group bg-[#0A0A0B] border-2 transition-all duration-500 ${isFullScreen ? 'mobile-full-screen' : 'h-[300px] lg:h-[500px] relative'} ${modeColors[currentMode]}`}>
       {/* Header Bar */}
       <div className="h-8 bg-white/5 border-b border-white/10 flex items-center px-4 justify-between transition-colors group-hover:bg-white/10 flex-shrink-0">
         <div className="flex space-x-2">
@@ -92,7 +93,7 @@ const VimTerminal = () => {
       >
         <Vim
           worker="/vim.worker.js" 
-          vimrc="set number\nset guicursor=a:block-Cursor\nset cursorline\nset laststatus=0\nset noshowmode"
+          vimrc="set number\nset laststatus=0\nset noshowmode"
           files={{
             'lesson.txt': getInitialContent()
           }}
@@ -103,28 +104,26 @@ const VimTerminal = () => {
           className="w-full h-full"
         />
 
-        {/* Mobile Focus Hint Overlay - Removed as we use virtual keyboard now */}
-        
-        {/* Animated Cursor Hint - Now more visible as a primary guide */}
+        {/* Animated Cursor Hint */}
         <div className="absolute bottom-4 right-4 animate-pulse pointer-events-none opacity-40">
           <div className="w-2 h-5 bg-brand-primary shadow-[0_0_15px_rgba(45,212,191,0.6)] rounded-sm"></div>
         </div>
       </div>
 
-      {/* Unified Mobile Console Controls */}
-      <UnifiedMobileConsole 
-        onKey={handleKey} 
-        currentMode={currentMode}
-      />
+      {/* Unified Mobile Console Controls - Only visible on small screens */}
+      <div className="lg:hidden">
+        <UnifiedMobileConsole 
+          onKey={handleKey} 
+          currentMode={currentMode}
+        />
+      </div>
 
-      {/* Exit Full Screen Button (Mobile Only) */}
+      {/* Full Screen Toggle Button (Mobile Only) */}
       <button 
-        onClick={(e) => {
-          e.currentTarget.parentElement.classList.toggle('mobile-full-screen');
-        }}
-        className="lg:hidden absolute top-2 right-2 z-[110] bg-black/50 p-2 rounded-full border border-white/10 text-white/40"
+        onClick={() => setIsFullScreen(!isFullScreen)}
+        className="lg:hidden absolute top-10 right-2 z-[110] bg-black/50 p-2 rounded-xl border border-white/10 text-brand-primary shadow-xl backdrop-blur-md"
       >
-        <X size={14} />
+        {isFullScreen ? <X size={16} /> : <Move size={16} />}
       </button>
     </div>
   );
