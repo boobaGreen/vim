@@ -1,12 +1,36 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Trophy, RotateCcw, ArrowRight } from 'lucide-react';
+import { useProgressStore } from '../../store/useProgressStore';
 
 const GRID_SIZE = 8;
 const INITIAL_POS = { x: 0, y: 0 };
 const GOAL_POS = { x: 7, y: 7 };
 
+const CONTENT = {
+  it: {
+    winTitle: "Missione Compiuta!",
+    winDesc: "Completato in {moves} mosse",
+    retry: "Ricomincia",
+    next: "Prosegui",
+    moves: "MOSSE",
+    goal: "OBIETTIVO"
+  },
+  en: {
+    winTitle: "Mission Accomplished!",
+    winDesc: "Completed in {moves} moves",
+    retry: "Restart",
+    next: "Continue",
+    moves: "MOVES",
+    goal: "GOAL"
+  }
+};
+
 const HJKLMaze = ({ onComplete }) => {
+  const language = useProgressStore((state) => state.language);
+  const nextLesson = useProgressStore((state) => state.nextLesson);
+  const localized = CONTENT[language] || CONTENT.en;
+
   const [pos, setPos] = useState(INITIAL_POS);
   const [moves, setMoves] = useState(0);
   const [isWon, setIsWon] = useState(false);
@@ -24,7 +48,6 @@ const HJKLMaze = ({ onComplete }) => {
       if (newPos.x !== prev.x || newPos.y !== prev.y) {
         setMoves(m => {
           const nextMoves = m + 1;
-          // Immediate win check after move with the updated moves count
           if (newPos.x === GOAL_POS.x && newPos.y === GOAL_POS.y) {
             setIsWon(true);
             if (onComplete) onComplete(nextMoves);
@@ -46,7 +69,7 @@ const HJKLMaze = ({ onComplete }) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [move]); // Only re-bind if move (memoized) changes
+  }, [move]);
 
   const reset = () => {
     setPos(INITIAL_POS);
@@ -114,10 +137,10 @@ const HJKLMaze = ({ onComplete }) => {
                 <Trophy size={48} className="text-brand-primary animate-bounce" />
               </MMotionDiv>
               <h3 className="text-2xl font-display font-black text-white uppercase italic tracking-tighter mb-1">
-                Missione Compiuta!
+                {localized.winTitle}
               </h3>
               <p className="text-white/50 text-xs uppercase tracking-[0.2em] font-bold mb-6">
-                Completato in <span className="text-brand-primary">{moves}</span> mosse
+                {localized.winDesc.replace('{moves}', moves)}
               </p>
               <div className="flex gap-4">
                 <button 
@@ -125,13 +148,13 @@ const HJKLMaze = ({ onComplete }) => {
                   className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all text-[10px] font-black uppercase tracking-widest text-white border border-white/10"
                 >
                   <RotateCcw size={14} />
-                  <span>Ricomincia</span>
+                  <span>{localized.retry}</span>
                 </button>
                 <button 
                   className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-brand-primary hover:bg-brand-primary/80 transition-all text-[10px] font-black uppercase tracking-widest text-brand-bg shadow-[0_4px_15px_rgba(45,212,191,0.3)]"
-                  onClick={() => alert('Ottimo! Prosegui alla prossima lezione.')}
+                  onClick={nextLesson}
                 >
-                  <span>Prosegui</span>
+                  <span>{localized.next}</span>
                   <ArrowRight size={14} />
                 </button>
               </div>
@@ -161,11 +184,11 @@ const HJKLMaze = ({ onComplete }) => {
 
       <div className="flex items-center space-x-8 text-[10px] font-black uppercase tracking-widest text-white/40">
         <div className="flex items-center gap-2">
-          <span>MOSSE:</span>
+          <span>{localized.moves}:</span>
           <span className="text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded">{moves}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span>OBIETTIVO:</span>
+          <span>{localized.goal}:</span>
           <span className="text-brand-accent bg-brand-accent/10 px-2 py-0.5 rounded">$</span>
         </div>
       </div>

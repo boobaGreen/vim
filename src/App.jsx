@@ -159,7 +159,7 @@ function App() {
                 <div className="text-center sm:text-left relative z-10">
                   <h3 className="text-brand-primary font-display font-black mb-2 flex items-center justify-center sm:justify-start space-x-2 text-[10px] tracking-[0.3em] uppercase italic">
                     <span className="animate-pulse">●</span>
-                    <span>{language === 'it' ? 'MISSION STATUS' : 'MISSION STATUS'}</span>
+                    <span>{language === 'it' ? 'STATO MISSIONE' : 'MISSION STATUS'}</span>
                   </h3>
                   <p className="text-white/60 text-xs md:text-sm leading-relaxed max-w-xs font-sans">
                     {language === 'it'
@@ -232,7 +232,7 @@ function App() {
           </a>
           <div className="h-3 w-px bg-white/5"></div>
           <div className="flex space-x-4 shrink-0 text-brand-primary">
-            <span>{language === 'it' ? 'PROGRESSO' : 'PROGRESS'}: {completedLessons.length} / 12</span>
+            <span>{language === 'it' ? 'PROGRESSO' : 'PROGRESS'}: {completedLessons.length} / {lessons.length}</span>
           </div>
         </div>
       </footer>

@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { MDXProvider } from '@mdx-js/react';
+import { useProgressStore } from './store/useProgressStore';
 import LessonLayout from './components/layout/LessonLayout';
 import { Card, Badge, Button } from './components/ui';
 import HJKLMaze from './components/interactive/HJKLMaze';
@@ -25,22 +26,31 @@ const components = {
 };
 
 const lessons = import.meta.glob('./content/**/*.mdx');
-console.log('Available lessons:', Object.keys(lessons));
 const lazyLessons = Object.fromEntries(
   Object.entries(lessons).map(([key, importFn]) => [key, lazy(importFn)])
 );
 
 const LessonRenderer = ({ path }) => {
+  const language = useProgressStore((state) => state.language);
   const lessonKey = `./content/${path}.mdx`;
-  console.log('Loading lesson:', lessonKey);
   const DynamicLesson = lazyLessons[lessonKey];
 
   if (!DynamicLesson) {
-    return <div className="text-red-500 font-mono text-xs p-4 border border-red-500/20 bg-red-500/5">Error: Lesson not found at {lessonKey}</div>;
+    return (
+      <div className="text-red-500 font-mono text-xs p-4 border border-red-500/20 bg-red-500/5 rounded-xl">
+        {language === 'it' 
+          ? `Errore: Lezione non trovata a ${lessonKey}` 
+          : `Error: Lesson not found at ${lessonKey}`}
+      </div>
+    );
   }
 
   return (
-    <Suspense fallback={<div className="animate-pulse text-brand-primary uppercase text-xs">Loading Data Stream...</div>}>
+    <Suspense fallback={
+      <div className="animate-pulse text-brand-primary uppercase text-[10px] font-black tracking-widest py-8">
+        {language === 'it' ? 'Caricamento Flusso Dati...' : 'Loading Data Stream...'}
+      </div>
+    }>
       <MDXProvider components={components}>
         <div className="prose max-w-none">
           <DynamicLesson />
