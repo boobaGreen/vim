@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, CornerDownLeft, Command, Type, Move } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
 import VirtualVimKeyboard from './VirtualVimKeyboard';
