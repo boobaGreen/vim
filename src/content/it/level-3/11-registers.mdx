@@ -11,17 +11,25 @@ export const metadata = {
 In un editor normale, hai un solo "appunti" (clipboard). In Vim, ne hai dozzine. Questi si chiamano **Registri**.
 
 ### Tipi di Registri
-- `"` (Unnamed): Il registro predefinito dove finisce tutto ciò che cancelli o copi.
-- `0-9`: Registri storici delle tue ultime cancellazioni.
-- `a-z`: Registri nominati che puoi usare per salvare testo a lungo termine.
-- `+` e `*`: Il ponte verso la clipboard del tuo sistema operativo.
+<ShortcutGrid 
+  data={[
+    { key: '"', label: 'Senza Nome', desc: 'Il registro predefinito per tutte le cancellazioni e copie.' },
+    { key: '0-9', label: 'Storico', desc: 'Registri storici delle ultime 10 cancellazioni.' },
+    { key: 'a-z', label: 'Nominati', desc: 'Registri personalizzati per memorizzare testo a lungo termine.' },
+    { key: '+ / *', label: 'Sistema', desc: 'Ponte verso gli appunti del sistema operativo.' },
+  ]}
+/>
 
 ### Come usare un registro
 La formula è: **`"` + [NOME_REGISTRO] + [AZIONE]**
 
-- `"ayw`: Copia (yank) una parola nel registro `a`.
-- `"ap`: Incolla il contenuto del registro `a`.
-- `"+y`: Copia il testo selezionato nella clipboard di Windows/Mac/Linux.
+<ShortcutGrid 
+  data={[
+    { key: '"ayw', label: 'Copia in Registro', desc: 'Copia una parola specificatamente nel registro "a".' },
+    { key: '"ap', label: 'Incolla da Registro', desc: 'Incolla il contenuto del registro "a".' },
+    { key: '"+y', label: 'Copia al Sistema', desc: 'Copia la selezione negli appunti globali.' },
+  ]}
+/>
 
 ### Perché è utile?
 Puoi copiare un pezzo di codice nel registro `f` (per 'funzione') e un altro nel registro `v` (per 'variabile'), e incollarli quando vuoi senza che uno sovrascriva l'altro.

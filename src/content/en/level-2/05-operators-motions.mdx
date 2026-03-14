@@ -12,15 +12,23 @@ Welcome to Level 2. Now that you know the basics, it's time to learn how to "spe
 
 ### The Big Three Operators
 Let's learn the primary verbs:
-1. `d` (**Delete**): Deletes text.
-2. `c` (**Change**): Deletes text and puts you in *Insert Mode*.
-3. `y` (**Yank**): Copies (yanks) text.
+<ShortcutGrid 
+  data={[
+    { key: "d", label: "Delete", desc: "Deletes text." },
+    { key: "c", label: "Change", desc: "Deletes text and puts you in Insert Mode." },
+    { key: "y", label: "Yank", desc: "Copies (yanks) text." },
+  ]}
+/>
 
 ### Word Motions
 For now, let's use these targets:
-- `w`: Jump to the start of the next word (**Word**).
-- `e`: Jump to the end of the current word (**End**).
-- `b`: Jump to the start of the previous word (**Back**).
+<ShortcutGrid 
+  data={[
+    { key: "w", label: "Word", desc: "Jump to the start of the next word." },
+    { key: "e", label: "End", desc: "Jump to the end of the current word." },
+    { key: "b", label: "Back", desc: "Jump to the start of the previous word." },
+  ]}
+/>
 
 ### The Magic Combination
 Try combining an operator with a motion in the terminal:

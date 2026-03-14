@@ -6,7 +6,7 @@ import HJKLMaze from './components/interactive/HJKLMaze';
 import GrammarBuilder from './components/interactive/GrammarBuilder';
 import SpeedRacer from './components/interactive/SpeedRacer';
 
-import { Kbd, InfoBox, CommandTable, Step } from './components/ui/MDXComponents';
+import { Kbd, InfoBox, CommandTable, Step, DirectionalGrid, ShortcutGrid } from './components/ui/MDXComponents';
 
 const components = {
   wrapper: ({ children }) => <LessonLayout {...children.props}>{children}</LessonLayout>,
@@ -19,7 +19,9 @@ const components = {
   Kbd,
   InfoBox,
   CommandTable,
-  Step
+  Step,
+  DirectionalGrid,
+  ShortcutGrid
 };
 
 const lessons = import.meta.glob('./content/**/*.mdx');

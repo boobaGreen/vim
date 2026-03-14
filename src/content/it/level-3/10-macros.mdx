@@ -16,9 +16,13 @@ Hai mai dovuto fare la stessa modifica su 50 righe diverse? Invece di diventare 
 3. Premi di nuovo `q` per fermare la registrazione.
 
 ### Come Riprodurre una Macro
-- `@a`: Esegue la macro registrata in `a`.
-- `@@`: Ripete l'ultima macro eseguita.
-- `10@a`: Esegue la macro 10 volte.
+<ShortcutGrid 
+  data={[
+    { key: "@a", label: "Esegui", desc: "Esegue la macro registrata nel registro 'a'." },
+    { key: "@@", label: "Ripeti", desc: "Ripete l'ultima macro eseguita." },
+    { key: "10@a", label: "Conteggio", desc: "Esegue la macro 10 volte di fila." },
+  ]}
+/>
 
 > [!IMPORTANT]
 > Quando registri una macro, termina sempre con un movimento che porti il cursore nella posizione corretta per la riga successiva (es. `j` o `0`).

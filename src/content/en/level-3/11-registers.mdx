@@ -11,17 +11,25 @@ export const metadata = {
 In a normal editor, you have only one "clipboard". In Vim, you have dozens. These are called **Registers**.
 
 ### Types of Registers
-- `"` (Unnamed): The default register where everything you delete or yank ends up.
-- `0-9`: Historical registers of your last deletions.
-- `a-z`: Named registers you can use to save text long-term.
-- `+` and `*`: The bridge to your operating system's clipboard.
+<ShortcutGrid 
+  data={[
+    { key: '"', label: 'Unnamed', desc: 'Default register for all deletions and yanks.' },
+    { key: '0-9', label: 'History', desc: 'Historical registers of your last 10 deletions.' },
+    { key: 'a-z', label: 'Named', desc: 'Custom registers for long-term text storage.' },
+    { key: '+ / *', label: 'System', desc: 'The bridge to your OS clipboard.' },
+  ]}
+/>
 
 ### How to Use a Register
 The formula is: **`"` + [REGISTER_NAME] + [ACTION]**
 
-- `"ayw`: Yank a word into register `a`.
-- `"ap`: Paste the content of register `a`.
-- `"+y`: Copy selected text to the system clipboard.
+<ShortcutGrid 
+  data={[
+    { key: '"ayw', label: 'Yank to Register', desc: 'Yank a word specifically into register "a".' },
+    { key: '"ap', label: 'Paste from Register', desc: 'Paste the contents of register "a".' },
+    { key: '"+y', label: 'Copy to System', desc: 'Copy selection to the global OS clipboard.' },
+  ]}
+/>
 
 ### Why is it useful?
 You can copy a piece of code into register `f` (for 'function') and another into register `v` (for 'variable'), and paste them whenever you want without one overwriting the other.

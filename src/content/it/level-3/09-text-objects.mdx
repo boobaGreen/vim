@@ -14,14 +14,22 @@ Fino ad ora abbiamo usato i movimenti (`w`, `e`, `b`) come bersagli. Ma Vim ha u
 La formula si evolve in:
 **[OPERATORE] + [i o a] + [OGGETTO]**
 
-- `i` (**Inner**): "Dentro" l'oggetto (escluse le delimitazioni).
-- `a` (**Around**): "Attorno" all'oggetto (incluse delimitazioni e spazi).
+<ShortcutGrid 
+  data={[
+    { key: "i", label: "Inner", desc: "Dentro l'oggetto (escluse le delimitazioni)." },
+    { key: "a", label: "Around", desc: "Attorno all'oggetto (incluse delimitazioni e spazi)." },
+  ]}
+/>
 
 ### Esempi Comuni
 Imagina di essere dentro una stringa `"Hello World"`.
-- `ci"`: **Change Inner Quotes**. Cancella il contenuto tra virgolette e ti mette in Insert Mode.
-- `da(`: **Delete Around Parentheses**. Cancella le parentesi e tutto il loro contenuto.
-- `diw`: **Delete Inner Word**. Cancella la parola corrente ovunque si trovi il cursore al suo interno.
+<ShortcutGrid 
+  data={[
+    { key: 'ci"', label: 'Change Inner Quotes', desc: 'Cancella il contenuto tra virgolette ed entra in Insert Mode.' },
+    { key: 'da(', label: 'Delete Around Parentheses', desc: 'Cancella le parentesi e tutto il loro contenuto.' },
+    { key: 'diw', label: 'Delete Inner Word', desc: 'Cancella la parola corrente ovunque si trovi il cursore.' },
+  ]}
+/>
 
 ### Perché usarli?
 Non devi più posizionarti all'inizio di una parola per cancellarla. Se il cursore è su una lettera qualsiasi, `diw` la cancellerà tutta.

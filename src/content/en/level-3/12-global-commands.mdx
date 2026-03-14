@@ -11,11 +11,19 @@ export const metadata = {
 We have reached the summit. The Wizard's final secret is the **Global** command (`:g`), which allows you to perform actions on every line that matches a pattern.
 
 ### The `:g` Command
-- `:g/TODO/d`: Delete all lines containing the word "TODO".
-- `:g/console.log/s/log/error/g`: Change all `console.log` to `console.error` throughout the file.
+<ShortcutGrid 
+  data={[
+    { key: ":g/TODO/d", label: "Global Delete", desc: 'Delete all lines containing the word "TODO".' },
+    { key: ":g/log/s/log/err/g", label: "Global Replace", desc: "Change all 'log' to 'err' throughout the file." },
+  ]}
+/>
 
 ### Powerful Substitution (`:s`)
-- `:%s/old/new/gc`: Search for "old" and replace it with "new" in the entire file (`%`), asking for confirmation (`c`).
+<ShortcutGrid 
+  data={[
+    { key: ":%s/old/new/gc", label: "Search & Replace", desc: 'Search entire file (%) for "old" and replace with "new", asking for confirmation (c).' },
+  ]}
+/>
 
 ### Becoming an Architect
 By combining Text Objects, Macros, and Global Commands, you can refactor an entire project in seconds. You are no longer just typing; you are conducting an orchestra of text.

@@ -18,13 +18,12 @@ Dimentica le frecce. Inizia a pensare per azioni. Ogni tasto è un comando di tr
 Ecco come interagire con il testo nella memoria di Vim mentre sei in **Normal Mode**:
 </Step>
 
-<CommandTable 
-  headers={["Comando", "Azione", "Risultato"]}
+<ShortcutGrid 
   data={[
-    ["i", "Insert", "Inserisce testo prima del cursore. (Entra in Insert Mode)"],
-    ["x", "Delete", "Elimina il carattere sotto il cursore."],
-    ["u", "Undo", "Annulla l'ultima azione. Il tuo miglior amico."],
-    ["Ctrl + r", "Redo", "Ripristina l'azione annullata."],
+    { key: "i", label: "Insert", desc: "Inserisce testo prima del cursore. (Entra in Insert Mode)" },
+    { key: "x", label: "Delete", desc: "Elimina il carattere sotto il cursore." },
+    { key: "u", label: "Undo", desc: "Annulla l'ultima azione. Il tuo miglior amico." },
+    { key: "Ctrl + r", label: "Redo", desc: "Ripristina l'azione annullata." },
   ]}
 />
 

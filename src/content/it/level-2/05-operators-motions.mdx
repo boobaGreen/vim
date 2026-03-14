@@ -12,15 +12,23 @@ Benvenuto nel Livello 2. Ora che conosci le basi, è tempo di imparare a "parlar
 
 ### I Tre Grandi Operatori
 Impariamo i verbi principali:
-1. `d` (**Delete**): Cancella il testo.
-2. `c` (**Change**): Cancella il testo e ti mette in *Insert Mode*.
-3. `y` (**Yank**): Copia il testo (senza cancellarlo).
+<ShortcutGrid 
+  data={[
+    { key: "d", label: "Delete", desc: "Cancella il testo." },
+    { key: "c", label: "Change", desc: "Cancella il testo e ti mette in Insert Mode." },
+    { key: "y", label: "Yank", desc: "Copia il testo (senza cancellarlo)." },
+  ]}
+/>
 
 ### I Movimenti di Parola
 Per ora, usiamo questi bersagli:
-- `w`: Salta all'inizio della parola successiva (**Word**).
-- `e`: Salta alla fine della parola corrente (**End**).
-- `b`: Salta all'inizio della parola precedente (**Back**).
+<ShortcutGrid 
+  data={[
+    { key: "w", label: "Word", desc: "Salta all'inizio della parola successiva." },
+    { key: "e", label: "End", desc: "Salta alla fine della parola corrente." },
+    { key: "b", label: "Back", desc: "Salta all'inizio della parola precedente." },
+  ]}
+/>
 
 ### La Combinazione Magica
 Prova a combinare un operatore con un movimento nel terminale:

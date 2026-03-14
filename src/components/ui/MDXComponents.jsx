@@ -1,5 +1,5 @@
-import React from 'react';
 import { Info, AlertTriangle, Lightbulb, CheckCircle } from 'lucide-react';
+import { useProgressStore } from '../../store/useProgressStore';
 
 export const Kbd = ({ children }) => (
   <kbd className="inline-flex items-center justify-center min-w-[28px] px-1.5 py-0.5 font-mono text-[11px] font-black text-brand-primary bg-brand-primary/10 border border-brand-primary/30 rounded shadow-[0_3px_0_0_rgba(45,212,191,0.2)] mx-1 transform -translate-y-[2px] hover:-translate-y-[1px] hover:shadow-[0_2px_0_0_rgba(45,212,191,0.2)] transition-all cursor-default select-none">
@@ -73,5 +73,84 @@ export const Step = ({ number, title, children }) => (
       <h4 className="text-2xl font-display font-black uppercase italic tracking-tighter text-white group-hover:text-brand-primary transition-colors leading-[0.9]">{title}</h4>
       <div className="text-[15px] text-white/50 leading-relaxed max-w-2xl font-sans">{children}</div>
     </div>
+  </div>
+);
+
+export const DirectionalGrid = () => {
+  const language = useProgressStore((state) => state.language);
+  
+  const labels = {
+    it: { up: 'SU', left: 'SINISTRA', down: 'GIÙ', right: 'DESTRA' },
+    en: { up: 'UP', left: 'LEFT', down: 'DOWN', right: 'RIGHT' }
+  };
+
+  const currentLabels = labels[language] || labels.en;
+
+  const details = {
+    it: [
+      { key: 'h', label: 'Sinistra', mantra: 'Indietro nel tempo' },
+      { key: 'j', label: 'Giù', mantra: 'Verso la terra' },
+      { key: 'k', label: 'Su', mantra: 'Verso il cielo' },
+      { key: 'l', label: 'Destra', mantra: 'Avanti nel futuro' }
+    ],
+    en: [
+      { key: 'h', label: 'Left', mantra: 'Backward in time' },
+      { key: 'j', label: 'Down', mantra: 'Towards the earth' },
+      { key: 'k', label: 'Up', mantra: 'Towards the sky' },
+      { key: 'l', label: 'Right', mantra: 'Forward into the future' }
+    ]
+  };
+
+  const currentDetails = details[language] || details.en;
+
+  return (
+    <div className="flex flex-col items-center justify-center py-10 mb-10 glass-morphism rounded-3xl border-white/5 bg-white/[0.01]">
+      <div className="grid grid-cols-3 gap-4">
+        <div />
+        <div className="flex flex-col items-center space-y-2">
+          <Kbd>k</Kbd>
+          <span className="text-[8px] font-black uppercase text-brand-primary tracking-widest">{currentLabels.up}</span>
+        </div>
+        <div />
+        
+        <div className="flex flex-col items-center space-y-2">
+          <Kbd>h</Kbd>
+          <span className="text-[8px] font-black uppercase text-brand-primary tracking-widest">{currentLabels.left}</span>
+        </div>
+        <div className="flex flex-col items-center space-y-2">
+          <Kbd>j</Kbd>
+          <span className="text-[8px] font-black uppercase text-brand-primary tracking-widest">{currentLabels.down}</span>
+        </div>
+        <div className="flex flex-col items-center space-y-2">
+          <Kbd>l</Kbd>
+          <span className="text-[8px] font-black uppercase text-brand-primary tracking-widest">{currentLabels.right}</span>
+        </div>
+      </div>
+      
+      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-8 px-10">
+        {currentDetails.map(item => (
+          <div key={item.key} className="text-center space-y-1">
+            <div className="text-[10px] font-display font-black text-brand-primary uppercase tracking-tighter italic">{item.label}</div>
+            <div className="text-[9px] font-bold text-white/20 uppercase tracking-widest">{item.mantra}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export const ShortcutGrid = ({ data }) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+    {data.map((item, i) => (
+      <div key={i} className="glass-morphism p-6 rounded-2xl border-white/5 hover:border-brand-primary/20 transition-all group flex items-center space-x-6">
+        <div className="shrink-0 flex items-center justify-center">
+          <Kbd>{item.key}</Kbd>
+        </div>
+        <div className="space-y-1">
+          <div className="text-xs font-display font-black uppercase text-white group-hover:text-brand-primary transition-colors">{item.label}</div>
+          <p className="text-[11px] text-white/40 font-medium italic leading-tight">{item.desc}</p>
+        </div>
+      </div>
+    ))}
   </div>
 );

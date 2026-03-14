@@ -14,14 +14,22 @@ Until now, we've used motions (`w`, `e`, `b`) as targets. But Vim has an even mo
 The formula evolves into:
 **[OPERATOR] + [i or a] + [OBJECT]**
 
-- `i` (**Inner**): "Inside" the object (excluding boundaries).
-- `a` (**Around**): "Around" the object (including boundaries and spaces).
+<ShortcutGrid 
+  data={[
+    { key: "i", label: "Inner", desc: "Inside the object (excluding boundaries)." },
+    { key: "a", label: "Around", desc: "Around the object (including boundaries and spaces)." },
+  ]}
+/>
 
 ### Common Examples
 Imagine you are inside a string `"Hello World"`.
-- `ci"`: **Change Inner Quotes**. Clears the content inside quotes and puts you in Insert Mode.
-- `da(`: **Delete Around Parentheses**. Deletes the parentheses and all their content.
-- `diw`: **Delete Inner Word**. Deletes the current word wherever the cursor is located within it.
+<ShortcutGrid 
+  data={[
+    { key: 'ci"', label: 'Change Inner Quotes', desc: 'Clears content inside quotes and enters Insert Mode.' },
+    { key: 'da(', label: 'Delete Around Parentheses', desc: 'Deletes parentheses and all their content.' },
+    { key: 'diw', label: 'Delete Inner Word', desc: 'Deletes current word wherever the cursor is.' },
+  ]}
+/>
 
 ### Why Use Them?
 You no longer need to position yourself at the start of a word to delete it. If the cursor is on any letter, `diw` will delete the whole thing.

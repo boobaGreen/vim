@@ -18,13 +18,12 @@ Forget arrows. Start thinking in actions. Every key is a transformation command.
 Here's how to interact with text in **Normal Mode**:
 </Step>
 
-<CommandTable 
-  headers={["Command", "Action", "Result"]}
+<ShortcutGrid 
   data={[
-    ["i", "Insert", "Insert before the cursor. (Enters Insert Mode)"],
-    ["x", "Delete", "Delete the character under the cursor."],
-    ["u", "Undo", "Undo the last action. Your best friend."],
-    ["Ctrl + r", "Redo", "Redo the undone action."],
+    { key: "i", label: "Insert", desc: "Insert before the cursor. (Enters Insert Mode)" },
+    { key: "x", label: "Delete", desc: "Delete the character under the cursor." },
+    { key: "u", label: "Undo", desc: "Undo the last action. Your best friend." },
+    { key: "Ctrl + r", label: "Redo", desc: "Redo the undone action." },
   ]}
 />
 

@@ -11,11 +11,19 @@ export const metadata = {
 Siamo arrivati alla vetta. L'ultimo segreto del Mago è il comando **Global** (`:g`), che ti permette di eseguire azioni su ogni riga che corrisponde a un pattern.
 
 ### Il Comando `:g`
-- `:g/TODO/d`: Cancella tutte le righe che contengono la parola "TODO".
-- `:g/console.log/s/log/error/g`: Cambia tutti i `console.log` in `console.error` in tutto il file.
+<ShortcutGrid 
+  data={[
+    { key: ":g/TODO/d", label: "Delete Globale", desc: 'Cancella tutte le righe che contengono la parola "TODO".' },
+    { key: ":g/log/s/log/err/g", label: "Sostituta Globale", desc: "Cambia tutti i 'log' in 'err' in tutto il file." },
+  ]}
+/>
 
 ### Sostituzione Potente (`:s`)
-- `:%s/vecchio/nuovo/gc`: Cerca "vecchio" e sostituiscilo con "nuovo" in tutto il file (`%`), chiedendo conferma (`c`).
+<ShortcutGrid 
+  data={[
+    { key: ":%s/old/new/gc", label: "Trova e Sostituisci", desc: 'Cerca in tutto il file (%) "old" e sostituisci con "new", chiedendo conferma (c).' },
+  ]}
+/>
 
 ### Diventare un Architetto
 Combinando Oggetti di Testo, Macro e Comandi Globali, puoi refactorizzare un intero progetto in pochi secondi. Non stai più solo scrivendo; stai dirigendo un'orchestra di testo.

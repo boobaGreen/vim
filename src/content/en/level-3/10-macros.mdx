@@ -16,9 +16,13 @@ Have you ever had to make the same change on 50 different lines? Instead of goin
 3. Press `q` again to stop recording.
 
 ### How to Play a Macro
-- `@a`: Runs the macro recorded in `a`.
-- `@@`: Repeats the last executed macro.
-- `10@a`: Runs the macro 10 times.
+<ShortcutGrid 
+  data={[
+    { key: "@a", label: "Play", desc: "Runs the macro recorded in register 'a'." },
+    { key: "@@", label: "Repeat", desc: "Repeats the last executed macro." },
+    { key: "10@a", label: "Count", desc: "Runs the macro 10 times in a row." },
+  ]}
+/>
 
 > [!IMPORTANT]
 > When recording a macro, always end with a motion that brings the cursor to the correct position for the next line (e.g., `j` or `0`).
