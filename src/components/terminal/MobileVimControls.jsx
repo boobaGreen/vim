@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, CornerDownLeft, Command, X } from 'lucide-react';
+import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, CornerDownLeft, Command, X, Keyboard } from 'lucide-react';
 
 const ControlButton = ({ children, onClick, className = '', label }) => {
   const MButton = motion.button;
@@ -8,7 +8,11 @@ const ControlButton = ({ children, onClick, className = '', label }) => {
     <MButton
       whileTap={{ scale: 0.9, backgroundColor: 'rgba(255,255,255,0.1)' }}
       whileHover={{ scale: 1.05, borderColor: 'rgba(45,212,191,0.5)' }}
-      onClick={onClick}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onClick();
+      }}
       className={`flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-xl p-2 min-w-[44px] min-h-[44px] transition-all duration-200 ${className}`}
     >
       {children}
@@ -17,7 +21,7 @@ const ControlButton = ({ children, onClick, className = '', label }) => {
   );
 };
 
-const MobileVimControls = ({ onKey, currentMode = 'NORMAL' }) => {
+const MobileVimControls = ({ onKey, onFocusRequest, currentMode = 'NORMAL' }) => {
   const modeColors = {
     NORMAL: 'text-brand-primary',
     INSERT: 'text-green-400',
@@ -37,6 +41,10 @@ const MobileVimControls = ({ onKey, currentMode = 'NORMAL' }) => {
           <X size={16} className="text-brand-primary" />
         </ControlButton>
         
+        <ControlButton onClick={onFocusRequest} label="Keys" className="bg-brand-primary/10 border-brand-primary/30">
+          <Keyboard size={16} className="text-brand-primary" />
+        </ControlButton>
+
         <ControlButton onClick={() => onKey(':')} label="Cmd">
           <span className="text-lg font-display font-black leading-none">:</span>
         </ControlButton>
@@ -45,7 +53,6 @@ const MobileVimControls = ({ onKey, currentMode = 'NORMAL' }) => {
            <Command size={16} className="text-white/60" />
         </ControlButton>
 
-        {/* Second Row of Quick Keys if needed, but we can fit more in 4 columns */}
         <ControlButton onClick={() => onKey('/')} label="Find">
            <span className="text-lg font-display font-black leading-none">/</span>
         </ControlButton>

@@ -16,6 +16,12 @@ const VimTerminal = () => {
 
   const { currentLessonIndex, language } = useProgressStore();
 
+  const handleFocusRequest = () => {
+    if (vimRef.current) {
+      vimRef.current.focus();
+    }
+  };
+
   const handleKey = (key) => {
     if (vimRef.current) {
       // Map key to keyCode for vim-wasm sendKeydown
@@ -33,6 +39,11 @@ const VimTerminal = () => {
         };
         
         vimRef.current.sendKeydown(key, keyCode, modifiers);
+
+        // Auto-focus on mobile when entering insert modes
+        if (key === 'i' || key === 'a' || key === 'o' || key === 's' || key === 'c') {
+          setTimeout(() => vimRef.current?.focus(), 50);
+        }
       } catch (e) {
         console.warn('Vim sendKeydown failed', e);
       }
@@ -104,7 +115,7 @@ const VimTerminal = () => {
         {/* Mobile Focus Hint Overlay */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 group-active:opacity-100 lg:hidden transition-opacity">
           <div className="bg-brand-primary/20 backdrop-blur-sm px-4 py-2 rounded-full border border-brand-primary/30 text-[10px] font-black text-brand-primary uppercase">
-            Capivolo Tastiera...
+            Capitolo Tastiera...
           </div>
         </div>
         
@@ -117,6 +128,7 @@ const VimTerminal = () => {
       {/* Mobile Controls Integration */}
       <MobileVimControls 
         onKey={handleKey} 
+        onFocusRequest={handleFocusRequest}
         currentMode={currentMode}
       />
     </div>
