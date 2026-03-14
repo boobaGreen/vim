@@ -168,19 +168,23 @@ const HJKLMaze = ({ onComplete, onCompleteId }) => {
       {/* Mobile Controls for Maze */}
       <div className="grid grid-cols-3 gap-3 md:hidden">
         <div />
-        <button onClick={() => move('k')} className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex items-center justify-center text-brand-primary active:scale-90 transition-transform">
-          <ChevronUp size={24} />
+        <button onClick={() => move('k')} className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex flex-col items-center justify-center text-brand-primary active:scale-90 transition-transform p-1">
+          <ChevronUp size={20} />
+          <span className="text-[10px] font-black mt-[-2px] ml-0.5">k</span>
         </button>
         <div />
         
-        <button onClick={() => move('h')} className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex items-center justify-center text-brand-primary active:scale-90 transition-transform">
-          <ChevronLeft size={24} />
+        <button onClick={() => move('h')} className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex flex-col items-center justify-center text-brand-primary active:scale-90 transition-transform p-1">
+          <ChevronLeft size={20} />
+          <span className="text-[10px] font-black mt-[-2px] ml-0.5">h</span>
         </button>
-        <button onClick={() => move('j')} className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex items-center justify-center text-brand-primary active:scale-90 transition-transform">
-          <ChevronDown size={24} />
+        <button onClick={() => move('j')} className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex flex-col items-center justify-center text-brand-primary active:scale-90 transition-transform p-1">
+          <ChevronDown size={20} />
+          <span className="text-[10px] font-black mt-[-2px] ml-0.5">j</span>
         </button>
-        <button onClick={() => move('l')} className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex items-center justify-center text-brand-primary active:scale-90 transition-transform">
-          <ChevronRight size={24} />
+        <button onClick={() => move('l')} className="w-14 h-14 rounded-2xl glass-morphism border border-white/10 flex flex-col items-center justify-center text-brand-primary active:scale-90 transition-transform p-1">
+          <ChevronRight size={20} />
+          <span className="text-[10px] font-black mt-[-2px] ml-0.5">l</span>
         </button>
       </div>
 

@@ -29,8 +29,50 @@ Siamo arrivati alla vetta. L'ultimo segreto del Mago è il comando **Global** (`
 Combinando Oggetti di Testo, Macro e Comandi Globali, puoi refactorizzare un intero progetto in pochi secondi. Non stai più solo scrivendo; stai dirigendo un'orchestra di testo.
 
 <Card title="Sfida Finale">
-  Hai una lista di 100 variabili? Usa `:g` per rinominarle tutte o una Macro per trasformarle in un oggetto JSON. Il limite è solo la tua immaginazione.
+  Sei arrivato alla fine del percorso base. Usa il comando `:g/error/d` nel terminale per pulire ipotetici log. Sei pronto per dominare ogni file.
 </Card>
+
+<Quiz 
+  id="12-global-commands"
+  questions={[
+    {
+      question: { 
+        it: "Cosa fa il comando ':g'?", 
+        en: "What does the ':g' command do?" 
+      },
+      options: [
+        { it: "Sostituisce una parola", en: "Replaces a word" },
+        { it: "Esegue un comando su tutte le righe che corrispondono a un pattern", en: "Executes a command on all lines that match a pattern" },
+        { it: "Chiude Vim", en: "Exits Vim" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Qual è la differenza tra ':g' e ':v'?", 
+        en: "What is the difference between ':g' and ':v'?" 
+      },
+      options: [
+        { it: "':v' agisce sulle righe che NON corrispondono al pattern", en: "':v' acts on lines that do NOT match the pattern" },
+        { it: "Non c'è differenza", en: "There is no difference" },
+        { it: "':v' è solo per la ricerca", en: "':v' is only for searching" }
+      ],
+      correctIndex: 0
+    },
+    {
+      question: { 
+        it: "Vim è il miglior editor del mondo?", 
+        en: "Is Vim the best editor in the world?" 
+      },
+      options: [
+        { it: "Sì", en: "Yes" },
+        { it: "Assolutamente sì", en: "Absolutely yes" },
+        { it: "Non posso vivere senza", en: "I can't live without it" }
+      ],
+      correctIndex: 1
+    }
+  ]}
+/>
 
 > [!IMPORTANT]
 > Il viaggio non finisce qui. Vim è una competenza che si affina in anni. Continua a esplorare, personalizzare il tuo `.vimrc` e, soprattutto, divertiti!

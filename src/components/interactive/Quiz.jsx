@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, XCircle, Trophy, ArrowRight } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
 import { Button } from '../ui';
@@ -9,6 +10,7 @@ const Quiz = ({ id, questions, onComplete }) => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const MMotionDiv = motion.div;
   
   const { language, completeLesson, nextLesson } = useProgressStore();
 
@@ -35,7 +37,7 @@ const Quiz = ({ id, questions, onComplete }) => {
 
   if (isFinished) {
     return (
-      <motion.div 
+      <MMotionDiv 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="bg-brand-primary/5 border border-brand-primary/20 rounded-[2rem] p-10 text-center space-y-6 my-10"
@@ -56,7 +58,7 @@ const Quiz = ({ id, questions, onComplete }) => {
         <Button onClick={nextLesson} className="w-full sm:w-auto px-10 py-4 rounded-xl">
           {language === 'it' ? 'Prossima Lezione' : 'Next Lesson'} <ArrowRight size={18} className="ml-2" />
         </Button>
-      </motion.div>
+      </MMotionDiv>
     );
   }
 
@@ -82,52 +84,62 @@ const Quiz = ({ id, questions, onComplete }) => {
         </div>
       </div>
 
-      <div className="space-y-6">
-        <h4 className="text-xl md:text-2xl font-display font-black text-white leading-tight">
-          {q.question[language] || q.question.en}
-        </h4>
 
-        <div className="grid grid-cols-1 gap-3">
-          {q.options.map((opt, index) => {
-            const isSelected = selectedAnswer === index;
-            const isCorrectAnswer = index === q.correctIndex;
-            
-            let statusClasses = "border-white/10 bg-white/[0.02] text-white/70 hover:bg-white/[0.05] hover:border-white/20";
-            if (isSelected) {
-              statusClasses = isCorrect 
-                ? "border-green-500/50 bg-green-500/10 text-green-400" 
-                : "border-red-500/50 bg-red-500/10 text-red-400";
-            } else if (isCorrect !== null && isCorrectAnswer) {
-              statusClasses = "border-green-500/30 bg-green-500/5 text-green-400/60";
-            }
 
-            return (
-              <button
-                key={index}
-                onClick={() => handleAnswer(index)}
-                disabled={isCorrect !== null}
-                className={`flex items-center justify-between p-5 rounded-2xl border transition-all text-left group overflow-hidden relative ${statusClasses}`}
-              >
-                <span className="font-sans font-medium text-[15px] relative z-10">
-                  {opt[language] || opt.en}
-                </span>
-                <div className="relative z-10">
-                  {isSelected && isCorrect && <CheckCircle2 size={20} className="text-green-500" />}
-                  {isSelected && !isCorrect && <XCircle size={20} className="text-red-500" />}
-                </div>
-                {isSelected && (
-                  <motion.div 
-                    layoutId="quiz-indicator"
-                    className={`absolute inset-0 opacity-10 ${isCorrect ? 'bg-green-500' : 'bg-red-500'}`}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                  />
-                )}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      <AnimatePresence mode="wait">
+        <MMotionDiv 
+          key={currentStep}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          className="space-y-6"
+        >
+          <h4 className="text-xl md:text-2xl font-display font-black text-white leading-tight">
+            {q.question[language] || q.question.en}
+          </h4>
+
+          <div className="grid grid-cols-1 gap-3">
+            {q.options.map((opt, index) => {
+              const isSelected = selectedAnswer === index;
+              const isCorrectAnswer = index === q.correctIndex;
+              
+              let statusClasses = "border-white/10 bg-white/[0.02] text-white/70 hover:bg-white/[0.05] hover:border-white/20";
+              if (isSelected) {
+                statusClasses = isCorrect 
+                  ? "border-green-500/50 bg-green-500/10 text-green-400" 
+                  : "border-red-500/50 bg-red-500/10 text-red-400";
+              } else if (isCorrect !== null && isCorrectAnswer) {
+                statusClasses = "border-green-500/30 bg-green-500/5 text-green-400/60";
+              }
+
+              return (
+                <button
+                  key={index}
+                  onClick={() => handleAnswer(index)}
+                  disabled={isCorrect !== null}
+                  className={`flex items-center justify-between p-5 rounded-2xl border transition-all text-left group overflow-hidden relative ${statusClasses}`}
+                >
+                  <span className="font-sans font-medium text-[15px] relative z-10">
+                    {opt[language] || opt.en}
+                  </span>
+                  <div className="relative z-10">
+                    {isSelected && isCorrect && <CheckCircle2 size={20} className="text-green-500" />}
+                    {isSelected && !isCorrect && <XCircle size={20} className="text-red-500" />}
+                  </div>
+                  {isSelected && (
+                    <MMotionDiv 
+                      layoutId="quiz-indicator"
+                      className={`absolute inset-0 opacity-10 ${isCorrect ? 'bg-green-500' : 'bg-red-500'}`}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </MMotionDiv>
+      </AnimatePresence>
     </div>
   );
 };

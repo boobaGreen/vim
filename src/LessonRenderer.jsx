@@ -11,7 +11,16 @@ import Quiz from './components/interactive/Quiz';
 import { Kbd, InfoBox, CommandTable, Step, DirectionalGrid, ShortcutGrid } from './components/ui/MDXComponents';
 
 const components = {
-  wrapper: ({ children }) => <LessonLayout {...children.props}>{children}</LessonLayout>,
+  wrapper: ({ children, isCompleted, onNext, language }) => (
+    <LessonLayout 
+      {...children.props} 
+      isCompleted={isCompleted} 
+      onNext={onNext} 
+      language={language}
+    >
+      {children}
+    </LessonLayout>
+  ),
   Card,
   Badge,
   Button,
@@ -32,7 +41,7 @@ const lazyLessons = Object.fromEntries(
   Object.entries(lessons).map(([key, importFn]) => [key, lazy(importFn)])
 );
 
-const LessonRenderer = ({ path }) => {
+const LessonRenderer = ({ path, isCompleted, onNext }) => {
   const language = useProgressStore((state) => state.language);
   const lessonKey = `./content/${path}.mdx`;
   const DynamicLesson = lazyLessons[lessonKey];
@@ -55,7 +64,9 @@ const LessonRenderer = ({ path }) => {
     }>
       <MDXProvider components={components}>
         <div className="prose max-w-none">
-          <DynamicLesson />
+          <wrapper isCompleted={isCompleted} onNext={onNext} language={language}>
+            <DynamicLesson />
+          </wrapper>
         </div>
       </MDXProvider>
     </Suspense>

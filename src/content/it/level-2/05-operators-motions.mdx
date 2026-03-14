@@ -39,3 +39,45 @@ Prova a combinare un operatore con un movimento nel terminale:
 <Card title="Sfida Rapida">
   Se scrivi `de`, cosa pensi che succederà? Prova nel terminale! Cancellerà fino alla fine della parola corrente.
 </Card>
+
+<Quiz 
+  id="05-operators-motions"
+  questions={[
+    {
+      question: { 
+        it: "Cosa fa l'operatore 'c'?", 
+        en: "What does the 'c' operator do?" 
+      },
+      options: [
+        { it: "Copia (Yank)", en: "Copy (Yank)" },
+        { it: "Cancella e basta", en: "Delete only" },
+        { it: "Cambia (Cancella e entra in Insert)", en: "Change (Delete and enter Insert)" }
+      ],
+      correctIndex: 2
+    },
+    {
+      question: { 
+        it: "Quale movimento ti porta alla FINE della parola successiva?", 
+        en: "Which motion takes you to the END of the next word?" 
+      },
+      options: [
+        { it: "w", en: "w" },
+        { it: "e", en: "e" },
+        { it: "b", en: "b" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Cosa succede se premi 'dw'?", 
+        en: "What happens if you press 'dw'?" 
+      },
+      options: [
+        { it: "Cancella l'intera riga", en: "Deletes the whole line" },
+        { it: "Cancella fino all'inizio della parola successiva", en: "Deletes until the start of the next word" },
+        { it: "Copia una parola", en: "Copies a word" }
+      ],
+      correctIndex: 1
+    }
+  ]}
+/>

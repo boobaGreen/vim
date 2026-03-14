@@ -51,10 +51,10 @@ const Landing = ({ onStart, onExplore, language }) => {
       {/* Features Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-6xl pt-12">
         {[
-          { icon: Zap, title: language === 'it' ? 'Adaptive UI' : 'Adaptive UI', desc: language === 'it' ? 'Rilevamento hardware per un layout perfetto su ogni device.' : 'Hardware detection for the perfect layout on every device.' },
-          { icon: Target, title: language === 'it' ? 'Touch-First' : 'Touch-First', desc: language === 'it' ? 'Progressione tramite quiz e sfide interattive ottimizzate.' : 'Progress via optimized quizzes and interactive challenges.' },
-          { icon: Shield, title: language === 'it' ? 'Grammatica' : 'Grammar', desc: language === 'it' ? 'Domina verbi, conteggi e movimenti in modo intuitivo.' : 'Master verbs, counts, and motions intuitively.' },
-          { icon: Terminal, title: language === 'it' ? 'Terminal' : 'Terminal', desc: language === 'it' ? 'WASM Vim completo solo quando serve (tastiera fisica).' : 'Full WASM Vim only when needed (physical keyboard).' },
+          { icon: Zap, title: language === 'it' ? 'Adaptive UI' : 'Adaptive UI', desc: language === 'it' ? 'Rilevamento hardware per un layout fluido e intelligente su ogni device.' : 'Hardware detection for a fluid and intelligent layout on every device.' },
+          { icon: Target, title: language === 'it' ? 'Touch-First' : 'Touch-First', desc: language === 'it' ? '100% delle lezioni verificabili via quiz e simulazioni touch-ready.' : '100% of lessons verifiable via touch-ready quizzes and simulations.' },
+          { icon: Shield, title: language === 'it' ? 'Grammatica' : 'Grammar', desc: language === 'it' ? 'Domina verbi, conteggi e movimenti con una didattica evoluta.' : 'Master verbs, counts, and motions with evolved pedagogy.' },
+          { icon: Terminal, title: language === 'it' ? 'Terminal' : 'Terminal', desc: language === 'it' ? 'WASM Vim 9.0 completo integrato solo in presenza di tastiera fisica.' : 'Full WASM Vim 9.0 integrated only when a physical keyboard is present.' },
         ].map((f, i) => (
           <MMotionDiv 
             key={i}

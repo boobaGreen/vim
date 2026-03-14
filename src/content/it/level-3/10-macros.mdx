@@ -30,3 +30,46 @@ Hai mai dovuto fare la stessa modifica su 50 righe diverse? Invece di diventare 
 <Card title="Sfida delle Macro">
   Nel terminale, crea 5 righe di testo. Registra una macro che aggiunge un prefisso a una riga e poi usala per le altre 4 con `4@q`.
 </Card>
+
+<Quiz 
+  id="10-macros"
+  questions={[
+    {
+      question: { 
+        it: "Quale tasto si usa per INIZIARE e FERMARE la registrazione di una macro?", 
+        en: "Which key is used to START and STOP macro recording?" 
+      },
+      options: [
+        { it: "m", en: "m" },
+        { it: "q", en: "q" },
+        { it: "@", en: "@" },
+        { it: "r", en: "r" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Come riproduci una macro registrata nel registro 'a'?", 
+        en: "How do you play back a macro recorded in register 'a'?" 
+      },
+      options: [
+        { it: "qa", en: "qa" },
+        { it: "@a", en: "@a" },
+        { it: "ma", en: "ma" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Cosa fa il comando '@@'?", 
+        en: "What does the '@@' command do?" 
+      },
+      options: [
+        { it: "Cancella tutte le macro", en: "Deletes all macros" },
+        { it: "Ripete l'ultima macro eseguita", en: "Repeats the last macro executed" },
+        { it: "Registra due macro alla volta", en: "Records two macros at once" }
+      ],
+      correctIndex: 1
+    }
+  ]}
+/>

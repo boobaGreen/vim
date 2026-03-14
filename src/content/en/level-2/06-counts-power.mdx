@@ -24,4 +24,46 @@ Counts are perfect when you see an obvious repetition. Instead of pressing `dw` 
   Use the terminal to navigate a long text. Try using `5j` to go down 5 lines or `d2w` to quickly clean up a sentence.
 </Card>
 
+<Quiz 
+  id="06-counts-power"
+  questions={[
+    {
+      question: { 
+        it: "Qual è la formula magica della grammatica di Vim?", 
+        en: "What is the magic formula of Vim grammar?" 
+      },
+      options: [
+        { it: "MOVIMENTO + VERBO", en: "MOTION + VERB" },
+        { it: "VERBO + CONTEGGIO + MOVIMENTO", en: "VERB + COUNT + MOTION" },
+        { it: "CONTEGGIO + VERBO", en: "COUNT + VERB" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Cosa succede se premi '3w'?", 
+        en: "What happens if you press '3w'?" 
+      },
+      options: [
+        { it: "Cancella 3 parole", en: "Deletes 3 words" },
+        { it: "Salta all'inizio della terza parola successiva", en: "Jumps to the start of the 3rd word forward" },
+        { it: "Scrive il numero 3", en: "Writes the number 3" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Quale comando usaresti per CANCELLARE 2 PAROLE?", 
+        en: "Which command would you use to DELETE 2 WORDS?" 
+      },
+      options: [
+        { it: "2dw", en: "2dw" },
+        { it: "d2w", en: "d2w" },
+        { it: "Entrambi sono validi", en: "Both are valid" }
+      ],
+      correctIndex: 2
+    }
+  ]}
+/>
+
 *Tip: If you mistype the number, press `<ESC>` to reset your mind and the command.*

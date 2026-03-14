@@ -8,7 +8,8 @@ vim-mastery/
 │   │   ├── terminal/       # VimTerminal.jsx
 │   │   ├── views/          # Landing.jsx, Achievements.jsx
 │   │   ├── ui/             # MDXComponents.jsx, index.jsx (Button, etc.)
-│   │   ├── interactive/    # HJKLMaze, GrammarBuilder, SpeedRacer, Quiz
+│   │   │   ├── interactive/    # HJKLMaze, GrammarBuilder, SpeedRacer, Quiz
+│   │   │   ├── layout/         # LessonLayout, CompletionCard, Breadcrumb
 │   ├── hooks/          # useDevice.js (Hardware Detection)
 │   ├── store/          # useProgressStore.js (XP, Level, Progression)
 │   ├── LessonRenderer.jsx  # MDX Provider & Component Mapping
@@ -34,7 +35,7 @@ Premium didactic components:
 - `CommandTable`: Interactive syntax guides.
 
 ### `src/content/**/*.mdx`
-The 12-lesson core curriculum. Balanced between theory and interactive practicing.
+The 12-unique-lesson core curriculum (24 files total, fully bilingual). Every lesson includes mandatory touch-friendly verification (Quizzes/Simulations).
 
 ### `src/store/useProgressStore.js`
 Handles:

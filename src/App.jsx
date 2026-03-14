@@ -175,34 +175,20 @@ function App() {
                 <div className="h-px bg-white/5 w-full" />
               </div>
               
-              <LessonRenderer path={currentPath} />
+              <LessonRenderer 
+                path={currentPath} 
+                isCompleted={completedLessons.includes(lessons[currentLessonIndex])}
+                onNext={nextLesson}
+              />
 
-              <div className="mt-16 p-6 md:p-8 rounded-[2rem] border border-brand-primary/20 bg-brand-primary/[0.03] shadow-2xl flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-8 relative group">
-                <div className="absolute top-0 left-0 w-1 h-full bg-brand-primary/30" />
-                <div className="text-center sm:text-left relative z-10">
-                  <h3 className="text-brand-primary font-display font-black mb-2 flex items-center justify-center sm:justify-start space-x-2 text-[10px] tracking-[0.3em] uppercase italic">
-                    <span className="animate-pulse">●</span>
-                    <span>{language === 'it' ? 'STATO MISSIONE' : 'MISSION STATUS'}</span>
-                  </h3>
-                  <p className="text-white/60 text-xs md:text-sm leading-relaxed max-w-xs font-sans">
-                    {language === 'it'
-                      ? 'Espandi la tua mente. Pratica i comandi nel terminale per sbloccare il prossimo livello.'
-                      : 'Expand your mind. Practice the commands in the terminal to unlock the next level.'}
-                  </p>
+              {currentLessonIndex > 0 && (
+                <div className="pt-8 border-t border-white/5 flex">
+                  <Button onClick={prevLesson} variant="secondary" className="cursor-pointer font-display font-bold px-8 py-3 rounded-xl bg-white/5 hover:bg-white/10 border-white/5 transition-all">
+                    &larr; {language === 'it' ? 'Indietro' : 'Back'}
+                  </Button>
                 </div>
-                <div className="flex space-x-3 md:space-x-4 w-full sm:w-auto relative z-10 sm:flex-shrink-0">
-                  {currentLessonIndex > 0 && (
-                    <Button onClick={prevLesson} variant="secondary" className="flex-1 sm:flex-none cursor-pointer font-display font-bold px-6 md:px-8 py-3 rounded-xl bg-white/5 hover:bg-white/10 border-white/5 transition-all whitespace-nowrap">
-                      &larr; {language === 'it' ? 'Indietro' : 'Back'}
-                    </Button>
-                  )}
-                  {currentLessonIndex < lessons.length - 1 && (
-                    <Button onClick={nextLesson} className="flex-1 sm:flex-none cursor-pointer font-display font-bold px-6 md:px-8 py-3 rounded-xl shadow-[0_4px_15px_rgba(45,212,191,0.2)] whitespace-nowrap">
-                      {language === 'it' ? 'Prossimo Rango' : 'Next Rank'} &rarr;
-                    </Button>
-                  )}
-                </div>
-              </div>
+              )}
+
             </div>
 
             {/* Right: Terminal Area */}

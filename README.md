@@ -13,7 +13,7 @@ Our latest release redefines how Vim is taught on the web:
     - **Desktop**: A split-view with a full WASM-powered Vim terminal for live practice.
     - **Mobile/Touch**: A focused content view that swaps the terminal for interactive, touch-friendly quizzes and simulations.
 - **Gamified XP System**: Every lesson completed grants **100 XP**. Watch your wizard level rise in real-time with our new persistent progression bar.
-- **Touch-Friendly Progression**: No keyboard? No problem. Complete lessons using our refined **Quiz Engine** designed for one-handed operation.
+- **Touch-Friendly Progression**: No keyboard? No problem. **100% of the lessons** are now verifiable via our refined Quiz Engine, fulfilling the universal promise.
 - **Unified Completion Logic**: Whether you solve a maze, build a command grammar, or ace a quiz, your progress is synced across all learning modules.
 
 ## 🌟 Key Features

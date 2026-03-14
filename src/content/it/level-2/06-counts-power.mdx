@@ -20,8 +20,50 @@ Ricordi la grammatica? `[VERBO] + [CONTEGGIO] + [MOVIMENTO]`
 ### Quando usare i conteggi?
 I conteggi sono perfetti quando vedi una ripetizione ovvia. Invece di premere `dw` tre volte, premi `d3w`. Risparmi tasti, risparmi tempo, riduci l'attrito cognitivo.
 
-<Card title="Esercizio">
-  Usa il terminale per navigare in un testo lungo. Prova a usare `5j` per scendere di 5 righe o `d2w` per pulire velocemente una frase.
+<Card title="Sfida dei Numeri">
+  Prova a cancellare 3 parole con un solo comando: `d3w`. Noti come la grammatica di Vim ti permetta di essere precisissimo?
 </Card>
+
+<Quiz 
+  id="06-counts-power"
+  questions={[
+    {
+      question: { 
+        it: "Qual è la formula magica della grammatica di Vim?", 
+        en: "What is the magic formula of Vim grammar?" 
+      },
+      options: [
+        { it: "MOVIMENTO + VERBO", en: "MOTION + VERB" },
+        { it: "VERBO + CONTEGGIO + MOVIMENTO", en: "VERB + COUNT + MOTION" },
+        { it: "CONTEGGIO + VERBO", en: "COUNT + VERB" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Cosa succede se premi '3w'?", 
+        en: "What happens if you press '3w'?" 
+      },
+      options: [
+        { it: "Cancella 3 parole", en: "Deletes 3 words" },
+        { it: "Salta all'inizio della terza parola successiva", en: "Jumps to the start of the 3rd word forward" },
+        { it: "Scrive il numero 3", en: "Writes the number 3" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Quale comando usaresti per CANCELLARE 2 PAROLE?", 
+        en: "Which command would you use to DELETE 2 WORDS?" 
+      },
+      options: [
+        { it: "2dw", en: "2dw" },
+        { it: "d2w", en: "d2w" },
+        { it: "Entrambi sono validi", en: "Both are valid" }
+      ],
+      correctIndex: 2
+    }
+  ]}
+/>
 
 *Suggerimento: Se sbagli il numero, premi `<ESC>` per resettare la mente e il comando.*

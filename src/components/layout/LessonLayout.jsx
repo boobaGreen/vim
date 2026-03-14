@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import CompletionCard from './CompletionCard';
 
-const LessonLayout = ({ children, title, level }) => {
+const LessonLayout = ({ children, title, level, isCompleted, onNext, language }) => {
+  const MMotionDiv = motion.div;
   return (
-    <motion.div 
+    <MMotionDiv 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
@@ -26,7 +28,13 @@ const LessonLayout = ({ children, title, level }) => {
         prose-li:text-white/60">
         {children}
       </div>
-    </motion.div>
+
+      <CompletionCard 
+        isCompleted={isCompleted} 
+        onNext={onNext} 
+        language={language} 
+      />
+    </MMotionDiv>
   );
 };
 

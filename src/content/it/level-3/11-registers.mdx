@@ -35,5 +35,48 @@ La formula è: **`"` + [NOME_REGISTRO] + [AZIONE]**
 Puoi copiare un pezzo di codice nel registro `f` (per 'funzione') e un altro nel registro `v` (per 'variabile'), e incollarli quando vuoi senza che uno sovrascriva l'altro.
 
 <Card title="Esercizio">
-  Prova a copiare tre parole diverse in tre registri diversi (`a`, `b`, `c`) nel terminale, e poi incollale in ordine inverso.
+  Copia una parola nel registro `a` con `"ayw`. Poi vai su un'altra riga e incollala con `"ap`. Hai appena usato una clipboard personalizzata!
 </Card>
+
+<Quiz 
+  id="11-registers"
+  questions={[
+    {
+      question: { 
+        it: "Quale simbolo si usa per specificare un registro?", 
+        en: "Which symbol is used to specify a register?" 
+      },
+      options: [
+        { it: "@", en: "@" },
+        { it: "\"", en: "\"" },
+        { it: ":", en: ":" },
+        { it: "$", en: "$" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "In quale registro finisce il testo che cancelli o copi normalmente?", 
+        en: "In which register does the text you delete or copy normally end up?" 
+      },
+      options: [
+        { it: "Nel registro di sistema", en: "In the system clipboard" },
+        { it: "Nel registro senza nome (Unnamed Register)", en: "In the Unnamed Register" },
+        { it: "In un registro a caso", en: "In a random register" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Qual è il nome del registro per la clipboard di SISTEMA?", 
+        en: "What is the name of the register for the SYSTEM clipboard?" 
+      },
+      options: [
+        { it: "\"+", en: "\"+" },
+        { it: "\"s", en: "\"s" },
+        { it: "\"*", en: "\"*" }
+      ],
+      correctIndex: 0
+    }
+  ]}
+/>

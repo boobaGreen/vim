@@ -31,3 +31,44 @@ In the next level, we will enter the realm of automation:
 <Button onClick={() => window.location.reload()} variant="primary">
   Return to Start or Keep Practicing
 </Button>
+
+<Quiz 
+  id="08-conclusion"
+  questions={[
+    {
+      question: { 
+        it: "Recap: Come cancelli una parola?", 
+        en: "Recap: How do you delete a word?" 
+      },
+      options: [
+        { it: "dw", en: "dw" },
+        { it: "cw", en: "cw" },
+        { it: "yw", en: "yw" }
+      ],
+      correctIndex: 0
+    },
+    {
+      question: { 
+        it: "Cosa significa '3j'?", 
+        en: "What does '3j' mean?" 
+      },
+      options: [
+        { it: "Sposta a destra di 3 caratteri", en: "Move 3 characters right" },
+        { it: "Sposta in giù di 3 righe", en: "Move 3 lines down" },
+        { it: "Cancella 3 righe", en: "Delete 3 lines" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Vim è un editor modale?", 
+        en: "Is Vim a modal editor?" 
+      },
+      options: [
+        { it: "Sì, ha diverse modalità (Normal, Insert, ecc.)", en: "Yes, it has different modes (Normal, Insert, etc.)" },
+        { it: "No, è come Notepad", en: "No, it's like Notepad" }
+      ],
+      correctIndex: 0
+    }
+  ]}
+/>
