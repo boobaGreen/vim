@@ -32,7 +32,7 @@ const VimTerminal = () => {
     }
   };
 
-  const handleVimInit = (vim) => {
+  const handleVimCreated = (vim) => {
     vimRef.current = vim;
   };
 
@@ -40,12 +40,12 @@ const VimTerminal = () => {
   const getInitialContent = () => {
     if (currentLessonIndex === 0) {
       return language === 'it' 
-        ? "Benvenuto nel Vuoto.\n\nSenti il feedback dei tasti.\nMuoviti con h, j, k, l.\n\nNon aver paura di esplorare."
-        : "Welcome to the Void.\n\nFeel the feedback of the keys.\nMove with h, j, k, l.\n\nDo not be afraid to explore.";
+        ? "Benvenuto nel Vuoto.\n\nSenti il feedback dei tasti.\nMuoviti con h, j, k, l.\n\nNon aver paura di esplorare.\n"
+        : "Welcome to the Void.\n\nFeel the feedback of the keys.\nMove with h, j, k, l.\n\nDo not be afraid to explore.\n";
     }
     return language === 'it'
-      ? "Pratica i tuoi comandi qui.\n\nOgni tasto è un'arma."
-      : "Practice your commands here.\n\nEvery key is a weapon.";
+      ? "Pratica i tuoi comandi qui.\n\nOgni tasto è un'arma.\n"
+      : "Practice your commands here.\n\nEvery key is a weapon.\n";
   };
 
   return (
@@ -81,8 +81,8 @@ const VimTerminal = () => {
           files={{
             'lesson.txt': getInitialContent()
           }}
-          cmdline="lesson.txt"
-          onVimInit={handleVimInit}
+          cmdArgs={['lesson.txt']}
+          onVimCreated={handleVimCreated}
           onVimExit={() => console.log('Vim Exited')}
           onError={(err) => console.error('Vim Error:', err)}
           className="w-full h-full"
