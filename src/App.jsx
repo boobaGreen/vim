@@ -121,7 +121,7 @@ function App() {
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <main className="flex-1 pt-20 pb-12 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col overflow-hidden">
+      <main className="flex-1 pt-20 pb-12 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col">
         {view === 'home' && (
           <Landing 
             language={language} 
@@ -188,7 +188,7 @@ function App() {
                animate={{ opacity: 1, scale: 1 }}
                className="h-full flex flex-col space-y-6 lg:sticky lg:top-24"
             >
-              <div className="glass-morphism rounded-3xl p-1 overflow-hidden shadow-2xl border-white/5 bg-white/[0.01]">
+            <div className="rounded-2xl overflow-hidden shadow-2xl border-white/5 bg-white/[0.01]">
                 <VimTerminal />
               </div>
               
