@@ -5,8 +5,9 @@ The goal is to create the definitive web platform for learning Vim, combining de
 Inspired by Salvatore Sanfilippo (antirez) for its pedagogical depth and clarity, the course will guide users from zero to expert level (Vim Wizard).
 
 ## 2. Core Pillars
-- **Interactive Terminal**: No more "reading about it". Users type commands directly in a browser-based Vim.
-- **Gamification**: Learning through movement and interactive challenges (Speed Racer, etc.).
+- **Interactive Terminal**: Adaptive layout that shows the terminal only when a physical keyboard is detected.
+- **Touch-First Progression**: Use of quizzes and interactive simulations as the primary completion mechanic on mobile.
+- **Gamification 2.0**: Persistent XP system and Level progression to drive engagement.
 - **Aesthetic Excellence**: A premium, "Cyber-Terminal" look with glassmorphism, neon highlights, and buttery-smooth animations.
 - **Bilingual (EN/IT)**: Full support for both languages in UI and content.
 
@@ -41,10 +42,11 @@ Inspired by Salvatore Sanfilippo (antirez) for its pedagogical depth and clarity
 
 ## 4. Technical Architecture
 - **Frontend**: Vite + React 19 + Tailwind CSS v4.
-- **Animations**: Framer Motion for tactile feedback and state transitions.
-- **Core Engine**: `vim-wasm` for the real Vim experience.
-- **Content Management**: MDX v3 with custom didactic components.
-- **State Management**: **Zustand** with persistent storage.
+- **Device Detection**: Custom `useDevice` hook utilizing pointer media queries for hardware-aware layouts.
+- **Animations**: Framer Motion 12 for tactile feedback, XP gains, and state transitions.
+- **Core Engine**: `vim-wasm` for the real Vim experience (conditional rendering).
+- **Content Management**: MDX v3 with integrated `Quiz` and simulation components.
+- **State Management**: **Zustand** with persistent storage for XP, Level, and Lessons.
 
 ## 5. User Interface (UI) Concepts
 - **VimTerminal Integration**: Integrated terminal with responsive stacking.
@@ -59,5 +61,8 @@ Inspired by Salvatore Sanfilippo (antirez) for its pedagogical depth and clarity
 - [x] Phase 5: Design Systems and Gamification.
 - [x] Phase 6: Professional Design & UX Audit (v0.5).
 
+- [x] Phase 7: Radical Overhaul - Mobile Optimization (v1.0 Universal).
+- [x] Phase 8: XP & Leveling Gamification System.
+
 ---
-*Updated on 2026-03-13 - Project is in Production Ready State (v0.5)*
+*Updated on 2026-03-14 - Project is in Production Ready State (v1.0 Universal)*

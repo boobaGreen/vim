@@ -46,7 +46,7 @@ const CONTENT = {
   }
 };
 
-const SpeedRacer = ({ onComplete }) => {
+const SpeedRacer = ({ onComplete, onCompleteId }) => {
   const language = useProgressStore((state) => state.language);
   const nextLesson = useProgressStore((state) => state.nextLesson);
   const localized = CONTENT[language] || CONTENT.en;
@@ -60,6 +60,7 @@ const SpeedRacer = ({ onComplete }) => {
   const handleComplete = () => {
     setIsFinished(true);
     if (onComplete) onComplete();
+    useProgressStore.getState().completeLesson(onCompleteId || '07-speed-racer');
   };
 
   const MMotionDiv = motion.div;

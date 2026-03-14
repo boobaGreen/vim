@@ -49,7 +49,7 @@ const CONTENT = {
   }
 };
 
-const GrammarBuilder = () => {
+const GrammarBuilder = ({ onComplete, onCompleteId }) => {
   const language = useProgressStore((state) => state.language);
   const localized = CONTENT[language] || CONTENT.en;
 
@@ -64,6 +64,13 @@ const GrammarBuilder = () => {
     setCount('');
     setVimMotion(null);
   };
+
+  React.useEffect(() => {
+    if (verb && vimMotion) {
+      if (onComplete) onComplete(`${verb.id}${count}${vimMotion.id}`);
+      useProgressStore.getState().completeLesson(onCompleteId || '04-grammar-intro');
+    }
+  }, [verb, count, vimMotion, onComplete, onCompleteId]);
 
   return (
     <div className="glass-morphism p-6 rounded-xl border-white/10 space-y-8">

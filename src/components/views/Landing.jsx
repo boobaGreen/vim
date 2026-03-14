@@ -23,7 +23,7 @@ const Landing = ({ onStart, onExplore, language }) => {
       >
         <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-black uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(45,212,191,0.1)]">
           <Zap size={12} className="animate-pulse" />
-          <span>Vim Mastery v{language === 'it' ? '0.12 Online' : '0.12 Online'}</span>
+          <span>Vim Mastery V1.0 Universal</span>
         </div>
         
         <h1 className="text-6xl md:text-8xl font-display font-black tracking-tighter italic uppercase text-white leading-[0.9]">
@@ -49,11 +49,12 @@ const Landing = ({ onStart, onExplore, language }) => {
       </MMotionDiv>
 
       {/* Features Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl pt-12">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-6xl pt-12">
         {[
-          { icon: Shield, title: language === 'it' ? 'Modalità' : 'Modes', desc: language === 'it' ? 'Dalla digitazione al comando.' : 'From typing to commanding.' },
-          { icon: Target, title: language === 'it' ? 'Grammatica' : 'Grammar', desc: language === 'it' ? 'Verbi, conteggi e movimenti.' : 'Verbs, counts and motions.' },
-          { icon: Terminal, title: language === 'it' ? 'Terminal' : 'Terminal', desc: language === 'it' ? 'WASM Vim completo nel browser.' : 'Full WASM Vim in your browser.' },
+          { icon: Zap, title: language === 'it' ? 'Adaptive UI' : 'Adaptive UI', desc: language === 'it' ? 'Rilevamento hardware per un layout perfetto su ogni device.' : 'Hardware detection for the perfect layout on every device.' },
+          { icon: Target, title: language === 'it' ? 'Touch-First' : 'Touch-First', desc: language === 'it' ? 'Progressione tramite quiz e sfide interattive ottimizzate.' : 'Progress via optimized quizzes and interactive challenges.' },
+          { icon: Shield, title: language === 'it' ? 'Grammatica' : 'Grammar', desc: language === 'it' ? 'Domina verbi, conteggi e movimenti in modo intuitivo.' : 'Master verbs, counts, and motions intuitively.' },
+          { icon: Terminal, title: language === 'it' ? 'Terminal' : 'Terminal', desc: language === 'it' ? 'WASM Vim completo solo quando serve (tastiera fisica).' : 'Full WASM Vim only when needed (physical keyboard).' },
         ].map((f, i) => (
           <MMotionDiv 
             key={i}

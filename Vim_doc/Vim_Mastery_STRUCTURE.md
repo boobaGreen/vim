@@ -8,11 +8,9 @@ vim-mastery/
 │   │   ├── terminal/       # VimTerminal.jsx
 │   │   ├── views/          # Landing.jsx, Achievements.jsx
 │   │   ├── ui/             # MDXComponents.jsx, index.jsx (Button, etc.)
-│   │   └── interactive/    # HJKLMaze, GrammarBuilder, SpeedRacer
-│   ├── content/
-│   │   ├── en/             # English MDX (12 lessons)
-│   │   └── it/             # Italian MDX (12 lessons)
-│   ├── store/              # useProgressStore.js
+│   │   ├── interactive/    # HJKLMaze, GrammarBuilder, SpeedRacer, Quiz
+│   ├── hooks/          # useDevice.js (Hardware Detection)
+│   ├── store/          # useProgressStore.js (XP, Level, Progression)
 │   ├── LessonRenderer.jsx  # MDX Provider & Component Mapping
 │   ├── App.jsx             # Main Routing & Layout
 │   ├── index.css           # Global Styles (Tailwind v4 tokens)
@@ -40,9 +38,10 @@ The 12-lesson core curriculum. Balanced between theory and interactive practicin
 
 ### `src/store/useProgressStore.js`
 Handles:
+- XP & Leveling system.
 - Completion status & Achievements.
+- Keyboard Override state.
 - Bilingual state (EN/IT).
-- User preferences.
 
 ### `src/index.css`
 Advanced Cyber-Midnight Design System:

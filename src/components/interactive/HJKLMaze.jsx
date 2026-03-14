@@ -26,7 +26,7 @@ const CONTENT = {
   }
 };
 
-const HJKLMaze = ({ onComplete }) => {
+const HJKLMaze = ({ onComplete, onCompleteId }) => {
   const language = useProgressStore((state) => state.language);
   const nextLesson = useProgressStore((state) => state.nextLesson);
   const localized = CONTENT[language] || CONTENT.en;
@@ -51,13 +51,15 @@ const HJKLMaze = ({ onComplete }) => {
           if (newPos.x === GOAL_POS.x && newPos.y === GOAL_POS.y) {
             setIsWon(true);
             if (onComplete) onComplete(nextMoves);
+            // Auto complete lesson in store
+            useProgressStore.getState().completeLesson(onCompleteId || '02-maze');
           }
           return nextMoves;
         });
       }
       return newPos;
     });
-  }, [isWon, onComplete]);
+  }, [isWon, onComplete, onCompleteId]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {

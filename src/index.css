@@ -10,6 +10,10 @@
   --glass-border: rgba(255, 255, 255, 0.08);
 }
 
+.glass-morphism {
+  @apply bg-white/[0.03] backdrop-blur-xl border border-white/10;
+}
+
 @theme {
   --color-brand-bg: rgb(var(--background));
   --color-brand-surface: rgb(var(--surface));
@@ -79,4 +83,23 @@ pre, code {
 /* Code Blocks */
 .prose code:not(pre code) {
   @apply bg-white/[0.03] text-brand-primary px-2 py-0.5 rounded-lg text-[13px] font-bold border border-white/5 font-mono;
+}
+
+@keyframes level-up {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.1); filter: brightness(2) drop-shadow(0 0 20px rgba(45, 212, 191, 0.8)); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+.animate-level-up {
+  animation: level-up 1s ease-out;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }

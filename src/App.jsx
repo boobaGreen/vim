@@ -7,11 +7,19 @@ import VimTerminal from './components/terminal/VimTerminal';
 import LessonRenderer from './LessonRenderer';
 import Breadcrumb from './components/layout/Breadcrumb';
 
+import { useDevice } from './hooks/useDevice';
 import Landing from './components/views/Landing';
 import Achievements from './components/views/Achievements';
 
 function App() {
-  const { language, setLanguage, completedLessons, achievements, currentLessonIndex, nextLesson, prevLesson, goToLesson, resetProgress, view, setView } = useProgressStore();
+  const { 
+    language, setLanguage, completedLessons, achievements, 
+    currentLessonIndex, nextLesson, prevLesson, goToLesson, 
+    resetProgress, view, setView, xp, level, keyboardOverride, setKeyboardOverride 
+  } = useProgressStore();
+  const { hasPhysicalKeyboard: autoDetectedKeyboard } = useDevice();
+  
+  const showTerminal = keyboardOverride !== null ? keyboardOverride : autoDetectedKeyboard;
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const lessons = [
@@ -59,8 +67,23 @@ function App() {
           <button 
             onClick={() => setLanguage(language === 'it' ? 'en' : 'it')}
             className="border border-white/20 rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center hover:bg-white/5 hover:border-brand-primary/50 transition-all cursor-pointer"
+            title={language === 'it' ? 'Cambia Lingua' : 'Switch Language'}
           >
             <span className="text-[8px] md:text-[9px] uppercase">{language}</span>
+          </button>
+          <button 
+            onClick={() => {
+              const next = keyboardOverride === null ? true : keyboardOverride === true ? false : null;
+              setKeyboardOverride(next);
+            }}
+            className={`border rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center transition-all cursor-pointer ${
+              keyboardOverride === true ? 'bg-brand-primary border-brand-primary text-brand-bg shadow-[0_0_10px_rgba(45,212,191,0.3)]' :
+              keyboardOverride === false ? 'bg-red-500/20 border-red-500/50 text-red-400' :
+              'border-white/20 text-white/40 hover:border-brand-primary/50'
+            }`}
+            title={language === 'it' ? 'Toggle Tastiera Fisica (Auto/Sì/No)' : 'Toggle Physical Keyboard (Auto/Yes/No)'}
+          >
+            <Terminal size={12} className="md:w-[14px] md:h-[14px]" />
           </button>
         </div>
       </nav>
@@ -136,7 +159,7 @@ function App() {
         />}
 
         {view === 'lesson' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start h-full">
+          <div className={`grid grid-cols-1 ${showTerminal ? 'lg:grid-cols-2' : ''} gap-10 md:gap-16 items-start h-full`}>
             {/* Left: Lesson Content Area */}
             <div className="h-full overflow-y-auto pr-0 lg:pr-6 custom-scrollbar space-y-8">
               <div className="space-y-4">
@@ -184,30 +207,32 @@ function App() {
 
             {/* Right: Terminal Area */}
             {/* Terminal Area */}
-            <MMotionDiv
-               initial={{ opacity: 0, scale: 0.95 }}
-               animate={{ opacity: 1, scale: 1 }}
-               className="h-full flex flex-col space-y-6 lg:sticky lg:top-24"
-            >
-            <div className="rounded-2xl overflow-hidden shadow-2xl border-white/5 bg-white/[0.01]">
-                <VimTerminal />
-              </div>
-              
-              {/* Quick Shortcuts Hint (Desktop Only) */}
-              <div className="hidden lg:grid grid-cols-4 gap-3 md:gap-4">
-                {['h', 'j', 'k', 'l'].map(key => (
-                  <div key={key} className="glass-morphism py-2.5 md:py-3 px-2 flex flex-col items-center justify-center rounded-2xl border-white/5 bg-white/[0.02] group hover:bg-brand-primary/10 transition-all cursor-default">
-                    <span className="text-brand-primary font-display font-black text-lg md:text-xl group-hover:scale-110 transition-transform">{key}</span>
-                    <span className="text-[7px] md:text-[9px] text-white/20 uppercase tracking-widest font-bold mt-1">
-                      {key === 'h' ? (language === 'it' ? 'SX' : 'Left') : 
-                       key === 'j' ? (language === 'it' ? 'GIÙ' : 'Down') : 
-                       key === 'k' ? (language === 'it' ? 'SU' : 'Up') : 
-                       (language === 'it' ? 'DX' : 'Right')}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </MMotionDiv>
+            {showTerminal && (
+              <MMotionDiv
+                 initial={{ opacity: 0, scale: 0.95 }}
+                 animate={{ opacity: 1, scale: 1 }}
+                 className="h-full flex flex-col space-y-6 lg:sticky lg:top-24"
+              >
+              <div className="rounded-2xl overflow-hidden shadow-2xl border-white/5 bg-white/[0.01]">
+                  <VimTerminal />
+                </div>
+                
+                {/* Quick Shortcuts Hint (Desktop Only) */}
+                <div className="hidden lg:grid grid-cols-4 gap-3 md:gap-4">
+                  {['h', 'j', 'k', 'l'].map(key => (
+                    <div key={key} className="glass-morphism py-2.5 md:py-3 px-2 flex flex-col items-center justify-center rounded-2xl border-white/5 bg-white/[0.02] group hover:bg-brand-primary/10 transition-all cursor-default">
+                      <span className="text-brand-primary font-display font-black text-lg md:text-xl group-hover:scale-110 transition-transform">{key}</span>
+                      <span className="text-[7px] md:text-[9px] text-white/20 uppercase tracking-widest font-bold mt-1">
+                        {key === 'h' ? (language === 'it' ? 'SX' : 'Left') : 
+                         key === 'j' ? (language === 'it' ? 'GIÙ' : 'Down') : 
+                         key === 'k' ? (language === 'it' ? 'SU' : 'Up') : 
+                         (language === 'it' ? 'DX' : 'Right')}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </MMotionDiv>
+            )}
           </div>
         )}
       </main>
@@ -231,7 +256,17 @@ function App() {
              <ExternalLink size={12} /> <span>Personal</span>
           </a>
           <div className="h-3 w-px bg-white/5"></div>
-          <div className="flex space-x-4 shrink-0 text-brand-primary">
+          <div className="flex space-x-6 shrink-0 text-brand-primary">
+            <span>LVL {level}</span>
+            <div className="w-20 h-1.5 bg-white/10 rounded-full overflow-hidden mt-1.5 hidden xs:block">
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: `${(xp % 500) / 5}%` }}
+                className="h-full bg-brand-primary"
+              />
+            </div>
+            <span>{xp} XP</span>
+            <span className="opacity-20">|</span>
             <span>{language === 'it' ? 'PROGRESSO' : 'PROGRESS'}: {completedLessons.length} / {lessons.length}</span>
           </div>
         </div>

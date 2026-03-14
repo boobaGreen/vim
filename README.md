@@ -1,51 +1,43 @@
-# 🧙‍♂️ Vim Mastery: Zero to Wizard
+# 🧙‍♂️ Vim Mastery: The Universal Editor Trainer
 
 ![Vim Mastery Banner](https://img.shields.io/badge/VIM-MASTERY-2dd4bf?style=for-the-badge&logo=vim&logoColor=white)
-![Build Status](https://img.shields.io/badge/VITE-BEYOND_FAST-646cff?style=for-the-badge&logo=vite&logoColor=white)
-![Platform](https://img.shields.io/badge/PLATFORM-WASM-FFD700?style=for-the-badge&logo=webassembly&logoColor=black)
-![License](https://img.shields.io/badge/LICENSE-GNU_GPL-red?style=for-the-badge)
+![Version](https://img.shields.io/badge/VERSION-1.0_UNIVERSAL-FFD700?style=for-the-badge)
+![Platform](https://img.shields.io/badge/PLATFORM-CROSS_DEVICE-646cff?style=for-the-badge)
 
-**Vim Mastery** is a premium, gamified educational platform designed to turn neophytes into Vim Wizards using a full WASM-powered Vim terminal directly in the browser.
+**Vim Mastery** is a premium, gamified educational platform that adapts to your environment. Whether you are on a high-end desktop workstation or a mobile device, Vim Mastery ensures you learn the language of Vim with maximum efficiency.
 
-## 🌟 The Final Polish (v1.0)
-The latest version completes the vision of a professional-grade, cross-platform learning tool:
-- **Unified Mobile Console**: A custom-built, touch-first environment featuring a **Virtual QWERTY Keyboard**, a high-precision **Navigation D-Pad**, and quick-action toolbars.
-- **Zero-Scroll Architecture**: Optimized viewport management ensures the terminal, keyboard, and instructions all fit on a single mobile screen.
-- **24-Lesson Curriculum**: A deep dive from basic `hjkl` movement to advanced macros, fully available in both **English and Italian** (100% localization parity).
-- **Edge Educational Tools**: A reactive **Pro-Tip System** that teaches alternative commands (like `Ctrl+[` for Escape) in real-time during Insert mode.
-- **Premium Design System**: A cohesive "Cyber-Midnight" aesthetic with glassmorphism, bioactive glowing borders, and Outfit/Inter performance typography.
-- **Gamified Progression**: Seamless integration between interactive challenges (`HJKLMaze`, `SpeedRacer`) and lesson advancement via a persistent Zustand store.
+## 🚀 The Radical Overhaul (v1.0 Universal)
+Our latest release redefines how Vim is taught on the web:
+- **Smart Hardware Detection**: Leverages the `useDevice` hook to detect physical keyboards via pointer media queries.
+- **Adaptive Terminal Layout**: 
+    - **Desktop**: A split-view with a full WASM-powered Vim terminal for live practice.
+    - **Mobile/Touch**: A focused content view that swaps the terminal for interactive, touch-friendly quizzes and simulations.
+- **Gamified XP System**: Every lesson completed grants **100 XP**. Watch your wizard level rise in real-time with our new persistent progression bar.
+- **Touch-Friendly Progression**: No keyboard? No problem. Complete lessons using our refined **Quiz Engine** designed for one-handed operation.
+- **Unified Completion Logic**: Whether you solve a maze, build a command grammar, or ace a quiz, your progress is synced across all learning modules.
 
-## 🚀 Key Features
-- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm` with high-visibility cursor tracking and `guicursor` injection.
-- **Mode-Aware Reactive UI**: The interface physically reacts (colors, shadows) to Vim's internal states (Normal, Insert, Visual, Replace).
-- **Touch Utility Belt**: Dedicated mobile controls for `Esc`, `:`, `/`, `u`, `i`, and `Tab`, reachable in thumb-friendly zones.
-- **Achievements & Metrics**: Track your progress with a robust achievement system and real-time efficiency metrics in challenges.
-- **Deep Localization**: Switch between English and Italian instantly with zero layout shifts or missing content.
+## 🌟 Key Features
+- **WASM Vim Engine**: A real Vim 9.0 environment running in your browser via WebAssembly.
+- **Physical Keyboard Override**: A manual toggle for hybrid devices (like iPads with keyboards) to force the terminal visible.
+- **24-Lesson Curriculum**: Comprehensive journey from `hjkl` to `Global` commands, fully localized in **English and Italian**.
+- **Cyber-Midnight Aesthetics**: Premium glassmorphism, bioactive animations, and high-performance typography.
 
 ## 📂 Project Structure
-- `src/content/`: MDX-based curriculum with perfect structural parity between `en` and `it`.
-- `src/components/terminal/`: The "Unified Mobile Console" core, bridging WASM logic with touch interaction.
-- `src/components/interactive/`: Localized, game-based learning modules.
-- `src/components/ui/MDXComponents.jsx`: A library of highly semantic, localized MDX tags for technical education.
-- `src/store/`: Centralized state for progress, language, and achievements via `zustand`.
+- `src/hooks/useDevice.js`: The brain behind hardware detection.
+- `src/store/useProgressStore.js`: Persistent state for XP, Level, and progression.
+- `src/components/interactive/Quiz.jsx`: The new touch-first interactive engine.
+- `src/content/`: MDX curriculum with interactive component integration.
 
 ## 🛠️ Tech Stack
 - **Framework**: React 19 + Vite 6
-- **Styling**: Tailwind CSS v4 + Custom Neon/Midnight Design Tokens
-- **Animations**: Framer Motion (Optimized for 60fps mobile transitions)
-- **Core Engine**: `vim-wasm` (WebAssembly)
-- **Icons**: Lucide-React
-- **Typography**: Outfit & Inter (Google Fonts)
+- **Styling**: Tailwind CSS v4 + Motion 12
+- **Core Engine**: `vim-wasm`
+- **State**: Zustand (Persistent)
 
-## 📜 License
-This project is licensed under the **GNU General Public License**.
-
-## 👤 Credits
-Developed with ❤️ by **Claudio Dall'Ara**.
+## 📜 License & Credits
+Licensed under **GNU General Public License**. Developed with ❤️ by **Claudio Dall'Ara**.
 - 🌐 [claudiodallara.it](https://www.claudiodallara.it/)
 - 🐙 [Github: boobaGreen](https://github.com/boobaGreen)
-- 💼 [LinkedIn](https://www.linkedin.com/in/claudio-dall-ara-730aa0302/)
 
 ---
-*MISSION_ACCOMPLISHED // VIM_MASTERY_V1.0*
+*MISSION_REDEFINED // VIM_MASTERY_V1.0_UNIVERSAL*

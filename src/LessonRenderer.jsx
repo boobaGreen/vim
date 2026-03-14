@@ -6,6 +6,7 @@ import { Card, Badge, Button } from './components/ui';
 import HJKLMaze from './components/interactive/HJKLMaze';
 import GrammarBuilder from './components/interactive/GrammarBuilder';
 import SpeedRacer from './components/interactive/SpeedRacer';
+import Quiz from './components/interactive/Quiz';
 
 import { Kbd, InfoBox, CommandTable, Step, DirectionalGrid, ShortcutGrid } from './components/ui/MDXComponents';
 
@@ -17,6 +18,7 @@ const components = {
   HJKLMaze,
   GrammarBuilder,
   SpeedRacer,
+  Quiz,
   Kbd,
   InfoBox,
   CommandTable,
