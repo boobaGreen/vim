@@ -7,37 +7,36 @@
 
 **Vim Mastery** is a premium, gamified educational platform designed to turn neophytes into Vim Wizards using a full WASM-powered Vim terminal directly in the browser.
 
-## 🌟 Professional Audit (v0.15)
-The latest version introduces a comprehensive **Professional UX & Mobile Audit**:
-- **Mobile-First UX**: Interactive Toolbar and D-Pad for seamless terminal control without a physical keyboard.
-- **Gamified Completion**: Premium success overlays with trophies and stats for all interactive challenges (`HJKLMaze`, `SpeedRacer`).
-- **High-Visibility Terminal**: Enhanced `guicursor` and `cursorline` tracking for a perfectly visible focus state.
-- **Reactive Mode Engine**: Real-time terminal styling that reacts to Vim modes (Normal, Insert, Visual).
-- **100% Bi-lingual Perfection**: Every UI element, tooltip, and lesson is fully localized (EN/IT).
-- **Premium Aesthetics**: Bioactive glowing borders, outfit typography, and radial background depth.
+## 🌟 The Final Polish (v1.0)
+The latest version completes the vision of a professional-grade, cross-platform learning tool:
+- **Unified Mobile Console**: A custom-built, touch-first environment featuring a **Virtual QWERTY Keyboard**, a high-precision **Navigation D-Pad**, and quick-action toolbars.
+- **Zero-Scroll Architecture**: Optimized viewport management ensures the terminal, keyboard, and instructions all fit on a single mobile screen.
+- **24-Lesson Curriculum**: A deep dive from basic `hjkl` movement to advanced macros, fully available in both **English and Italian** (100% localization parity).
+- **Edge Educational Tools**: A reactive **Pro-Tip System** that teaches alternative commands (like `Ctrl+[` for Escape) in real-time during Insert mode.
+- **Premium Design System**: A cohesive "Cyber-Midnight" aesthetic with glassmorphism, bioactive glowing borders, and Outfit/Inter performance typography.
+- **Gamified Progression**: Seamless integration between interactive challenges (`HJKLMaze`, `SpeedRacer`) and lesson advancement via a persistent Zustand store.
 
 ## 🚀 Key Features
-- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm` with custom touch-injection and visible cursors.
-- **Touch Utility Belt**: Dedicated mobile controls for `Esc`, `:`, `/`, and directional `hjkl` motions.
-- **On-Screen D-Pad**: Integrated touch navigation for interactive games, making them 100% playable on mobile.
-- **12 Lesson Curriculum**: Progress from basic survival to advanced text orchestration with unified content structure.
-- **Achievements System**: Unlock badges like "Maze Runner" or "Grammar Master" as you progress.
-- **Deep Localization**: Switch between English and Italian with zero hardcoded artifacts.
+- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm` with high-visibility cursor tracking and `guicursor` injection.
+- **Mode-Aware Reactive UI**: The interface physically reacts (colors, shadows) to Vim's internal states (Normal, Insert, Visual, Replace).
+- **Touch Utility Belt**: Dedicated mobile controls for `Esc`, `:`, `/`, `u`, `i`, and `Tab`, reachable in thumb-friendly zones.
+- **Achievements & Metrics**: Track your progress with a robust achievement system and real-time efficiency metrics in challenges.
+- **Deep Localization**: Switch between English and Italian instantly with zero layout shifts or missing content.
 
 ## 📂 Project Structure
-- `src/content/`: MDX-based curriculum with structural consistency (EN/IT).
-- `src/components/terminal/`: Bridge to the Vim WASM worker + `MobileVimControls`.
-- `src/components/views/`: Main application screens with interactive animations.
-- `src/components/ui/`: Custom design system with tactile feedback.
-- `src/store/`: Robust state management with `zustand` persistence.
+- `src/content/`: MDX-based curriculum with perfect structural parity between `en` and `it`.
+- `src/components/terminal/`: The "Unified Mobile Console" core, bridging WASM logic with touch interaction.
+- `src/components/interactive/`: Localized, game-based learning modules.
+- `src/components/ui/MDXComponents.jsx`: A library of highly semantic, localized MDX tags for technical education.
+- `src/store/`: Centralized state for progress, language, and achievements via `zustand`.
 
 ## 🛠️ Tech Stack
-- **Framework**: React 19 + Vite
-- **Styling**: Tailwind CSS v4 + Custom Bioactive Tokens
-- **Animations**: Framer Motion (Hero & Micro-interactions)
-- **Core Engine**: `vim-wasm`
+- **Framework**: React 19 + Vite 6
+- **Styling**: Tailwind CSS v4 + Custom Neon/Midnight Design Tokens
+- **Animations**: Framer Motion (Optimized for 60fps mobile transitions)
+- **Core Engine**: `vim-wasm` (WebAssembly)
 - **Icons**: Lucide-React
-- **Typography**: Inter & Outfit (Google Fonts)
+- **Typography**: Outfit & Inter (Google Fonts)
 
 ## 📜 License
 This project is licensed under the **GNU General Public License**.
@@ -49,4 +48,4 @@ Developed with ❤️ by **Claudio Dall'Ara**.
 - 💼 [LinkedIn](https://www.linkedin.com/in/claudio-dall-ara-730aa0302/)
 
 ---
-*SYS_READY // VIM_MASTERY_V0.12*
+*MISSION_ACCOMPLISHED // VIM_MASTERY_V1.0*
