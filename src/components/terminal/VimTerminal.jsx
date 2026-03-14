@@ -18,10 +18,23 @@ const VimTerminal = () => {
 
   const handleKey = (key) => {
     if (vimRef.current) {
+      // Map key to keyCode for vim-wasm sendKeydown
+      const keyCodes = {
+        'h': 72, 'j': 74, 'k': 75, 'l': 76,
+        'i': 73, 'a': 65, 'v': 86, 'V': 86, 'R': 82, 'u': 85,
+        'Escape': 27, 'Enter': 13, 'Tab': 9,
+        ':': 186, '/': 191
+      };
+
       try {
-        vimRef.current.onKeyDown(key);
+        const keyCode = keyCodes[key] || key.charCodeAt(0);
+        const modifiers = {
+          shift: (key === ':' || key === 'V' || key === 'R')
+        };
+        
+        vimRef.current.sendKeydown(key, keyCode, modifiers);
       } catch (e) {
-        console.warn('Vim onKeyDown failed', e);
+        console.warn('Vim sendKeydown failed', e);
       }
       
       // Syncing Internal Mode (simplified)

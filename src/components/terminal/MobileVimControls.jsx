@@ -64,26 +64,40 @@ const MobileVimControls = ({ onKey, currentMode = 'NORMAL' }) => {
       </div>
 
       {/* Navigation D-Pad */}
-      <div className="grid grid-cols-3 gap-2 w-fit mx-auto bg-white/[0.02] p-3 rounded-2xl border border-white/5">
+      <div className="grid grid-cols-3 gap-3 w-fit mx-auto bg-white/[0.01] p-4 rounded-[2rem] border border-white/5 shadow-inner">
         <div />
-        <ControlButton onClick={() => onKey('k')} label="Up (k)">
-          <ChevronUp size={20} className="text-brand-primary" />
+        <ControlButton onClick={() => onKey('k')} className="!p-1">
+          <div className="flex flex-col items-center">
+            <ChevronUp size={18} className="text-brand-primary" />
+            <span className="text-[10px] font-display font-black text-brand-primary -mt-1">K</span>
+          </div>
         </ControlButton>
         <div />
         
-        <ControlButton onClick={() => onKey('h')} label="Left (h)">
-          <ChevronLeft size={20} className="text-brand-primary" />
+        <ControlButton onClick={() => onKey('h')} className="!p-1">
+          <div className="flex flex-row items-center space-x-0.5">
+            <ChevronLeft size={18} className="text-brand-primary" />
+            <span className="text-[10px] font-display font-black text-brand-primary">H</span>
+          </div>
         </ControlButton>
-        <ControlButton onClick={() => onKey('Enter')} label="Enter">
-          <CornerDownLeft size={20} className="text-white/60" />
+        
+        <ControlButton onClick={() => onKey('Enter')} className="bg-brand-primary/10 border-brand-primary/20">
+          <CornerDownLeft size={18} className="text-brand-primary" />
         </ControlButton>
-        <ControlButton onClick={() => onKey('l')} label="Right (l)">
-          <ChevronRight size={20} className="text-brand-primary" />
+        
+        <ControlButton onClick={() => onKey('l')} className="!p-1">
+          <div className="flex flex-row items-center space-x-0.5">
+            <span className="text-[10px] font-display font-black text-brand-primary">L</span>
+            <ChevronRight size={18} className="text-brand-primary" />
+          </div>
         </ControlButton>
         
         <div />
-        <ControlButton onClick={() => onKey('j')} label="Down (j)">
-          <ChevronDown size={20} className="text-brand-primary" />
+        <ControlButton onClick={() => onKey('j')} className="!p-1">
+          <div className="flex flex-col items-center">
+            <span className="text-[10px] font-display font-black text-brand-primary -mb-1">J</span>
+            <ChevronDown size={18} className="text-brand-primary" />
+          </div>
         </ControlButton>
         <div />
       </div>
