@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Vim } from 'react-vim-wasm';
 import { useProgressStore } from '../../store/useProgressStore';
+import { X } from 'lucide-react';
 import UnifiedMobileConsole from './UnifiedMobileConsole';
 
 const VimTerminal = () => {
@@ -115,6 +116,16 @@ const VimTerminal = () => {
         onKey={handleKey} 
         currentMode={currentMode}
       />
+
+      {/* Exit Full Screen Button (Mobile Only) */}
+      <button 
+        onClick={(e) => {
+          e.currentTarget.parentElement.classList.toggle('mobile-full-screen');
+        }}
+        className="lg:hidden absolute top-2 right-2 z-[110] bg-black/50 p-2 rounded-full border border-white/10 text-white/40"
+      >
+        <X size={14} />
+      </button>
     </div>
   );
 };

@@ -29,8 +29,13 @@
   @apply bg-brand-primary/10 rounded-full hover:bg-brand-primary/30 transition-colors border border-white/5;
 }
 
-@utility glass-morphism {
-  @apply backdrop-blur-2xl bg-white/[0.03] border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+@utility mobile-full-screen {
+  @apply lg:relative fixed inset-0 z-[100] flex flex-col bg-brand-bg h-[100dvh] w-full p-0 m-0 overflow-hidden;
+}
+
+/* Hide scrollbar on body when mobile full screen is active */
+body:has(.mobile-full-screen) {
+  overflow: hidden !important;
 }
 
 @utility font-display { font-family: 'Outfit', sans-serif; }

@@ -24,6 +24,21 @@ const ControlButton = ({ children, onClick, active = false, className = '', labe
 
 const UnifiedMobileConsole = ({ onKey, currentMode }) => {
   const [activeTab, setActiveTab] = useState('NAV'); // NAV or TYPE
+  const [tipIndex, setTipIndex] = useState(0);
+
+  const proTips = [
+    "Pro Tip: Ctrl+[ also exits",
+    "Pro Tip: Ctrl+c is a quick escape",
+    "Pro Tip: Use 'Esc' on physical keys",
+    "Vim Tip: 'i' for Insert mode"
+  ];
+
+  // Randomize or cycle tip when mode changes to INSERT
+  React.useEffect(() => {
+    if (currentMode === 'INSERT') {
+      setTipIndex(prev => (prev + 1) % proTips.length);
+    }
+  }, [currentMode, proTips.length]);
 
   const modeColors = {
     NORMAL: 'text-brand-primary',
@@ -35,7 +50,7 @@ const UnifiedMobileConsole = ({ onKey, currentMode }) => {
   return (
     <div className="flex flex-col bg-[#0A0A0B]/90 backdrop-blur-2xl border-t border-white/10 select-none overflow-hidden">
       {/* Tab Switcher & Status */}
-      <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/5">
+      <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/5 relative">
         <div className={`text-[10px] font-black uppercase tracking-widest ${modeColors[currentMode] || modeColors.NORMAL}`}>
           {currentMode} MODE
         </div>
@@ -55,9 +70,26 @@ const UnifiedMobileConsole = ({ onKey, currentMode }) => {
           </button>
         </div>
 
-        <button onClick={() => onKey('Escape')} className="text-white/20 p-1">
-          <X size={16} />
-        </button>
+        <div className="flex items-center space-x-2">
+          <AnimatePresence mode="wait">
+            {currentMode !== 'NORMAL' && (
+              <motion.div 
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                className="text-[7px] text-white/30 font-bold uppercase italic tracking-tighter hidden sm:block"
+              >
+                {proTips[tipIndex]}
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <button 
+            onClick={() => onKey('Escape')} 
+            className="bg-red-500/10 border border-red-500/30 text-red-500 px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-tighter hover:bg-red-500/20 transition-all shadow-[0_0_10px_rgba(239,68,68,0.1)]"
+          >
+            ESC
+          </button>
+        </div>
       </div>
 
       {/* Main Control Area */}

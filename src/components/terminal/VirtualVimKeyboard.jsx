@@ -82,6 +82,11 @@ const VirtualVimKeyboard = ({ onKey, className = '' }) => {
       {/* Control Row */}
       <div className="flex space-x-1">
         <KeyButton 
+          char="ESC" 
+          variant="danger" 
+          onClick={() => onKey('Escape')} 
+        />
+        <KeyButton 
           char={layout === 'ALPHA' ? '123' : 'ABC'} 
           variant="action" 
           wide 
