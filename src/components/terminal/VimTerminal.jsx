@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Vim } from 'react-vim-wasm';
+import { useProgressStore } from '../../store/useProgressStore';
 import MobileVimControls from './MobileVimControls';
 
 const VimTerminal = () => {
@@ -13,14 +14,14 @@ const VimTerminal = () => {
     REPLACE: 'border-red-500/30 shadow-red-500/10',
   };
 
+  const { currentLessonIndex, language } = useProgressStore();
+
   const handleKey = (key) => {
     if (vimRef.current) {
-      // Construction of a more robust key event if onKeyDown expects it
-      // Some versions of react-vim-wasm handle string, others need object
       try {
         vimRef.current.onKeyDown(key);
       } catch (e) {
-        console.warn('Vim onKeyDown failed with string, trying event simulation', e);
+        console.warn('Vim onKeyDown failed', e);
       }
       
       // Syncing Internal Mode (simplified)
@@ -33,6 +34,18 @@ const VimTerminal = () => {
 
   const handleVimInit = (vim) => {
     vimRef.current = vim;
+  };
+
+  // Lesson-specific initial content
+  const getInitialContent = () => {
+    if (currentLessonIndex === 0) {
+      return language === 'it' 
+        ? "Benvenuto nel Vuoto.\n\nSenti il feedback dei tasti.\nMuoviti con h, j, k, l.\n\nNon aver paura di esplorare."
+        : "Welcome to the Void.\n\nFeel the feedback of the keys.\nMove with h, j, k, l.\n\nDo not be afraid to explore.";
+    }
+    return language === 'it'
+      ? "Pratica i tuoi comandi qui.\n\nOgni tasto è un'arma."
+      : "Practice your commands here.\n\nEvery key is a weapon.";
   };
 
   return (
@@ -54,9 +67,21 @@ const VimTerminal = () => {
       </div>
       
       {/* Content Area */}
-      <div className="flex-1 relative pt-2 overflow-hidden cursor-text" onClick={() => vimRef.current?.focus()}>
+      <div 
+        className="flex-1 relative pt-2 overflow-hidden cursor-text" 
+        onClick={() => {
+          if (vimRef.current) {
+            vimRef.current.focus();
+          }
+        }}
+      >
         <Vim
-          worker="./vim.worker.js" 
+          worker="/vim.worker.js" 
+          vimrc="set number\nset guicursor=a:block-Cursor\nset cursorline\nset laststatus=0\nset noshowmode"
+          files={{
+            'lesson.txt': getInitialContent()
+          }}
+          cmdline="lesson.txt"
           onVimInit={handleVimInit}
           onVimExit={() => console.log('Vim Exited')}
           onError={(err) => console.error('Vim Error:', err)}
@@ -70,9 +95,9 @@ const VimTerminal = () => {
           </div>
         </div>
         
-        {/* Animated Cursor Hint */}
-        <div className="absolute bottom-4 right-4 animate-pulse pointer-events-none opacity-20">
-          <div className="w-1.5 h-4 bg-brand-primary/50 shadow-[0_0_10px_rgba(45,212,191,0.5)]"></div>
+        {/* Animated Cursor Hint - Now more visible as a primary guide */}
+        <div className="absolute bottom-4 right-4 animate-pulse pointer-events-none opacity-40">
+          <div className="w-2 h-5 bg-brand-primary shadow-[0_0_15px_rgba(45,212,191,0.6)] rounded-sm"></div>
         </div>
       </div>
 
