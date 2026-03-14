@@ -7,16 +7,19 @@
 
 **Vim Mastery** is a premium, gamified educational platform designed to turn neophytes into Vim Wizards using a full WASM-powered Vim terminal directly in the browser.
 
-## 🌟 Professional Audit (v0.12)
+## 🌟 Professional Audit (v0.15)
 The latest version introduces a comprehensive **Professional UX & Mobile Audit**:
 - **Mobile-First UX**: Interactive Toolbar and D-Pad for seamless terminal control without a physical keyboard.
+- **Gamified Completion**: Premium success overlays with trophies and stats for all interactive challenges (`HJKLMaze`, `SpeedRacer`).
+- **High-Visibility Terminal**: Enhanced `guicursor` and `cursorline` tracking for a perfectly visible focus state.
 - **Reactive Mode Engine**: Real-time terminal styling that reacts to Vim modes (Normal, Insert, Visual).
 - **100% Bi-lingual Perfection**: Every UI element, tooltip, and lesson is fully localized (EN/IT).
 - **Premium Aesthetics**: Bioactive glowing borders, outfit typography, and radial background depth.
 
 ## 🚀 Key Features
-- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm` with custom touch-injection.
+- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm` with custom touch-injection and visible cursors.
 - **Touch Utility Belt**: Dedicated mobile controls for `Esc`, `:`, `/`, and directional `hjkl` motions.
+- **On-Screen D-Pad**: Integrated touch navigation for interactive games, making them 100% playable on mobile.
 - **12 Lesson Curriculum**: Progress from basic survival to advanced text orchestration with unified content structure.
 - **Achievements System**: Unlock badges like "Maze Runner" or "Grammar Master" as you progress.
 - **Deep Localization**: Switch between English and Italian with zero hardcoded artifacts.
