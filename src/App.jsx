@@ -141,6 +141,7 @@ function App() {
             <div className="h-full overflow-y-auto pr-0 lg:pr-6 custom-scrollbar space-y-8">
               <div className="space-y-4">
                 <Breadcrumb 
+                  language={language}
                   level={currentModule.split('-')[1].padStart(2, '0')} 
                   chapter={
                     currentLessonIndex < 4 ? (language === 'it' ? 'Livello 1: Il Neofita' : 'Level 1: The Neophyte') :
@@ -192,8 +193,8 @@ function App() {
                 <VimTerminal />
               </div>
               
-              {/* Quick Shortcuts Hint */}
-              <div className="grid grid-cols-4 gap-3 md:gap-4">
+              {/* Quick Shortcuts Hint (Desktop Only) */}
+              <div className="hidden lg:grid grid-cols-4 gap-3 md:gap-4">
                 {['h', 'j', 'k', 'l'].map(key => (
                   <div key={key} className="glass-morphism py-2.5 md:py-3 px-2 flex flex-col items-center justify-center rounded-2xl border-white/5 bg-white/[0.02] group hover:bg-brand-primary/10 transition-all cursor-default">
                     <span className="text-brand-primary font-display font-black text-lg md:text-xl group-hover:scale-110 transition-transform">{key}</span>
@@ -231,7 +232,7 @@ function App() {
           </a>
           <div className="h-3 w-px bg-white/5"></div>
           <div className="flex space-x-4 shrink-0 text-brand-primary">
-            <span>PROGRESS: {completedLessons.length} / 12</span>
+            <span>{language === 'it' ? 'PROGRESSO' : 'PROGRESS'}: {completedLessons.length} / 12</span>
           </div>
         </div>
       </footer>

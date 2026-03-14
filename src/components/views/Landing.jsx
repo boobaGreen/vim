@@ -9,18 +9,26 @@ const Landing = ({ onStart, onExplore, language }) => {
   return (
     <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 text-center space-y-12">
       <MMotionDiv 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-6 max-w-3xl"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ 
+          opacity: 1, 
+          scale: 1,
+          y: [0, -10, 0],
+        }}
+        transition={{
+          y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+          duration: 0.8
+        }}
+        className="space-y-6 max-w-3xl relative z-10"
       >
-        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-black uppercase tracking-[0.2em]">
+        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-black uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(45,212,191,0.1)]">
           <Zap size={12} className="animate-pulse" />
-          <span>Vim Mastery v0.12 System Online</span>
+          <span>Vim Mastery v{language === 'it' ? '0.12 Online' : '0.12 Online'}</span>
         </div>
         
         <h1 className="text-6xl md:text-8xl font-display font-black tracking-tighter italic uppercase text-white leading-[0.9]">
           {language === 'it' ? 'Evolviti in un' : 'Evolve into a'} <br />
-          <span className="text-brand-primary block mt-4 drop-shadow-[0_0_20px_rgba(45,212,191,0.25)]">VIM WIZARD</span>
+          <span className="text-brand-primary block mt-4 drop-shadow-[0_0_30px_rgba(45,212,191,0.3)]">VIM WIZARD</span>
         </h1>
 
         <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed font-sans">
@@ -30,7 +38,7 @@ const Landing = ({ onStart, onExplore, language }) => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-10">
-          <Button onClick={onStart} className="px-12 py-5 text-lg w-full sm:w-auto flex items-center justify-center space-x-3 group cursor-pointer font-display font-bold tracking-wide rounded-2xl shadow-[0_0_20px_rgba(45,212,191,0.1)]">
+          <Button onClick={onStart} className="px-12 py-5 text-lg w-full sm:w-auto flex items-center justify-center space-x-3 group cursor-pointer font-display font-bold tracking-wide rounded-2xl shadow-[0_8px_30px_rgba(45,212,191,0.2)] hover:shadow-[0_8px_40px_rgba(45,212,191,0.4)] transition-all">
             <Play size={20} className="fill-current group-hover:scale-110 transition-transform" />
             <span>{language === 'it' ? 'INIZIA IL VIAGGIO' : 'START JOURNEY'}</span>
           </Button>

@@ -84,8 +84,8 @@ const Achievements = ({ unlockedList, language }) => {
                       {a.desc}
                     </p>
                     {isUnlocked && (
-                      <div className="inline-flex mt-2 px-2 py-0.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[8px] font-black tracking-widest uppercase">
-                        Mastered
+                      <div className="inline-flex mt-2 px-2 py-0.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[8px] font-black tracking-widest uppercase shadow-[0_0_10px_rgba(45,212,191,0.1)]">
+                        {language === 'it' ? 'MAESTRATO' : 'MASTERED'}
                       </div>
                     )}
                   </div>

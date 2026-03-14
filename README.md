@@ -7,32 +7,33 @@
 
 **Vim Mastery** is a premium, gamified educational platform designed to turn neophytes into Vim Wizards using a full WASM-powered Vim terminal directly in the browser.
 
-## 🌟 Professional Audit (v0.5)
-The latest version introduces a comprehensive **Professional Design & UX Audit**:
-- **Outfit High-End Typography**: A new consistent visual language for a premium feel.
-- **Cyber-Midnight Palette**: Refined bioactive colors for immersion and eye comfort.
-- **Mobile Fidelity**: Full WASM Terminal support on smartphones and tablets.
-- **Glassmorphism 2.0**: Enhanced tactile feedback and micro-animations.
+## 🌟 Professional Audit (v0.12)
+The latest version introduces a comprehensive **Professional UX & Mobile Audit**:
+- **Mobile-First UX**: Interactive Toolbar and D-Pad for seamless terminal control without a physical keyboard.
+- **Reactive Mode Engine**: Real-time terminal styling that reacts to Vim modes (Normal, Insert, Visual).
+- **100% Bi-lingual Perfection**: Every UI element, tooltip, and lesson is fully localized (EN/IT).
+- **Premium Aesthetics**: Bioactive glowing borders, outfit typography, and radial background depth.
 
 ## 🚀 Key Features
-- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm` (Now on Mobile!).
-- **12 Lesson Curriculum**: Progress from basic survival (hjkl) to advanced text orchestration (Macros/Registers).
-- **Achievements System**: Unlock badges as you master the language of productivity.
-- **Bi-lingual Support**: Seamless switching between English and Italian.
-- **Responsive UX**: Optimized workflow with "Click-Outside" menu closure and persistent terminal views.
+- **Interactive WASM Terminal**: Real Vim environment powered by `vim-wasm` with custom touch-injection.
+- **Touch Utility Belt**: Dedicated mobile controls for `Esc`, `:`, `/`, and directional `hjkl` motions.
+- **12 Lesson Curriculum**: Progress from basic survival to advanced text orchestration with unified content structure.
+- **Achievements System**: Unlock badges like "Maze Runner" or "Grammar Master" as you progress.
+- **Deep Localization**: Switch between English and Italian with zero hardcoded artifacts.
 
 ## 📂 Project Structure
-- `src/content/`: MDX-based curriculum with bilingual support.
-- `src/components/views/`: Main application screens (Landing, Achievements).
-- `src/components/terminal/`: Bridge to the Vim WASM worker.
-- `src/components/ui/`: Custom design system (Kbd, InfoBox, Step).
-- `src/store/`: State management with `zustand` for progress.
+- `src/content/`: MDX-based curriculum with structural consistency (EN/IT).
+- `src/components/terminal/`: Bridge to the Vim WASM worker + `MobileVimControls`.
+- `src/components/views/`: Main application screens with interactive animations.
+- `src/components/ui/`: Custom design system with tactile feedback.
+- `src/store/`: Robust state management with `zustand` persistence.
 
 ## 🛠️ Tech Stack
 - **Framework**: React 19 + Vite
-- **Styling**: Tailwind CSS v4 + Professional tokens
-- **Animations**: Framer Motion
+- **Styling**: Tailwind CSS v4 + Custom Bioactive Tokens
+- **Animations**: Framer Motion (Hero & Micro-interactions)
 - **Core Engine**: `vim-wasm`
+- **Icons**: Lucide-React
 - **Typography**: Inter & Outfit (Google Fonts)
 
 ## 📜 License
@@ -45,4 +46,4 @@ Developed with ❤️ by **Claudio Dall'Ara**.
 - 💼 [LinkedIn](https://www.linkedin.com/in/claudio-dall-ara-730aa0302/)
 
 ---
-*SYS_READY // VIM_MASTERY_V0.5*
+*SYS_READY // VIM_MASTERY_V0.12*
