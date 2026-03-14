@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Vim } from 'react-vim-wasm';
 import { useProgressStore } from '../../store/useProgressStore';
-import MobileVimControls from './MobileVimControls';
+import UnifiedMobileConsole from './UnifiedMobileConsole';
 
 const VimTerminal = () => {
   const [currentMode, setCurrentMode] = useState('NORMAL');
@@ -16,12 +16,6 @@ const VimTerminal = () => {
 
   const { currentLessonIndex, language } = useProgressStore();
 
-  const handleFocusRequest = () => {
-    if (vimRef.current) {
-      vimRef.current.focus();
-    }
-  };
-
   const handleKey = (key) => {
     if (vimRef.current) {
       // Map key to keyCode for vim-wasm sendKeydown
@@ -29,21 +23,16 @@ const VimTerminal = () => {
         'h': 72, 'j': 74, 'k': 75, 'l': 76,
         'i': 73, 'a': 65, 'v': 86, 'V': 86, 'R': 82, 'u': 85,
         'Escape': 27, 'Enter': 13, 'Tab': 9,
-        ':': 186, '/': 191
+        ':': 186, '/': 191, 'Backspace': 8, ' ': 32
       };
 
       try {
-        const keyCode = keyCodes[key] || key.charCodeAt(0);
+        const keyCode = keyCodes[key] || (key.length === 1 ? key.charCodeAt(0) : 0);
         const modifiers = {
-          shift: (key === ':' || key === 'V' || key === 'R')
+          shift: (key === ':' || key === 'V' || key === 'R' || (key.length === 1 && key === key.toUpperCase() && key !== key.toLowerCase()))
         };
         
         vimRef.current.sendKeydown(key, keyCode, modifiers);
-
-        // Auto-focus on mobile when entering insert modes
-        if (key === 'i' || key === 'a' || key === 'o' || key === 's' || key === 'c') {
-          setTimeout(() => vimRef.current?.focus(), 50);
-        }
       } catch (e) {
         console.warn('Vim sendKeydown failed', e);
       }
@@ -73,7 +62,7 @@ const VimTerminal = () => {
   };
 
   return (
-    <div className={`flex flex-col w-full min-h-[500px] lg:h-[600px] glass-morphism rounded-lg overflow-hidden neo-shadow group bg-[#0A0A0B] border-2 transition-all duration-500 ${modeColors[currentMode]}`}>
+    <div className={`flex flex-col w-full h-[600px] lg:h-[600px] glass-morphism rounded-lg overflow-hidden neo-shadow group bg-[#0A0A0B] border-2 transition-all duration-500 mobile-full-screen ${modeColors[currentMode]}`}>
       {/* Header Bar */}
       <div className="h-8 bg-white/5 border-b border-white/10 flex items-center px-4 justify-between transition-colors group-hover:bg-white/10 flex-shrink-0">
         <div className="flex space-x-2">
@@ -94,7 +83,8 @@ const VimTerminal = () => {
       <div 
         className="flex-1 relative pt-2 overflow-hidden cursor-text" 
         onClick={() => {
-          if (vimRef.current) {
+          // Only focus native input on non-mobile to keep native keyboard away on mobile
+          if (window.innerWidth > 1024 && vimRef.current) {
             vimRef.current.focus();
           }
         }}
@@ -112,12 +102,7 @@ const VimTerminal = () => {
           className="w-full h-full"
         />
 
-        {/* Mobile Focus Hint Overlay */}
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-0 group-active:opacity-100 lg:hidden transition-opacity">
-          <div className="bg-brand-primary/20 backdrop-blur-sm px-4 py-2 rounded-full border border-brand-primary/30 text-[10px] font-black text-brand-primary uppercase">
-            Capitolo Tastiera...
-          </div>
-        </div>
+        {/* Mobile Focus Hint Overlay - Removed as we use virtual keyboard now */}
         
         {/* Animated Cursor Hint - Now more visible as a primary guide */}
         <div className="absolute bottom-4 right-4 animate-pulse pointer-events-none opacity-40">
@@ -125,10 +110,9 @@ const VimTerminal = () => {
         </div>
       </div>
 
-      {/* Mobile Controls Integration */}
-      <MobileVimControls 
+      {/* Unified Mobile Console Controls */}
+      <UnifiedMobileConsole 
         onKey={handleKey} 
-        onFocusRequest={handleFocusRequest}
         currentMode={currentMode}
       />
     </div>
