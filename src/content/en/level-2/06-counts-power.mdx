@@ -24,6 +24,12 @@ Counts are perfect when you see an obvious repetition. Instead of pressing `dw` 
   Use the terminal to navigate a long text. Try using `5j` to go down 5 lines or `d2w` to quickly clean up a sentence.
 </Card>
 
+<OpenQuestion 
+  question={{ it: "Scrivi il comando per COPIARE (Yank) le prossime 5 parole:", en: "Type the command to YANK (Copy) the next 5 words:" }}
+  answer="y5w"
+  hint={{ it: "Operatore 'y', Conteggio '5', Movimento 'w'.", en: "Operator 'y', Count '5', Motion 'w'." }}
+/>
+
 <Quiz 
   id="06-counts-power"
   questions={[
@@ -60,6 +66,30 @@ Counts are perfect when you see an obvious repetition. Instead of pressing `dw` 
         { it: "2dw", en: "2dw" },
         { it: "d2w", en: "d2w" },
         { it: "Entrambi sono validi", en: "Both are valid" }
+      ],
+      correctIndex: 2
+    },
+    {
+      question: { 
+        it: "Cosa fa il comando '4j'?", 
+        en: "What does the '4j' command do?" 
+      },
+      options: [
+        { it: "Cancella 4 righe", en: "Deletes 4 lines" },
+        { it: "Si sposta in giù di 4 righe", en: "Moves down 4 lines" },
+        { it: "Si sposta in alto di 4 righe", en: "Moves up 4 lines" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Se vuoi cambiare (Change) le prossime 3 parole, quale comando è più corretto?", 
+        en: "If you want to change the next 3 words, which command is most correct?" 
+      },
+      options: [
+        { it: "3cw", en: "3cw" },
+        { it: "c3w", en: "c3w" },
+        { it: "Entrambi sono validi, ma c3w è più logico", en: "Both are valid, but c3w makes more sense" }
       ],
       correctIndex: 2
     }

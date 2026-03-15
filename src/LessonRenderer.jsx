@@ -7,16 +7,18 @@ import HJKLMaze from './components/interactive/HJKLMaze';
 import GrammarBuilder from './components/interactive/GrammarBuilder';
 import SpeedRacer from './components/interactive/SpeedRacer';
 import Quiz from './components/interactive/Quiz';
+import OpenQuestion from './components/interactive/OpenQuestion';
 
 import { Kbd, InfoBox, CommandTable, Step, DirectionalGrid, ShortcutGrid } from './components/ui/MDXComponents';
 
 const components = {
-  wrapper: ({ children, isCompleted, onNext, language }) => (
+  wrapper: ({ children, isCompleted, onNext, language, isLastLesson }) => (
     <LessonLayout 
       {...children.props} 
       isCompleted={isCompleted} 
       onNext={onNext} 
       language={language}
+      isLastLesson={isLastLesson}
     >
       {children}
     </LessonLayout>
@@ -28,6 +30,7 @@ const components = {
   GrammarBuilder,
   SpeedRacer,
   Quiz,
+  OpenQuestion,
   Kbd,
   InfoBox,
   CommandTable,
@@ -41,7 +44,7 @@ const lazyLessons = Object.fromEntries(
   Object.entries(lessons).map(([key, importFn]) => [key, lazy(importFn)])
 );
 
-const LessonRenderer = ({ path, isCompleted, onNext }) => {
+const LessonRenderer = ({ path, isCompleted, onNext, isLastLesson }) => {
   const language = useProgressStore((state) => state.language);
   const lessonKey = `./content/${path}.mdx`;
   const DynamicLesson = lazyLessons[lessonKey];
@@ -64,7 +67,7 @@ const LessonRenderer = ({ path, isCompleted, onNext }) => {
     }>
       <MDXProvider components={components}>
         <div className="prose max-w-none">
-          <wrapper isCompleted={isCompleted} onNext={onNext} language={language}>
+          <wrapper isCompleted={isCompleted} onNext={onNext} language={language} isLastLesson={isLastLesson}>
             <DynamicLesson />
           </wrapper>
         </div>

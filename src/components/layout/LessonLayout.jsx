@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import CompletionCard from './CompletionCard';
 
-const LessonLayout = ({ children, title, level, isCompleted, onNext, language }) => {
+const LessonLayout = ({ children, title, level, isCompleted, onNext, language, isLastLesson }) => {
   const MMotionDiv = motion.div;
   return (
     <MMotionDiv 
@@ -32,7 +32,8 @@ const LessonLayout = ({ children, title, level, isCompleted, onNext, language })
       <CompletionCard 
         isCompleted={isCompleted} 
         onNext={onNext} 
-        language={language} 
+        language={language}
+        isLastLesson={isLastLesson}
       />
     </MMotionDiv>
   );

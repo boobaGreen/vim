@@ -20,5 +20,64 @@ Use combinations like `dw`, `cw`, or counts like `d2w` to minimize your steps.
 
 <SpeedRacer />
 
+<Card title="🏆 The Perfect Score">
+  To get a perfect score, you must combine an operator (`c`, `d`, `y`) with a motion (`w`, `e`, `$`) in the most efficient way possible. 
+  Example: instead of pressing `x` 5 times to delete a word, use `dw` (2 keys).
+</Card>
+
 > [!IMPORTANT]
 > Don't rush. Think of the Vim "sentence" before typing. A true Vim Wizard reflects for a second and acts in a millisecond.
+
+<Quiz 
+  id="07-speed-racer"
+  questions={[
+    {
+      question: { 
+        it: "Quale combinazione è più efficiente (meno tasti) per cambiare una parola intera?", 
+        en: "Which combination is more efficient (fewer keys) to change an entire word?" 
+      },
+      options: [
+        { it: "Premere x finché scompare, poi i", en: "Press x until it disappears, then i" },
+        { it: "cw", en: "cw" },
+        { it: "dw e poi i", en: "dw and then i" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Per cancellare tutto fino alla fine della riga, cosa premi?", 
+        en: "To delete everything until the end of the line, what do you press?" 
+      },
+      options: [
+        { it: "d$", en: "d$" },
+        { it: "dd", en: "dd" },
+        { it: "d0", en: "d0" }
+      ],
+      correctIndex: 0
+    },
+    {
+      question: { 
+        it: "In Vim, qual è la metrica principale di efficienza?", 
+        en: "In Vim, what is the main metric of efficiency?" 
+      },
+      options: [
+        { it: "Parole al minuto (WPM)", en: "Words per minute (WPM)" },
+        { it: "Numero di tasti premuti", en: "Number of keystrokes" },
+        { it: "Tempo totale trascorso", en: "Total time spent" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Se vuoi copiare (Yank) le prossime 3 parole, quale comando è ottimale?", 
+        en: "If you want to Yank the next 3 words, which command is optimal?" 
+      },
+      options: [
+        { it: "yw yw yw", en: "yw yw yw" },
+        { it: "y3w", en: "y3w" },
+        { it: "v3wy", en: "v3wy" }
+      ],
+      correctIndex: 1
+    }
+  ]}
+/>

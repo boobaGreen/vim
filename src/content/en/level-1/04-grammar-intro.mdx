@@ -1,17 +1,19 @@
 import LessonLayout from '../../../components/layout/LessonLayout';
 
 export const metadata = {
-  title: "The Vim Grammar",
+  title: "The Grammar of Vim",
   level: "01",
   id: "1-4"
 };
 
-# Speaking with Code.
+# Speaking to Code.
 
 The true power of Vim lies not in individual keys, but in its **Grammar**. Just like a human language, Vim combines elements to form complex sentences.
 
-### The Magic Formula
+<Step number="1" title="The Magic Formula">
 Almost every advanced command follows this pattern:
+</Step>
+
 **VERB + COUNT + MOTION**
 
 - **VERB**: What do you want to do? (e.g., `d` for Delete)
@@ -19,11 +21,152 @@ Almost every advanced command follows this pattern:
 - **MOTION**: Where do you want to do it? (e.g., `w` for Word)
 
 ### Example: `d2w`
-It means: *Delete (`d`) the next two (`2`) words (`w`)*.
+Means: *Delete (`d`) the next two (`2`) words (`w`)*.
 
-### Explored with the Command Builder
-Use the tool below to visualize how commands are constructed. Try different combinations and observe the result.
+### Experiment with the Command Builder
+Use the tool below to visualize how commands are built. Try different combinations and observe the result.
 
 <GrammarBuilder />
 
-*In the next Level 2 lessons, we will learn how to use this grammar to edit code at the speed of thought.*
+<Step number="2" title="Line Navigation">
+You never need to use arrow keys! Here's how to move quickly on a line:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "0", label: "Line Start", desc: "Go to the first character of the line (column 0)." },
+    { key: "^", label: "First Non-Space", desc: "Go to the first non-whitespace character." },
+    { key: "$", label: "Line End", desc: "Go to the last character of the line." },
+    { key: "f{c}", label: "Find Forward", desc: "Jump to the next character {c} on the line." },
+    { key: "t{c}", label: "Till Forward", desc: "Jump one character BEFORE {c} on the line." },
+    { key: ";", label: "Repeat Search", desc: "Repeats the last f/t in the same direction." },
+  ]}
+/>
+
+<Card title="⚡ Try in the Terminal">
+  Type a long sentence, then use `0` to go to line start and `$` for the end. Try `f` followed by a letter to jump directly to that character!
+</Card>
+
+<Step number="3" title="File Navigation">
+For long files, you need to move quickly between lines:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "gg", label: "File Start", desc: "Jump to the first line of the file." },
+    { key: "G", label: "File End", desc: "Jump to the last line of the file." },
+    { key: "{n}G", label: "Go to Line", desc: "Jump to line number {n}. E.g.: 10G → line 10." },
+    { key: "Ctrl+d", label: "Scroll Down", desc: "Scroll half a page down." },
+    { key: "Ctrl+u", label: "Scroll Up", desc: "Scroll half a page up." },
+    { key: "%", label: "Matching Bracket", desc: "Jump to matching bracket: (), [], {}." },
+  ]}
+/>
+
+<Step number="4" title="Searching the File">
+Finding text is fundamental for efficient editing:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "/pattern", label: "Search Forward", desc: "Search for 'pattern' forward in the file." },
+    { key: "?pattern", label: "Search Backward", desc: "Search for 'pattern' backward in the file." },
+    { key: "n", label: "Next", desc: "Go to the next match of the pattern." },
+    { key: "N", label: "Previous", desc: "Go to the previous match of the pattern." },
+    { key: "*", label: "Search Word", desc: "Search forward for the word under the cursor." },
+    { key: "#", label: "Search Back", desc: "Search backward for the word under the cursor." },
+  ]}
+/>
+
+<Card title="🧠 Simulation: Find and Navigate">
+  You have a file with 100 lines and need to find the word "error":
+  1. Press `/error` then `Enter` → Vim takes you to the first match
+  2. Press `n` → go to the next match
+  3. Press `N` → go back to the previous match
+  4. Press `*` on a word → searches for it automatically!
+</Card>
+
+<InfoBox type="tip" title="PRO TIP">
+The `*` command is incredibly useful in coding: position the cursor on a variable name and press `*` to find all its occurrences in the file.
+</InfoBox>
+
+*In the next Level 2 lessons, we'll learn to use this grammar to modify code at the speed of thought.*
+
+<Quiz 
+  id="04-grammar-intro"
+  questions={[
+    {
+      question: { 
+        it: "Qual è la formula della grammatica di Vim?", 
+        en: "What is the Vim grammar formula?" 
+      },
+      options: [
+        { it: "VERBO + CONTEGGIO + MOVIMENTO", en: "VERB + COUNT + MOTION" },
+        { it: "TASTO + RISULTATO", en: "KEY + RESULT" },
+        { it: "CTRL + LETTERA", en: "CTRL + LETTER" }
+      ],
+      correctIndex: 0
+    },
+    {
+      question: { 
+        it: "Quale tasto ti porta alla FINE della riga?", 
+        en: "Which key takes you to the END of the line?" 
+      },
+      options: [
+        { it: "0", en: "0" },
+        { it: "^", en: "^" },
+        { it: "$", en: "$" },
+        { it: "G", en: "G" }
+      ],
+      correctIndex: 2
+    },
+    {
+      question: { 
+        it: "Come vai alla PRIMA riga del file?", 
+        en: "How do you go to the FIRST line of the file?" 
+      },
+      options: [
+        { it: "G", en: "G" },
+        { it: "gg", en: "gg" },
+        { it: "0", en: "0" },
+        { it: "^", en: "^" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Quale comando cerca una parola nel file?", 
+        en: "Which command searches for a word in the file?" 
+      },
+      options: [
+        { it: ":find parola", en: ":find word" },
+        { it: "/parola", en: "/word" },
+        { it: "s/parola", en: "s/word" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Cosa fa il tasto '*' in Normal Mode?", 
+        en: "What does the '*' key do in Normal Mode?" 
+      },
+      options: [
+        { it: "Mette un asterisco", en: "Types an asterisk" },
+        { it: "Cerca la parola sotto il cursore", en: "Searches for the word under the cursor" },
+        { it: "Seleziona tutto", en: "Selects all" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Dopo una ricerca con '/', come vai alla prossima occorrenza?", 
+        en: "After searching with '/', how do you go to the next match?" 
+      },
+      options: [
+        { it: "Premi n", en: "Press n" },
+        { it: "Premi /", en: "Press /" },
+        { it: "Premi Enter", en: "Press Enter" }
+      ],
+      correctIndex: 0
+    }
+  ]}
+/>

@@ -14,29 +14,84 @@ In Vim, non si scrive solo. Si manipola la materia testuale con gesti precisi.
 Dimentica le frecce. Inizia a pensare per azioni. Ogni tasto è un comando di trasformazione.
 </InfoBox>
 
-<Step number="1" title="Comandi CRUD Fondamentali">
-Ecco come interagire con il testo nella memoria di Vim mentre sei in **Normal Mode**:
+<Step number="1" title="Entrare in Insert Mode">
+Ci sono **molti modi** per entrare in Insert Mode. Ognuno ha un posizionamento diverso del cursore:
 </Step>
 
 <ShortcutGrid 
   data={[
-    { key: "i", label: "Insert", desc: "Inserisce testo prima del cursore. (Entra in Insert Mode)" },
-    { key: "x", label: "Delete", desc: "Elimina il carattere sotto il cursore." },
-    { key: "u", label: "Undo", desc: "Annulla l'ultima azione. Il tuo miglior amico." },
-    { key: "Ctrl + r", label: "Redo", desc: "Ripristina l'azione annullata." },
+    { key: "i", label: "Insert", desc: "Inserisce testo PRIMA del cursore." },
+    { key: "a", label: "Append", desc: "Inserisce testo DOPO il cursore." },
+    { key: "I", label: "Insert Inizio", desc: "Va all'inizio della riga e entra in Insert." },
+    { key: "A", label: "Append Fine", desc: "Va alla fine della riga e entra in Insert." },
+    { key: "o", label: "Open Sotto", desc: "Crea una NUOVA RIGA sotto e entra in Insert." },
+    { key: "O", label: "Open Sopra", desc: "Crea una NUOVA RIGA sopra e entra in Insert." },
   ]}
 />
 
-<Step number="2" title="Didattica Pratica">
-Sposta il cursore sul terminale a destra. Prova a cancellare una parola con <Kbd>x</Kbd> e poi a ripristinarla con <Kbd>u</Kbd>.
-</Step>
-
 <InfoBox type="warning" title="ATTENZIONE">
-Per tornare in **Normal Mode** dopo aver usato <Kbd>i</Kbd>, premi sempre <Kbd>ESC</Kbd>. Senza questo tasto, continuerai a scrivere invece di comandare.
+Per tornare in **Normal Mode** dopo aver usato qualsiasi comando di inserimento, premi sempre <Kbd>ESC</Kbd>. Senza questo tasto, continuerai a scrivere invece di comandare.
 </InfoBox>
 
-<Card title="Esercizio">
-  Prova a scrivere "Vim is King" nel terminale e poi usa <Kbd>u</Kbd> per tornare indietro nel tempo.
+<Step number="2" title="Comandi di Modifica Essenziali">
+Ecco come modificare il testo mentre sei in **Normal Mode**:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "x", label: "Delete Char", desc: "Elimina il carattere sotto il cursore." },
+    { key: "r", label: "Replace", desc: "Sostituisce il carattere sotto il cursore con un altro." },
+    { key: "dd", label: "Delete Line", desc: "Cancella l'intera riga corrente." },
+    { key: "yy", label: "Yank Line", desc: "Copia l'intera riga corrente." },
+    { key: "p", label: "Paste After", desc: "Incolla DOPO il cursore/riga." },
+    { key: "P", label: "Paste Before", desc: "Incolla PRIMA del cursore/riga." },
+    { key: "u", label: "Undo", desc: "Annulla l'ultima azione. Il tuo miglior amico." },
+    { key: "Ctrl+r", label: "Redo", desc: "Ripristina l'azione annullata." },
+    { key: "J", label: "Join", desc: "Unisce la riga corrente con quella sotto." },
+    { key: ".", label: "Repeat", desc: "Ripete l'ultimo comando. Potentissimo!" },
+  ]}
+/>
+
+<Card title="💡 Il Segreto del Punto (.)">
+  Il tasto `.` (punto) ripete l'ultimo comando di modifica. Esempio: se fai `dd` per cancellare una riga, poi premi `.` per cancellarne un'altra. È il comando più sottovalutato di Vim!
+</Card>
+
+<Step number="3" title="Salvare, Uscire e Gestione File">
+Questi sono i comandi più importanti. Senza di questi, non puoi fare nulla!
+</Step>
+
+<InfoBox type="warning" title="IL MEME PIÙ FAMOSO DI VIM">
+"Come esco da Vim?" — Ogni programmatore almeno una volta. Ecco la risposta definitiva:
+</InfoBox>
+
+<ShortcutGrid 
+  data={[
+    { key: ":w", label: "Write (Salva)", desc: "Salva il file corrente su disco." },
+    { key: ":q", label: "Quit (Esci)", desc: "Esce da Vim (solo se non ci sono modifiche)." },
+    { key: ":wq", label: "Write & Quit", desc: "Salva ed esce in un colpo solo." },
+    { key: ":q!", label: "Force Quit", desc: "Esce SENZA salvare. Scarta tutte le modifiche." },
+    { key: "ZZ", label: "Shortcut wq", desc: "Scorciatoia: salva ed esce (come :wq ma senza :)." },
+    { key: "ZQ", label: "Shortcut q!", desc: "Scorciatoia: esce senza salvare (come :q!)." },
+    { key: ":e file", label: "Edit File", desc: "Apre un altro file nel buffer." },
+    { key: ":w nome", label: "Save As", desc: "Salva con un nome diverso (Salva come)." },
+  ]}
+/>
+
+<Card title="⚡ Esercizio Pratico">
+  Nel terminale, prova questa sequenza:
+  1. Premi `i` per entrare in Insert Mode
+  2. Scrivi "Vim è potente"
+  3. Premi `ESC` per tornare in Normal Mode
+  4. Premi `dd` per cancellare la riga
+  5. Premi `u` per annullare (Undo)
+  6. Premi `.` per ripetere l'ultimo comando (ri-cancella!)
+</Card>
+
+<Card title="🧠 Simulazione: Cosa Succede?">
+  Immagina di aver aperto un file, scritto del codice, e vuoi salvare ed uscire.
+  - Se premi `:q` → Vim dice **"E37: No write since last change"** e NON esce!
+  - Se premi `:wq` → Vim **salva e esce** correttamente ✅
+  - Se premi `:q!` → Vim **esce senza salvare** (perdi tutto!) ⚠️
 </Card>
 
 <Quiz 
@@ -57,15 +112,42 @@ Per tornare in **Normal Mode** dopo aver usato <Kbd>i</Kbd>, premi sempre <Kbd>E
     },
     {
       question: { 
-        it: "Quale comando ELIMINA il carattere sotto il cursore?", 
-        en: "Which command DELETES the character under the cursor?" 
+        it: "Quale comando CANCELLA l'intera riga corrente?", 
+        en: "Which command DELETES the entire current line?" 
       },
       options: [
-        { it: "d", en: "d" },
         { it: "x", en: "x" },
-        { it: "u", en: "u" }
+        { it: "dd", en: "dd" },
+        { it: "D", en: "D" },
+        { it: "dw", en: "dw" }
       ],
       correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Come SALVI ed ESCI da Vim?", 
+        en: "How do you SAVE and QUIT Vim?" 
+      },
+      options: [
+        { it: ":q!", en: ":q!" },
+        { it: ":w", en: ":w" },
+        { it: ":wq", en: ":wq" },
+        { it: "Ctrl+S", en: "Ctrl+S" }
+      ],
+      correctIndex: 2
+    },
+    {
+      question: { 
+        it: "Quale comando inserisce testo alla FINE della riga?", 
+        en: "Which command inserts text at the END of the line?" 
+      },
+      options: [
+        { it: "i", en: "i" },
+        { it: "a", en: "a" },
+        { it: "A", en: "A" },
+        { it: "o", en: "o" }
+      ],
+      correctIndex: 2
     },
     {
       question: { 
@@ -73,11 +155,36 @@ Per tornare in **Normal Mode** dopo aver usato <Kbd>i</Kbd>, premi sempre <Kbd>E
         en: "You made a mistake. Which key saves you (Undo)?" 
       },
       options: [
-        { it: "Ctrl + r", en: "Ctrl + r" },
+        { it: "Ctrl+r", en: "Ctrl+r" },
         { it: "q", en: "q" },
-        { it: "u", en: "u" }
+        { it: "u", en: "u" },
+        { it: ".", en: "." }
       ],
       correctIndex: 2
+    },
+    {
+      question: { 
+        it: "Cosa fa il comando '.' (punto)?", 
+        en: "What does the '.' (dot) command do?" 
+      },
+      options: [
+        { it: "Esce da Vim", en: "Exits Vim" },
+        { it: "Ripete l'ultimo comando di modifica", en: "Repeats the last edit command" },
+        { it: "Va alla fine della riga", en: "Goes to end of line" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Quale scorciatoia equivale a :wq?", 
+        en: "Which shortcut is equivalent to :wq?" 
+      },
+      options: [
+        { it: "ZQ", en: "ZQ" },
+        { it: "ZZ", en: "ZZ" },
+        { it: "Ctrl+Z", en: "Ctrl+Z" }
+      ],
+      correctIndex: 1
     }
   ]}
 />

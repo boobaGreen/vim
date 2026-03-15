@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trophy, ArrowRight, Zap } from 'lucide-react';
+import { Trophy, ArrowRight, Zap, Star } from 'lucide-react';
 import { Button } from '../ui';
 
-const CompletionCard = ({ isCompleted, onNext, language }) => {
+const CompletionCard = ({ isCompleted, onNext, language, isLastLesson }) => {
   const MMotionDiv = motion.div;
 
   return (
@@ -21,21 +21,35 @@ const CompletionCard = ({ isCompleted, onNext, language }) => {
           
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center space-x-6">
-              <div className="bg-brand-primary flex items-center justify-center w-16 h-16 rounded-2xl rotate-12 group-hover:rotate-0 transition-transform duration-500 shadow-[0_0_20px_rgba(45,212,191,0.4)]">
-                <Trophy size={32} className="text-brand-bg -rotate-12 group-hover:rotate-0 transition-transform duration-500" />
+              <div className={`${isLastLesson ? 'bg-yellow-500' : 'bg-brand-primary'} flex items-center justify-center w-16 h-16 rounded-2xl rotate-12 group-hover:rotate-0 transition-transform duration-500 shadow-[0_0_20px_rgba(45,212,191,0.4)]`}>
+                {isLastLesson 
+                  ? <Star size={32} className="text-brand-bg -rotate-12 group-hover:rotate-0 transition-transform duration-500" />
+                  : <Trophy size={32} className="text-brand-bg -rotate-12 group-hover:rotate-0 transition-transform duration-500" />
+                }
               </div>
               <div className="space-y-1">
                 <div className="flex items-center space-x-2 text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] italic">
                   <Zap size={12} className="animate-pulse" />
-                  <span>{language === 'it' ? 'LEZIONE COMPLETATA' : 'LESSON COMPLETED'}</span>
+                  <span>{isLastLesson 
+                    ? (language === 'it' ? 'CORSO COMPLETATO!' : 'COURSE COMPLETED!') 
+                    : (language === 'it' ? 'LEZIONE COMPLETATA' : 'LESSON COMPLETED')
+                  }</span>
                 </div>
                 <h3 className="text-2xl font-display font-black text-white uppercase italic tracking-tighter">
-                  {language === 'it' ? 'Evolviti al Prossimo Rango' : 'Evolve to Next Rank'}
+                  {isLastLesson 
+                    ? (language === 'it' ? 'Sei un Mago di Vim!' : 'You Are a Vim Wizard!')
+                    : (language === 'it' ? 'Evolviti al Prossimo Rango' : 'Evolve to Next Rank')
+                  }
                 </h3>
                 <p className="text-white/40 text-xs font-sans max-w-xs leading-relaxed">
-                  {language === 'it' 
-                    ? 'Nuove abilità di Vim sono state sbloccate nel tuo arsenale.' 
-                    : 'New Vim skills have been unlocked in your arsenal.'}
+                  {isLastLesson 
+                    ? (language === 'it' 
+                      ? 'Hai completato tutte le lezioni. Il tuo viaggio Vim è solo all\'inizio!' 
+                      : 'You completed all lessons. Your Vim journey is just beginning!')
+                    : (language === 'it' 
+                      ? 'Nuove abilità di Vim sono state sbloccate nel tuo arsenale.' 
+                      : 'New Vim skills have been unlocked in your arsenal.')
+                  }
                 </p>
               </div>
             </div>
@@ -44,7 +58,10 @@ const CompletionCard = ({ isCompleted, onNext, language }) => {
               onClick={onNext} 
               className="w-full md:w-auto px-12 py-5 text-lg rounded-2xl flex items-center justify-center space-x-3 group/btn shadow-[0_10px_25px_rgba(45,212,191,0.3)] hover:shadow-[0_15px_35px_rgba(45,212,191,0.5)] transition-all"
             >
-              <span>{language === 'it' ? 'PROSSIMA LEZIONE' : 'NEXT LESSON'}</span>
+              <span>{isLastLesson 
+                ? (language === 'it' ? 'TORNA ALLA HOME' : 'BACK TO HOME')
+                : (language === 'it' ? 'PROSSIMA LEZIONE' : 'NEXT LESSON')
+              }</span>
               <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
             </Button>
           </div>

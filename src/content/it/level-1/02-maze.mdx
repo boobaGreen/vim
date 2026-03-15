@@ -15,9 +15,88 @@ Usa questi tasti per ogni movimento:
 
 <DirectionalGrid />
 
+<InfoBox type="tip" title="PERCHÉ hjkl?">
+I tasti `hjkl` risalgono ai tempi del terminale ADM-3A, ma il motivo vero è l'efficienza: le dita restano sulla fila principale della tastiera, risparmiando millisecondi che si sommano in ore.
+</InfoBox>
+
 ### La Sfida del Labirinto
 Per procedere, devi portare il cursore (quadrato verde) fino alla fine della riga, rappresentata dal simbolo `$`.
 
 <HJKLMaze />
 
-*Nota: Una volta completato il labirinto, sbloccherai la lezione successiva sui comandi CRUD.*
+<Card title="🧠 Esercizio Mentale">
+  Immagina una griglia 5x5. Il cursore è in alto a sinistra e devi raggiungere il basso a destra. 
+  Quale sequenza è più corta?
+  - `jjjjllll` (4 giù + 4 destra = 8 tasti)
+  - `ljljljlj` (alternando = 8 tasti)
+  - Entrambe funzionano, ma col tempo imparerai combo più veloci!
+</Card>
+
+<Quiz 
+  id="02-maze"
+  questions={[
+    {
+      question: { 
+        it: "Quale tasto muove il cursore a SINISTRA?", 
+        en: "Which key moves the cursor LEFT?" 
+      },
+      options: [
+        { it: "j", en: "j" },
+        { it: "k", en: "k" },
+        { it: "h", en: "h" },
+        { it: "l", en: "l" }
+      ],
+      correctIndex: 2
+    },
+    {
+      question: { 
+        it: "Perché Vim usa hjkl invece delle frecce?", 
+        en: "Why does Vim use hjkl instead of arrows?" 
+      },
+      options: [
+        { it: "Perché le frecce sono rotte", en: "Because arrows are broken" },
+        { it: "Per tenere le dita sulla fila principale", en: "To keep fingers on the home row" },
+        { it: "Per confondere i principianti", en: "To confuse beginners" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "In quale modalità funzionano hjkl per muoversi?", 
+        en: "In which mode do hjkl work for movement?" 
+      },
+      options: [
+        { it: "Insert Mode", en: "Insert Mode" },
+        { it: "Normal Mode", en: "Normal Mode" },
+        { it: "Visual Mode", en: "Visual Mode" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Quale tasto muove il cursore verso l'ALTO?", 
+        en: "Which key moves the cursor UP?" 
+      },
+      options: [
+        { it: "j", en: "j" },
+        { it: "k", en: "k" },
+        { it: "h", en: "h" },
+        { it: "l", en: "l" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Per muoverti 5 righe in giù, quale è più efficiente?", 
+        en: "To move 5 lines down, which is more efficient?" 
+      },
+      options: [
+        { it: "Premere j cinque volte", en: "Press j five times" },
+        { it: "Premere 5j", en: "Press 5j" },
+        { it: "Usare le frecce", en: "Use arrow keys" }
+      ],
+      correctIndex: 1
+    }
+  ]}
+/>
+

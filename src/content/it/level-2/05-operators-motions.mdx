@@ -1,7 +1,7 @@
 import LessonLayout from '../../../components/layout/LessonLayout';
 
 export const metadata = {
-  title: "Operatori e Movimenti",
+  title: "Operatori, Movimenti e Ricerca",
   level: "02",
   id: "2-1"
 };
@@ -10,8 +10,10 @@ export const metadata = {
 
 Benvenuto nel Livello 2. Ora che conosci le basi, è tempo di imparare a "parlare" fluentemente. In Vim, un **Operatore** definisce *cosa* fare, e un **Movimento** definisce *su cosa* farlo.
 
-### I Tre Grandi Operatori
+<Step number="1" title="I Tre Grandi Operatori">
 Impariamo i verbi principali:
+</Step>
+
 <ShortcutGrid 
   data={[
     { key: "d", label: "Delete", desc: "Cancella il testo." },
@@ -20,8 +22,10 @@ Impariamo i verbi principali:
   ]}
 />
 
-### I Movimenti di Parola
+<Step number="2" title="I Movimenti di Parola">
 Per ora, usiamo questi bersagli:
+</Step>
+
 <ShortcutGrid 
   data={[
     { key: "w", label: "Word", desc: "Salta all'inizio della parola successiva." },
@@ -30,8 +34,10 @@ Per ora, usiamo questi bersagli:
   ]}
 />
 
-### La Combinazione Magica
+<Step number="3" title="La Combinazione Magica">
 Prova a combinare un operatore con un movimento nel terminale:
+</Step>
+
 - `dw`: Cancella fino alla prossima parola.
 - `cw`: Cambia la parola corrente (cancella e scrivi).
 - `yw`: Copia la parola.
@@ -39,6 +45,23 @@ Prova a combinare un operatore con un movimento nel terminale:
 <Card title="Sfida Rapida">
   Se scrivi `de`, cosa pensi che succederà? Prova nel terminale! Cancellerà fino alla fine della parola corrente.
 </Card>
+
+<OpenQuestion 
+  question={{ it: "Scrivi il comando per CANCELLARE la parola corrente e scriverci sopra (Change Word):", en: "Type the command to CHANGE the current word:" }}
+  answer="cw"
+  hint={{ it: "Combina l'operatore 'c' con il movimento 'w'.", en: "Combine operator 'c' with motion 'w'." }}
+/>
+
+<Step number="4" title="Ricerca al Volo">
+La ricerca è anche un movimento! Puoi combinare un operatore con una ricerca.
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "d / foo", label: "Delete until foo", desc: "Cerca la parola 'foo' e cancella tutto fino ad essa." },
+    { key: "c / bar", label: "Change until bar", desc: "Cancella tutto fino alla parola 'bar' e vai in Insert Mode." },
+  ]}
+/>
 
 <Quiz 
   id="05-operators-motions"
@@ -76,6 +99,30 @@ Prova a combinare un operatore con un movimento nel terminale:
         { it: "Cancella l'intera riga", en: "Deletes the whole line" },
         { it: "Cancella fino all'inizio della parola successiva", en: "Deletes until the start of the next word" },
         { it: "Copia una parola", en: "Copies a word" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Quale combinazione COPIA (Yank) tutto fino alla fine della riga?", 
+        en: "Which combination COPIES (Yanks) everything to the end of the line?" 
+      },
+      options: [
+        { it: "y$", en: "y$" },
+        { it: "yw", en: "yw" },
+        { it: "yy", en: "yy" }
+      ],
+      correctIndex: 0
+    },
+    {
+      question: { 
+        it: "Se esegui 'd / error', cosa fa Vim?", 
+        en: "If you run 'd / error', what does Vim do?" 
+      },
+      options: [
+        { it: "Stampa 'error'", en: "Prints 'error'" },
+        { it: "Cancella tutto fino alla prossima volta che trova 'error'", en: "Deletes everything until the next time it finds 'error'" },
+        { it: "Va in errore", en: "Crashes" }
       ],
       correctIndex: 1
     }

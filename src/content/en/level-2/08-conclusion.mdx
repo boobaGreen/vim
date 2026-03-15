@@ -1,10 +1,44 @@
 import LessonLayout from '../../../components/layout/LessonLayout';
 
 export const metadata = {
-  title: "Level 2 Conclusion: Beyond the Word",
+  title: "Level 2 Conclusion & Visual Mode",
   level: "02",
   id: "2-4"
 };
+
+# The Final Touch: Visual Mode.
+
+Before closing Level 2, we must discuss the last essential mode: **Visual Mode**. While in Normal Mode you operate blindly (relying on grammar), in Visual Mode you highlight text before acting.
+
+<Step number="1" title="Selecting Text">
+Enter Visual Mode and use standard motions (`h,j,k,l,w,b,e,$`) to highlight blocks of text:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "v", label: "Visual (Character)", desc: "Selects character by character. Great for parts of a line." },
+    { key: "V", label: "Visual Line", desc: "Selects entire lines. Perfect for moving code blocks." },
+    { key: "Ctrl+v", label: "Visual Block", desc: "Selects rectangular blocks. Pure magic for column editing." },
+  ]}
+/>
+
+<Step number="2" title="Acting on Selection">
+Once the text is highlighted, press an Operator (`d, c, y`) or use these special commands for the selection:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: ">", label: "Indent (Right)", desc: "Moves the selected text to the right." },
+    { key: "<", label: "De-indent (Left)", desc: "Moves the selected text to the left." },
+    { key: "u / U", label: "Case Toggle", desc: "Forces lowercase (`u`) or UPPERCASE (`U`) on the selection." },
+  ]}
+/>
+
+<Card title="⚡ The Secret of Ctrl+V (Visual Block)">
+  Select multiple lines with `Ctrl+v` (a vertical rectangle). Press `I` (Capital Insert), type something (e.g., `// ` to comment) and press `ESC`. The text will magically appear on *all* selected lines!
+</Card>
+
+---
 
 # Congratulations, Efficient User!
 
@@ -28,9 +62,7 @@ In the next level, we will enter the realm of automation:
 > [!TIP]
 > Keep practicing with the Speed Racer challenge until the commands become muscle memory.
 
-<Button onClick={() => window.location.reload()} variant="primary">
-  Return to Start or Keep Practicing
-</Button>
+*Your journey to Level 3 begins now. Complete the quiz to unlock the next chapter!*
 
 <Quiz 
   id="08-conclusion"
@@ -61,14 +93,27 @@ In the next level, we will enter the realm of automation:
     },
     {
       question: { 
-        it: "Vim è un editor modale?", 
-        en: "Is Vim a modal editor?" 
+        it: "Se vuoi selezionare INTERE RIGHE per volta, quale comando usi?", 
+        en: "If you want to select ENTIRE LINES at a time, which command do you use?" 
       },
       options: [
-        { it: "Sì, ha diverse modalità (Normal, Insert, ecc.)", en: "Yes, it has different modes (Normal, Insert, etc.)" },
-        { it: "No, è come Notepad", en: "No, it's like Notepad" }
+        { it: "v", en: "v" },
+        { it: "V (Maiuscolo)", en: "V (Uppercase)" },
+        { it: "Ctrl+v", en: "Ctrl+v" }
       ],
-      correctIndex: 0
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Dopo aver selezionato del testo in Visual Mode, come lo elimini e scrivi al suo posto?", 
+        en: "After selecting text in Visual Mode, how do you delete it and write in its place?" 
+      },
+      options: [
+        { it: "Premi d", en: "Press d" },
+        { it: "Premi c", en: "Press c" },
+        { it: "Premi y", en: "Press y" }
+      ],
+      correctIndex: 1
     }
   ]}
 />

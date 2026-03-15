@@ -10,8 +10,10 @@ export const metadata = {
 
 La vera potenza di Vim non risiede nei singoli tasti, ma nella sua **Grammatica**. Proprio come una lingua umana, Vim combina elementi per formare frasi complesse.
 
-### La Formula Magica
+<Step number="1" title="La Formula Magica">
 Quasi ogni comando avanzato segue questo schema:
+</Step>
+
 **VERBO + CONTEGGIO + MOVIMENTO**
 
 - **VERBO**: Cosa vuoi fare? (es. `d` per Delete)
@@ -26,4 +28,145 @@ Usa il tool qui sotto per visualizzare come si costruiscono i comandi. Prova div
 
 <GrammarBuilder />
 
+<Step number="2" title="Navigazione nella Riga">
+Non devi mai usare le frecce! Ecco come muoverti rapidamente sulla riga:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "0", label: "Inizio Riga", desc: "Va al primo carattere della riga (colonna 0)." },
+    { key: "^", label: "Primo Non-Spazio", desc: "Va al primo carattere non-spazio della riga." },
+    { key: "$", label: "Fine Riga", desc: "Va all'ultimo carattere della riga." },
+    { key: "f{c}", label: "Find Avanti", desc: "Salta al prossimo carattere {c} sulla riga." },
+    { key: "t{c}", label: "Till Avanti", desc: "Salta un carattere PRIMA di {c} sulla riga." },
+    { key: ";", label: "Ripeti Ricerca", desc: "Ripete l'ultimo f/t nella stessa direzione." },
+  ]}
+/>
+
+<Card title="⚡ Prova nel Terminale">
+  Scrivi una frase lunga, poi usa `0` per andare all'inizio riga e `$` per la fine. Prova `f` seguito da una lettera per saltare direttamente a quel carattere!
+</Card>
+
+<Step number="3" title="Navigazione nel File">
+Per file lunghi, devi muoverti velocemente tra le righe:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "gg", label: "Inizio File", desc: "Salta alla prima riga del file." },
+    { key: "G", label: "Fine File", desc: "Salta all'ultima riga del file." },
+    { key: "{n}G", label: "Vai a Riga", desc: "Salta alla riga numero {n}. Es: 10G → riga 10." },
+    { key: "Ctrl+d", label: "Scroll Giù", desc: "Scorri mezza pagina verso il basso." },
+    { key: "Ctrl+u", label: "Scroll Su", desc: "Scorri mezza pagina verso l'alto." },
+    { key: "%", label: "Parentesi", desc: "Salta alla parentesi corrispondente: (), [], {}." },
+  ]}
+/>
+
+<Step number="4" title="Ricerca nel File">
+Trovare testo è fondamentale per l'editing efficiente:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "/pattern", label: "Cerca Avanti", desc: "Cerca 'pattern' in avanti nel file." },
+    { key: "?pattern", label: "Cerca Indietro", desc: "Cerca 'pattern' all'indietro nel file." },
+    { key: "n", label: "Prossimo", desc: "Vai alla prossima occorrenza del pattern." },
+    { key: "N", label: "Precedente", desc: "Vai all'occorrenza precedente del pattern." },
+    { key: "*", label: "Cerca Parola", desc: "Cerca in avanti la parola sotto il cursore." },
+    { key: "#", label: "Cerca Indietro", desc: "Cerca all'indietro la parola sotto il cursore." },
+  ]}
+/>
+
+<Card title="🧠 Simulazione: Trovare e Sostituire">
+  Hai un file con 100 righe e devi trovare la parola "errore":
+  1. Premi `/errore` e poi `Enter` → Vim ti porta alla prima occorrenza
+  2. Premi `n` → vai alla prossima
+  3. Premi `N` → torni alla precedente
+  4. Premi `*` su una parola → la cerca automaticamente!
+</Card>
+
+<InfoBox type="tip" title="PRO TIP">
+Il comando `*` è incredibilmente utile nel coding: posiziona il cursore su un nome di variabile e premi `*` per trovare tutte le sue occorrenze nel file.
+</InfoBox>
+
 *Nelle prossime lezioni del Livello 2, impareremo a usare questa grammatica per modificare il codice alla velocità del pensiero.*
+
+<Quiz 
+  id="04-grammar-intro"
+  questions={[
+    {
+      question: { 
+        it: "Qual è la formula della grammatica di Vim?", 
+        en: "What is the Vim grammar formula?" 
+      },
+      options: [
+        { it: "VERBO + CONTEGGIO + MOVIMENTO", en: "VERB + COUNT + MOTION" },
+        { it: "TASTO + RISULTATO", en: "KEY + RESULT" },
+        { it: "CTRL + LETTERA", en: "CTRL + LETTER" }
+      ],
+      correctIndex: 0
+    },
+    {
+      question: { 
+        it: "Quale tasto ti porta alla FINE della riga?", 
+        en: "Which key takes you to the END of the line?" 
+      },
+      options: [
+        { it: "0", en: "0" },
+        { it: "^", en: "^" },
+        { it: "$", en: "$" },
+        { it: "G", en: "G" }
+      ],
+      correctIndex: 2
+    },
+    {
+      question: { 
+        it: "Come vai alla PRIMA riga del file?", 
+        en: "How do you go to the FIRST line of the file?" 
+      },
+      options: [
+        { it: "G", en: "G" },
+        { it: "gg", en: "gg" },
+        { it: "0", en: "0" },
+        { it: "^", en: "^" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Quale comando cerca una parola nel file?", 
+        en: "Which command searches for a word in the file?" 
+      },
+      options: [
+        { it: ":find parola", en: ":find word" },
+        { it: "/parola", en: "/word" },
+        { it: "s/parola", en: "s/word" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Cosa fa il tasto '*' in Normal Mode?", 
+        en: "What does the '*' key do in Normal Mode?" 
+      },
+      options: [
+        { it: "Mette un asterisco", en: "Types an asterisk" },
+        { it: "Cerca la parola sotto il cursore", en: "Searches for the word under the cursor" },
+        { it: "Seleziona tutto", en: "Selects all" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Dopo una ricerca con '/', come vai alla prossima occorrenza?", 
+        en: "After searching with '/', how do you go to the next match?" 
+      },
+      options: [
+        { it: "Premi n", en: "Press n" },
+        { it: "Premi /", en: "Press /" },
+        { it: "Premi Enter", en: "Press Enter" }
+      ],
+      correctIndex: 0
+    }
+  ]}
+/>

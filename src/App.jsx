@@ -37,36 +37,40 @@ function App() {
   const MMotionDiv = motion.div;
 
   return (
-    <div className="min-h-screen bg-brand-bg text-white selection:bg-brand-primary/30 flex flex-col">
+    <div className="min-h-screen w-full overflow-x-hidden bg-brand-bg text-white selection:bg-brand-primary/30 flex flex-col">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass-morphism border-b-0 py-3 px-4 md:px-10 flex justify-between items-center h-14">
+      <nav className="fixed top-0 w-full z-50 glass-morphism border-b-0 py-3 px-3 md:px-10 flex justify-between items-center h-14">
         <button 
           onClick={() => setView('home')}
-          className="flex items-center space-x-2 md:space-x-2.5 group outline-none cursor-pointer"
+          className="flex items-center space-x-1.5 md:space-x-2.5 group outline-none cursor-pointer shrink-0"
         >
           <div className="bg-brand-primary/10 p-1 md:p-1.5 rounded-lg border border-brand-primary/20 group-hover:scale-110 transition-transform">
             <Terminal className="text-brand-primary w-3.5 h-3.5 md:w-4 md:h-4" />
           </div>
-          <span className="font-display font-black text-base md:text-lg tracking-tight uppercase italic group-hover:text-brand-primary transition-colors">VIM<span className="text-brand-primary group-hover:text-white">MASTERY</span></span>
+          <span className="font-display font-black text-sm md:text-lg tracking-tight uppercase italic group-hover:text-brand-primary transition-colors">
+            VIM<span className="text-brand-primary group-hover:text-white">MASTERY</span>
+          </span>
         </button>
         
-        <div className="flex items-center space-x-3 md:space-x-10 text-[10px] md:text-[11px] font-bold uppercase tracking-widest">
+        <div className="flex items-center space-x-2.5 md:space-x-10 text-[9px] md:text-[11px] font-bold uppercase tracking-widest shrink-0">
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`hover:text-brand-primary transition-all flex items-center space-x-1.5 md:space-x-2 cursor-pointer ${isMenuOpen ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
+            className={`hover:text-brand-primary transition-all flex items-center space-x-1 md:space-x-2 cursor-pointer ${isMenuOpen ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
           >
-            <BookOpen size={12} className="md:w-[14px] md:h-[14px]" /> <span>{language === 'it' ? 'Lezioni' : 'Lessons'}</span>
+            <BookOpen size={12} className="md:w-[14px] md:h-[14px]" /> 
+            <span className="hidden min-[380px]:inline">{language === 'it' ? 'Lezioni' : 'Lessons'}</span>
           </button>
           <button 
             onClick={() => setView('achievements')}
-            className={`hover:text-brand-primary transition-all flex items-center space-x-1.5 md:space-x-2 cursor-pointer ${view === 'achievements' ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
+            className={`hover:text-brand-primary transition-all flex items-center space-x-1 md:space-x-2 cursor-pointer ${view === 'achievements' ? 'text-brand-primary scale-105' : 'text-white/60 hover:scale-105'}`}
           >
-            <Trophy size={12} className="md:w-[14px] md:h-[14px]" /> <span>{language === 'it' ? 'Obiettivi' : 'Achievements'}</span>
+            <Trophy size={12} className="md:w-[14px] md:h-[14px]" /> 
+            <span className="hidden min-[380px]:inline">{language === 'it' ? 'Obiettivi' : 'Achievements'}</span>
           </button>
           <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
           <button 
             onClick={() => setLanguage(language === 'it' ? 'en' : 'it')}
-            className="border border-white/20 rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center hover:bg-white/5 hover:border-brand-primary/50 transition-all cursor-pointer"
+            className="border border-white/20 rounded-full w-6 h-6 md:w-8 md:h-8 flex items-center justify-center hover:bg-white/5 hover:border-brand-primary/50 transition-all cursor-pointer"
             title={language === 'it' ? 'Cambia Lingua' : 'Switch Language'}
           >
             <span className="text-[8px] md:text-[9px] uppercase">{language}</span>
@@ -76,14 +80,14 @@ function App() {
               const next = keyboardOverride === null ? true : keyboardOverride === true ? false : null;
               setKeyboardOverride(next);
             }}
-            className={`border rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center transition-all cursor-pointer ${
+            className={`border rounded-full w-6 h-6 md:w-8 md:h-8 flex items-center justify-center transition-all cursor-pointer ${
               keyboardOverride === true ? 'bg-brand-primary border-brand-primary text-brand-bg shadow-[0_0_10px_rgba(45,212,191,0.3)]' :
               keyboardOverride === false ? 'bg-red-500/20 border-red-500/50 text-red-400' :
               'border-white/20 text-white/40 hover:border-brand-primary/50'
             }`}
-            title={language === 'it' ? 'Toggle Tastiera Fisica (Auto/Sì/No)' : 'Toggle Physical Keyboard (Auto/Yes/No)'}
+            title={language === 'it' ? 'Toggle Tastiera Fisica (Auto/Attiva/Disattiva Terminale)' : 'Toggle Physical Keyboard (Auto/Force On/Force Off)'}
           >
-            <Terminal size={12} className="md:w-[14px] md:h-[14px]" />
+            <Terminal size={11} className="md:w-[14px] md:h-[14px]" />
           </button>
         </div>
       </nav>
@@ -144,7 +148,7 @@ function App() {
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <main className="flex-1 pt-20 pb-12 px-6 md:px-10 max-w-7xl mx-auto w-full flex flex-col">
+      <main className="flex-1 pt-20 pb-12 px-5 md:px-10 max-w-7xl mx-auto w-full flex flex-col">
         {view === 'home' && (
           <Landing 
             language={language} 
@@ -179,6 +183,7 @@ function App() {
                 path={currentPath} 
                 isCompleted={completedLessons.includes(lessons[currentLessonIndex])}
                 onNext={nextLesson}
+                isLastLesson={currentLessonIndex === lessons.length - 1}
               />
 
               {currentLessonIndex > 0 && (
@@ -223,15 +228,15 @@ function App() {
         )}
       </main>
 
-      {/* Footer / Status Bar */}
-      <footer className="h-10 mt-auto glass-morphism border-t-0 px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center text-[9px] font-bold tracking-widest uppercase text-white/30 z-50 py-2 gap-4">
-        <div className="flex items-center space-x-4">
+      {/* Footer / Status Bar - Fixed wrap issues */}
+      <footer className="h-auto md:h-10 mt-auto glass-morphism border-t-0 px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center text-[9px] font-bold tracking-widest uppercase text-white/30 z-50 py-4 md:py-2 gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
           <span className="text-brand-primary/50 shrink-0">GNU GENERAL PUBLIC LICENSE</span>
-          <div className="h-3 w-px bg-white/5"></div>
-          <div className="truncate pr-4">© 2026 CLAUDIO DALL'ARA // SYS_READY</div>
+          <div className="h-3 w-px bg-white/5 hidden sm:block"></div>
+          <div className="truncate shrink-0">© 2026 CLAUDIO DALL'ARA // SYS_READY</div>
         </div>
         
-        <div className="flex items-center space-x-6">
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3">
           <a href="https://github.com/boobaGreen" target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors flex items-center space-x-1 cursor-pointer">
             <Github size={12} /> <span>Github</span>
           </a>
@@ -239,12 +244,12 @@ function App() {
             <Linkedin size={12} /> <span>LinkedIn</span>
           </a>
           <a href="https://www.claudiodallara.it/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors flex items-center space-x-1 cursor-pointer">
-             <ExternalLink size={12} /> <span>Personal</span>
+             <ExternalLink size={12} /> <span className="hidden min-[380px]:inline">Personal</span>
           </a>
-          <div className="h-3 w-px bg-white/5"></div>
-          <div className="flex space-x-6 shrink-0 text-brand-primary">
+          <div className="h-3 w-px bg-white/5 hidden sm:block"></div>
+          <div className="flex items-center gap-x-3 shrink-0 text-brand-primary">
             <span>LVL {level}</span>
-            <div className="w-20 h-1.5 bg-white/10 rounded-full overflow-hidden mt-1.5 hidden xs:block">
+            <div className="w-16 h-1.5 bg-white/10 rounded-full overflow-hidden hidden xs:block">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${(xp % 500) / 5}%` }}
@@ -252,8 +257,8 @@ function App() {
               />
             </div>
             <span>{xp} XP</span>
-            <span className="opacity-20">|</span>
-            <span>{language === 'it' ? 'PROGRESSO' : 'PROGRESS'}: {completedLessons.length} / {lessons.length}</span>
+            <span className="opacity-20 hidden min-[380px]:inline">|</span>
+            <span className="hidden min-[380px]:inline">{language === 'it' ? 'PROG.' : 'PROG.'} {completedLessons.length}/{lessons.length}</span>
           </div>
         </div>
       </footer>

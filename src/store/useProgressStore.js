@@ -32,7 +32,13 @@ export const useProgressStore = create(
           };
         }),
 
-      nextLesson: () => set((state) => ({ currentLessonIndex: state.currentLessonIndex + 1, view: 'lesson' })),
+      nextLesson: () => set((state) => {
+        const totalLessons = 12;
+        if (state.currentLessonIndex >= totalLessons - 1) {
+          return { view: 'home' }; // Course completed
+        }
+        return { currentLessonIndex: state.currentLessonIndex + 1, view: 'lesson' };
+      }),
       prevLesson: () => set((state) => ({ currentLessonIndex: Math.max(0, state.currentLessonIndex - 1), view: 'lesson' })),
       goToLesson: (index) => set({ currentLessonIndex: index, view: 'lesson' }),
       resetProgress: () => set({ currentLessonIndex: 0, completedLessons: [], view: 'home' }),

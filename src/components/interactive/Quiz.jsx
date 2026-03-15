@@ -12,7 +12,9 @@ const Quiz = ({ id, questions, onComplete }) => {
   const [isFinished, setIsFinished] = useState(false);
   const MMotionDiv = motion.div;
   
-  const { language, completeLesson, nextLesson } = useProgressStore();
+  const { language, completeLesson, nextLesson, currentLessonIndex } = useProgressStore();
+  const totalLessons = 12;
+  const isLastLesson = currentLessonIndex >= totalLessons - 1;
 
   const handleAnswer = (index) => {
     if (isCorrect !== null) return;
@@ -56,7 +58,10 @@ const Quiz = ({ id, questions, onComplete }) => {
           </p>
         </div>
         <Button onClick={nextLesson} className="w-full sm:w-auto px-10 py-4 rounded-xl">
-          {language === 'it' ? 'Prossima Lezione' : 'Next Lesson'} <ArrowRight size={18} className="ml-2" />
+          {isLastLesson 
+            ? (language === 'it' ? 'Torna alla Home' : 'Back to Home')
+            : (language === 'it' ? 'Prossima Lezione' : 'Next Lesson')
+          } <ArrowRight size={18} className="ml-2" />
         </Button>
       </MMotionDiv>
     );

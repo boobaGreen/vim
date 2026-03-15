@@ -1,7 +1,7 @@
 import LessonLayout from '../../../components/layout/LessonLayout';
 
 export const metadata = {
-  title: "Operators and Motions",
+  title: "Operators, Motions, and Search",
   level: "02",
   id: "2-1"
 };
@@ -10,35 +10,58 @@ export const metadata = {
 
 Welcome to Level 2. Now that you know the basics, it's time to learn how to "speak" fluently. In Vim, an **Operator** defines *what* to do, and a **Motion** defines *what to do it on*.
 
-### The Big Three Operators
-Let's learn the primary verbs:
+<Step number="1" title="The Big Three Operators">
+Let's learn the main verbs:
+</Step>
+
 <ShortcutGrid 
   data={[
     { key: "d", label: "Delete", desc: "Deletes text." },
     { key: "c", label: "Change", desc: "Deletes text and puts you in Insert Mode." },
-    { key: "y", label: "Yank", desc: "Copies (yanks) text." },
+    { key: "y", label: "Yank", desc: "Copies text (without deleting it)." },
   ]}
 />
 
-### Word Motions
+<Step number="2" title="Word Motions">
 For now, let's use these targets:
+</Step>
+
 <ShortcutGrid 
   data={[
-    { key: "w", label: "Word", desc: "Jump to the start of the next word." },
-    { key: "e", label: "End", desc: "Jump to the end of the current word." },
-    { key: "b", label: "Back", desc: "Jump to the start of the previous word." },
+    { key: "w", label: "Word", desc: "Jumps to the start of the next word." },
+    { key: "e", label: "End", desc: "Jumps to the end of the current word." },
+    { key: "b", label: "Back", desc: "Jumps to the start of the previous word." },
   ]}
 />
 
-### The Magic Combination
+<Step number="3" title="The Magic Combination">
 Try combining an operator with a motion in the terminal:
-- `dw`: Delete until the next word.
-- `cw`: Change the current word (delete and start typing).
-- `yw`: Copy the word.
+</Step>
+
+- `dw`: Deletes until the next word.
+- `cw`: Changes the current word (deletes and writes).
+- `yw`: Copies the word.
 
 <Card title="Quick Challenge">
   If you type `de`, what do you think will happen? Try it in the terminal! It will delete until the end of the current word.
 </Card>
+
+<OpenQuestion 
+  question={{ it: "Scrivi il comando per CANCELLARE la parola corrente e scriverci sopra (Change Word):", en: "Type the command to CHANGE the current word:" }}
+  answer="cw"
+  hint={{ it: "Combina l'operatore 'c' con il movimento 'w'.", en: "Combine operator 'c' with motion 'w'." }}
+/>
+
+<Step number="4" title="Searching on the Fly">
+Search is also a motion! You can combine an operator with a search.
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "d / foo", label: "Delete until foo", desc: "Searches for the word 'foo' and deletes everything up to it." },
+    { key: "c / bar", label: "Change until bar", desc: "Deletes everything up to the word 'bar' and enters Insert Mode." },
+  ]}
+/>
 
 <Quiz 
   id="05-operators-motions"
@@ -76,6 +99,30 @@ Try combining an operator with a motion in the terminal:
         { it: "Cancella l'intera riga", en: "Deletes the whole line" },
         { it: "Cancella fino all'inizio della parola successiva", en: "Deletes until the start of the next word" },
         { it: "Copia una parola", en: "Copies a word" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Quale combinazione COPIA (Yank) tutto fino alla fine della riga?", 
+        en: "Which combination COPIES (Yanks) everything to the end of the line?" 
+      },
+      options: [
+        { it: "y$", en: "y$" },
+        { it: "yw", en: "yw" },
+        { it: "yy", en: "yy" }
+      ],
+      correctIndex: 0
+    },
+    {
+      question: { 
+        it: "Se esegui 'd / error', cosa fa Vim?", 
+        en: "If you run 'd / error', what does Vim do?" 
+      },
+      options: [
+        { it: "Stampa 'error'", en: "Prints 'error'" },
+        { it: "Cancella tutto fino alla prossima volta che trova 'error'", en: "Deletes everything until the next time it finds 'error'" },
+        { it: "Va in errore", en: "Crashes" }
       ],
       correctIndex: 1
     }

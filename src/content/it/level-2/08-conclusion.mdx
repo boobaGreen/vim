@@ -1,10 +1,44 @@
 import LessonLayout from '../../../components/layout/LessonLayout';
 
 export const metadata = {
-  title: "Conclusione Livello 2: Oltre la Parola",
+  title: "Conclusione Livello 2 e Visual Mode",
   level: "02",
   id: "2-4"
 };
+
+# Il Tocco Finale: Visual Mode.
+
+Prima di chiudere il Livello 2, dobbiamo parlare dell'ultima modalità essenziale: il **Visual Mode**. Mentre in Normal Mode operi alla cieca (affidandoti alla grammatica), in Visual Mode evidenzi il testo prima di agire.
+
+<Step number="1" title="Selezionare il Testo">
+Entra in Visual Mode e usa i movimenti standard (`h,j,k,l,w,b,e,$`) per evidenziare blocchi di testo:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: "v", label: "Visual (Carattere)", desc: "Seleziona carattere per carattere. Ottimo per porzioni di riga." },
+    { key: "V", label: "Visual Line (Riga)", desc: "Seleziona intere righe. Perfetto per spostare blocchi di codice." },
+    { key: "Ctrl+v", label: "Visual Block", desc: "Seleziona blocchi rettangolari. Magia pura per l'editing in colonna." },
+  ]}
+/>
+
+<Step number="2" title="Agire sulla Selezione">
+Una volta evidenziato il testo, premi un Operatore (`d, c, y`) o usa questi comandi speciali per la selezione:
+</Step>
+
+<ShortcutGrid 
+  data={[
+    { key: ">", label: "Indenta (Avanti)", desc: "Sposta il testo selezionato verso destra." },
+    { key: "<", label: "De-Indenta (Indietro)", desc: "Sposta il testo selezionato verso sinistra." },
+    { key: "u / U", label: "Case Toggle", desc: "Forza minuscolo (`u`) o MAIUSCOLO (`U`) sulla selezione." },
+  ]}
+/>
+
+<Card title="⚡ Il Segreto di Ctrl+V (Visual Block)">
+  Seleziona più righe con `Ctrl+v` (un rettangolo verticale). Premi `I` (Insert maiuscolo), scrivi qualcosa (es: `// ` per commentare) e premi `ESC`. Il testo apparirà magicamente su *tutte* le righe selezionate!
+</Card>
+
+---
 
 # Congratulazioni, Utente Efficiente!
 
@@ -28,6 +62,58 @@ Nel prossimo livello, entreremo nel regno dell'automazione:
 > [!TIP]
 > Continua a fare pratica con la sfida Speed Racer finché i comandi non diventano memoria muscolare.
 
-<Button onClick={() => window.location.reload()} variant="primary">
-  Torna all'Inizio o Continua a Praticare
-</Button>
+*Il tuo viaggio verso il Livello 3 inizia ora. Completa il quiz per sbloccare il prossimo capitolo!*
+
+<Quiz 
+  id="08-conclusion"
+  questions={[
+    {
+      question: { 
+        it: "Recap: Come cancelli una parola?", 
+        en: "Recap: How do you delete a word?" 
+      },
+      options: [
+        { it: "dw", en: "dw" },
+        { it: "cw", en: "cw" },
+        { it: "yw", en: "yw" }
+      ],
+      correctIndex: 0
+    },
+    {
+      question: { 
+        it: "Cosa significa '3j'?", 
+        en: "What does '3j' mean?" 
+      },
+      options: [
+        { it: "Sposta a destra di 3 caratteri", en: "Move 3 characters right" },
+        { it: "Sposta in giù di 3 righe", en: "Move 3 lines down" },
+        { it: "Cancella 3 righe", en: "Delete 3 lines" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Se vuoi selezionare INTERE RIGHE per volta, quale comando usi?", 
+        en: "If you want to select ENTIRE LINES at a time, which command do you use?" 
+      },
+      options: [
+        { it: "v", en: "v" },
+        { it: "V (Maiuscolo)", en: "V (Uppercase)" },
+        { it: "Ctrl+v", en: "Ctrl+v" }
+      ],
+      correctIndex: 1
+    },
+    {
+      question: { 
+        it: "Dopo aver selezionato del testo in Visual Mode, come lo elimini e scrivi al suo posto?", 
+        en: "After selecting text in Visual Mode, how do you delete it and write in its place?" 
+      },
+      options: [
+        { it: "Premi d", en: "Press d" },
+        { it: "Premi c", en: "Press c" },
+        { it: "Premi y", en: "Press y" }
+      ],
+      correctIndex: 1
+    }
+  ]}
+/>
