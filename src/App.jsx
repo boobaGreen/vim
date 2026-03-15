@@ -75,20 +75,45 @@ function App() {
           >
             <span className="text-[8px] md:text-[9px] uppercase">{language}</span>
           </button>
-          <button 
-            onClick={() => {
-              const next = keyboardOverride === null ? true : keyboardOverride === true ? false : null;
-              setKeyboardOverride(next);
-            }}
-            className={`border rounded-full w-6 h-6 md:w-8 md:h-8 flex items-center justify-center transition-all cursor-pointer ${
-              keyboardOverride === true ? 'bg-brand-primary border-brand-primary text-brand-bg shadow-[0_0_10px_rgba(45,212,191,0.3)]' :
-              keyboardOverride === false ? 'bg-red-500/20 border-red-500/50 text-red-400' :
-              'border-white/20 text-white/40 hover:border-brand-primary/50'
-            }`}
-            title={language === 'it' ? 'Toggle Tastiera Fisica (Auto/Attiva/Disattiva Terminale)' : 'Toggle Physical Keyboard (Auto/Force On/Force Off)'}
-          >
-            <Terminal size={11} className="md:w-[14px] md:h-[14px]" />
-          </button>
+          
+          {/* Keyboard Toggle with Legend */}
+          <div className="relative group">
+            <button 
+              onClick={() => {
+                const next = keyboardOverride === null ? true : keyboardOverride === true ? false : null;
+                setKeyboardOverride(next);
+              }}
+              className={`border rounded-full w-6 h-6 md:w-8 md:h-8 flex items-center justify-center transition-all cursor-pointer ${
+                keyboardOverride === true ? 'bg-brand-primary border-brand-primary text-brand-bg shadow-[0_0_10px_rgba(45,212,191,0.3)]' :
+                keyboardOverride === false ? 'bg-red-500/20 border-red-500/50 text-red-400' :
+                'border-white/20 text-white/40 hover:border-brand-primary/50'
+              }`}
+            >
+              <Terminal size={11} className="md:w-[14px] md:h-[14px]" />
+            </button>
+            
+            {/* Modern Legend Tooltip */}
+            <div className="absolute right-0 top-full mt-3 w-64 p-4 rounded-xl bg-brand-overlay border border-white/10 shadow-2xl backdrop-blur-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 pointer-events-none origin-top-right transform scale-95 group-hover:scale-100">
+              <h4 className="text-[10px] text-white/50 mb-3 border-b border-white/10 pb-2">
+                {language === 'it' ? 'TERMINALE / TASTIERA FISICA' : 'TERMINAL / PHYSICAL KEYBOARD'}
+              </h4>
+              <ul className="space-y-3 font-mono text-[10px] normal-case">
+                <li className="flex items-start gap-3">
+                  <div className="w-4 h-4 rounded-full border border-white/20 flex-shrink-0 flex items-center justify-center text-[8px] mt-0.5"><Terminal size={8} /></div>
+                  <span className="text-white/70 leading-relaxed"><strong className="text-white">Auto:</strong> {language === 'it' ? 'Il terminale appare solo se hai una tastiera fisica.' : 'Terminal appears only if a physical keyboard is detected.'}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-4 h-4 rounded-full bg-brand-primary text-brand-bg flex-shrink-0 flex items-center justify-center text-[8px] mt-0.5"><Terminal size={8} /></div>
+                  <span className="text-white/70 leading-relaxed"><strong className="text-white">On:</strong> {language === 'it' ? 'Forza l\'apertura del terminale a destra.' : 'Forces the terminal to open on the right.'}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-4 h-4 rounded-full bg-red-500/20 border border-red-500/50 text-red-400 flex-shrink-0 flex items-center justify-center text-[8px] mt-0.5"><Terminal size={8} /></div>
+                  <span className="text-white/70 leading-relaxed"><strong className="text-white">Off:</strong> {language === 'it' ? 'Nasconde il terminale (solo teoria).' : 'Hides the terminal (theory only).'}</span>
+                </li>
+              </ul>
+              <div className="absolute -top-1.5 right-2 w-3 h-3 bg-brand-overlay border-l border-t border-white/10 rotate-45"></div>
+            </div>
+          </div>
         </div>
       </nav>
 
