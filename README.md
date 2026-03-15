@@ -18,50 +18,65 @@ Our latest release redefines how Vim is taught on the web with massive interacti
 Vim Mastery is built on a custom education engine that prioritizes action and feedback. We've replaced passive reading with a reactive environment:
 
 ### Progression System
-- **XP & Levels**: Every action counts. Completing lessons, passing quizzes, and finishing minigames grants **XP**. Accumulate XP to visually level up in the bottom progress bar, going from a Level 1 Neophyte to a Vim Wizard.
-- **Achievements**: Unlock mastery badges for perfect quiz scores, discovering hidden macros, and completing entire structural levels.
-- **Smart Analytics**: Your progress is persistently saved locally, syncing your Level, XP, and completed modules across sessions.
+- **XP & Levels**: Every interaction counts. Completing a lesson grants a baseline of **100 XP**. Accumulate XP to visually level up the bottom progress bar, advancing from a Level 1 Neophyte up to Level 12 Vim Wizard.
+- **Achievements (Bilingual)**: A dedicated trophy room dynamically translates into EN/IT. Unlocking features grants badges:
+  - *First Step* (Finish Lesson 1)
+  - *Maze Runner* (Beat the HJKL Maze)
+  - *Grammar Master* (Unlock Level 2)
+  - *Wizard Apprentice* (Unlock Level 3)
+  - *The Terminator* (Complete all 12 modules)
+- **Smart Analytics**: Your progress is persistently saved locally via Zustand middleware, syncing your Level, XP, and completed modules perfectly across sessions.
 
 ### The Interactivity Suite
-- **Interactive Quizzes**: Present in every theoretical lesson, dynamically testing your knowledge of commands, motions, and grammar. Uses a sleek, high-contrast UI to illuminate correct/incorrect paths without obscuring data.
-- **`OpenQuestion` Engine**: A unique typing component where users must physically type out Vim combos (e.g., `d3w` or `cw`) into an input field, featuring real-time validation, neon-glow borders, and intelligent hints if you fail.
+- **Interactive Quizzes (33 Questions total)**: Present in every theoretical lesson, dynamically testing your knowledge.
+  - **L01: Zen** (6 Questions - testing ESC and modes)
+  - **L02: Maze** (5 Questions - testing HJKL navigation)
+  - **L05: Operators** (5 Questions - testing verb+motion)
+  - **L06: Counts** (5 Questions - testing multipliers)
+  - **L07: Speed Racer** (4 Questions - testing refactoring speed)
+  - **L08: Conclusion** (4 Questions - testing visual mode & synthesis)
+  - **L09, L10, L11, L12** (4 Questions each - testing advanced wizardry)
+- **`OpenQuestion` Engine**: A unique typing component where users must physically type out correct Vim combo strings (e.g., `d3w`, `cw`, `y5w`) into a styled input field, featuring real-time validation, neon-glow borders, and intelligent contextual hints if you fail.
 - **Minigames**: 
-  - **HJKLMaze**: A mental sandbox to test your navigational efficiency.
-  - **SpeedRacer**: A high-stakes refactoring simulation that grades you on finding the quickest path to a text edit utilizing Vim operators and counts.
+  - **HJKLMaze**: A mental Sandbox UI to test your navigational efficiency.
+  - **SpeedRacer**: A high-stakes refactoring simulation that grades you on finding the absolute quickest path to a text edit utilizing Vim operators and counts.
 
 ## 🎨 Premium UX/UI & Animations
 We abandoned the traditional "boring terminal" look for a **Cyber-Midnight Aesthetic**:
-- **Glassmorphism 2.0**: Navigation bars, tooltips, and floating widgets utilize frosted glass effects, giving depth to the interface without cluttering it.
+- **Glassmorphism 2.0**: Navigation bars, tooltips, and floating widgets utilize frosted glass effects, giving depth to the interface without obscuring content beneath.
 - **Framer Motion Elements**: 
-  - Smooth page transitions and unmounting.
-  - Interactive hover scaling on terminal buttons and shortcuts.
-  - Pulse animations for active lesson states.
-  - Glowing, animated color feedback for right/wrong quiz answers.
-- **Adaptive Terminal Layout**: The UI intelligently responds to your hardware. If you are on a touch device, the terminal hides entirely, expanding the interactive content. If a keyboard is plugged in, the WASM terminal mounts instantly for split-view parallel practice.
+  - **Page Layout**: Smooth layout mounting/unmounting transitions.
+  - **Buttons**: Interactive hover scaling and layout bumping on terminal buttons and shortcuts.
+  - **Feedback Status**: Pulse animations for active lesson states. Glowing neon borders (green/red) and animated drop-shadow popups for correct/incorrect `OpenQuestion` and `Quiz` submissions.
+  - **Data Visualization**: An SVG animated circle-progress bar for total Completion tracking inside the Achievements view.
+- **Adaptive Terminal Layout**: The UI intelligently responds to your hardware via pointer detection. 
+  - **Touch device**: The terminal hides entirely, expanding the interactive theoretical content to full width.
+  - **Desktop/Keyboard**: The WASM terminal mounts instantly for split-view parallel practice.
+  - **Manual Override**: A glassmorphism tooltip allows hybrid users (e.g., iPad + Keyboard) to force the terminal visible.
 
 ## 📚 The Curriculum Breakdown
-A 12-lesson journey, fully localized in both **English** and **Italian**.
+A comprehensive 12-lesson journey, fully localized in both **English** and **Italian**.
 
 ### Level 1: The Neophyte
 *Survival and basic text navigation.*
-1. **The Zen of Modality**: Understanding Normal vs Insert Modes and the mighty `<ESC>`.
-2. **The hjkl Maze**: Dropping the arrow keys forever.
-3. **Basic CRUD & File Ops**: `i`, `dd`, `yy`, `p`, `u`, `.`, along with file survival commands `:w`, `:q!`, `ZZ`.
-4. **Vim Grammar Intro**: First taste of Verbs + Objects. Moving with `0`, `$`, `gg`, `G` and searching with `/` and `*`.
+1. **The Zen of Modality**: Understanding Normal vs Insert Modes. `i`, `I`, `a`, `A`, `o`, `O` and the mighty `<ESC>`. (6 Qs)
+2. **The hjkl Maze**: Dropping the arrow keys forever. Navigating lines efficiently. (5 Qs)
+3. **Basic CRUD & File Ops**: Master file survival `:w`, `:q`, `:wq`, `ZZ`, `ZQ`. Basic editing with `x`, `dd`, `yy`, `p`, `u`, `Ctrl-R`, and `.`.
+4. **Vim Grammar Intro**: First taste of Verbs + Objects. Moving horizontally `0`, `$`, `^`, `f`, `t`. Moving vertically `gg`, `G`, `%`. Searching with `/`, `?`, `n`, `N`, `*`.
 
 ### Level 2: The Efficient User
 *Speed of thought and refactoring power.*
-5. **Operators & Motions**: Combining `d`, `c`, `y` with word motions (`w`, `e`, `b`).
-6. **Counts & Multipliers**: Scaling commands (e.g., `d3w` to delete 3 words).
-7. **Speed Racer**: Action-oriented efficiency and keystroke optimization.
-8. **Conclusion & Visual Mode**: Utilizing `v`, `V`, `Ctrl+v` to manipulate blocks of text, indent, and transform cases.
+5. **Operators & Motions**: Combining verbs (`d`, `c`, `y`) with word motions (`w`, `e`, `b`). Contains an `OpenQuestion` integration. (5 Qs)
+6. **Counts & Multipliers**: Scaling commands (e.g., `d3w`, `4j`). Contains an `OpenQuestion` integration. (5 Qs)
+7. **Speed Racer**: Action-oriented efficiency and keystroke optimization. Focuses on finding the shortest path sequence. (4 Qs)
+8. **Conclusion & Visual Mode**: Utilizing `v`, `V`, `Ctrl+v` to manipulate blocks of text, indent (`>`, `<`), and transform cases (`u`, `U`). (4 Qs)
 
 ### Level 3: The Vim Wizard
 *Total automation and text orchestration.*
-9. **Text Objects**: Acting on structures (`ciw`, `da(`, `vit`).
-10. **Macros Mastery**: Recording sequences with `q` to automate complex refactoring forever.
-11. **Registers & Memory**: Utilizing the 26 user registers and the system clipboard.
-12. **Global Power**: Unleashing `:g` and `:s` for bulk text transformations.
+9. **Text Objects**: Acting on structures inside/around (`ciw`, `da(`, `vit`).
+10. **Macros Mastery**: Recording complex sequences with `q`, playing with `@`, and recursive editing.
+11. **Registers & Memory**: Utilizing the 26 unique user registers (`"a` to `"z`) and the system clipboard (`"+y`).
+12. **Global Power**: Unleashing the Command-line mode `:g` (Global) and `:s` (Substitute) filters for bulk multi-file regex transformations.
 
 ## 📂 Project Structure
 - `src/hooks/useDevice.js`: Intelligent hardware detection.
