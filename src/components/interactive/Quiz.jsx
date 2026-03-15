@@ -4,17 +4,29 @@ import { CheckCircle2, XCircle, Trophy, ArrowRight } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
 import { Button } from '../ui';
 
+// Assuming CONTENT is defined elsewhere, e.g., imported from a localization file
+// const CONTENT = {
+//   en: {
+//     moduleCompleted: 'Module Completed!',
+//     continueLesson: 'Continue Lesson',
+//     // ... other localized strings
+//   },
+//   it: {
+//     moduleCompleted: 'Modulo Completato!',
+//     continueLesson: 'Continua Lezione',
+//     // ... other localized strings
+//   },
+// };
+
 const Quiz = ({ id, questions, onComplete }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
-  const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
+  const [score, setScore] = useState(0);
   const MMotionDiv = motion.div;
   
-  const { language, completeLesson, nextLesson, currentLessonIndex } = useProgressStore();
-  const totalLessons = 12;
-  const isLastLesson = currentLessonIndex >= totalLessons - 1;
+  const { language, completeLesson } = useProgressStore();
 
   const handleAnswer = (index) => {
     if (isCorrect !== null) return;
@@ -57,11 +69,9 @@ const Quiz = ({ id, questions, onComplete }) => {
               : `You answered ${score} out of ${questions.length} questions correctly.`}
           </p>
         </div>
-        <Button onClick={nextLesson} className="w-full sm:w-auto px-10 py-4 rounded-xl">
-          {isLastLesson 
-            ? (language === 'it' ? 'Torna alla Home' : 'Back to Home')
-            : (language === 'it' ? 'Prossima Lezione' : 'Next Lesson')
-          } <ArrowRight size={18} className="ml-2" />
+        <Button onClick={() => setIsFinished(false)} className="w-full sm:w-auto px-10 py-4 rounded-xl">
+          {language === 'it' ? 'Continua Lezione' : 'Continue Lesson'}
+          <ArrowRight size={18} className="ml-2" />
         </Button>
       </MMotionDiv>
     );

@@ -48,17 +48,16 @@ const CONTENT = {
 
 const SpeedRacer = ({ onComplete, onCompleteId }) => {
   const language = useProgressStore((state) => state.language);
-  const nextLesson = useProgressStore((state) => state.nextLesson);
   const localized = CONTENT[language] || CONTENT.en;
 
   const currentIdx = 0;
   const [keystrokes, setKeystrokes] = useState(0);
-  const [isFinished, setIsFinished] = useState(false);
+  const [showWinOverlay, setShowWinOverlay] = useState(false);
 
   const challenge = localized.challenges[currentIdx];
 
   const handleComplete = () => {
-    setIsFinished(true);
+    setShowWinOverlay(true);
     if (onComplete) onComplete();
     useProgressStore.getState().completeLesson(onCompleteId || '07-speed-racer');
   };
@@ -122,9 +121,9 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
 
       {/* Completion Overlay */}
       <AnimatePresence>
-        {isFinished && (
+        {showWinOverlay && (
           <MMotionDiv 
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="absolute inset-0 bg-brand-bg/95 backdrop-blur-md z-30 flex flex-col items-center justify-center p-8 text-center"
           >
             <div className="bg-brand-primary/20 p-6 rounded-full mb-6 text-brand-primary">
@@ -132,12 +131,20 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
             </div>
             <h3 className="text-3xl font-display font-black text-white italic uppercase tracking-tighter mb-2">{localized.ui.winTitle}</h3>
             <p className="text-white/50 text-xs uppercase tracking-[0.2em] font-bold mb-8">{localized.ui.winDesc}</p>
-            <button 
-              onClick={nextLesson}
-              className="px-8 py-3 bg-brand-primary text-brand-bg font-black rounded-2xl uppercase tracking-widest text-xs shadow-[0_10px_30px_rgba(45,212,191,0.3)] hover:scale-105 transition-transform"
-            >
-              {localized.ui.next}
-            </button>
+            <div className="flex gap-4">
+               <button 
+                onClick={() => { setKeystrokes(0); setShowWinOverlay(false); }}
+                className="px-6 py-3 bg-white/10 text-white font-black rounded-2xl uppercase tracking-widest text-xs hover:bg-white/20 transition-all border border-white/10"
+              >
+                {localized.ui.reset}
+              </button>
+              <button 
+                onClick={() => setShowWinOverlay(false)}
+                className="px-8 py-3 bg-brand-primary text-brand-bg font-black rounded-2xl uppercase tracking-widest text-xs shadow-[0_10px_30px_rgba(45,212,191,0.3)] hover:scale-105 transition-transform"
+              >
+                {localized.ui.next}
+              </button>
+            </div>
           </MMotionDiv>
         )}
       </AnimatePresence>

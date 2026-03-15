@@ -28,12 +28,12 @@ const CONTENT = {
 
 const HJKLMaze = ({ onComplete, onCompleteId }) => {
   const language = useProgressStore((state) => state.language);
-  const nextLesson = useProgressStore((state) => state.nextLesson);
   const localized = CONTENT[language] || CONTENT.en;
 
   const [pos, setPos] = useState(INITIAL_POS);
   const [moves, setMoves] = useState(0);
   const [isWon, setIsWon] = useState(false);
+  const [showWinOverlay, setShowWinOverlay] = useState(false);
   const MMotionDiv = motion.div;
 
   const move = useCallback((dir) => {
@@ -50,6 +50,7 @@ const HJKLMaze = ({ onComplete, onCompleteId }) => {
           const nextMoves = m + 1;
           if (newPos.x === GOAL_POS.x && newPos.y === GOAL_POS.y) {
             setIsWon(true);
+            setShowWinOverlay(true);
             if (onComplete) onComplete(nextMoves);
             // Auto complete lesson in store
             useProgressStore.getState().completeLesson(onCompleteId || '02-maze');
@@ -77,11 +78,12 @@ const HJKLMaze = ({ onComplete, onCompleteId }) => {
     setPos(INITIAL_POS);
     setMoves(0);
     setIsWon(false);
+    setShowWinOverlay(false);
   };
 
   return (
-    <div className="flex flex-col items-center space-y-8 py-4">
-      <div className="relative group">
+    <div className="flex flex-col items-center space-y-8 py-4 w-full">
+      <div className="relative group w-full max-w-[400px]">
         <div className="grid grid-cols-8 gap-1 bg-white/5 p-3 rounded-2xl border border-white/10 neo-shadow overflow-hidden">
           {Array.from({ length: GRID_SIZE * GRID_SIZE }).map((_, i) => {
             const x = i % GRID_SIZE;
@@ -92,7 +94,7 @@ const HJKLMaze = ({ onComplete, onCompleteId }) => {
             return (
               <div 
                 key={i} 
-                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                className={`w-full aspect-square rounded-lg flex items-center justify-center transition-all duration-300 ${
                   isGoal ? 'bg-brand-accent/20 border-2 border-brand-accent/50' : 'bg-white/[0.02]'
                 } ${isPlayer && isWon ? 'bg-brand-primary/40' : ''}`}
               >
@@ -100,7 +102,7 @@ const HJKLMaze = ({ onComplete, onCompleteId }) => {
                   {isPlayer && (
                     <MMotionDiv
                       layoutId="player"
-                      className={`w-4 h-6 sm:w-5 sm:h-7 neo-shadow ring-2 ${isWon ? 'bg-white ring-white/50' : 'bg-brand-primary ring-brand-primary/50'}`}
+                      className={`w-1/2 h-3/4 neo-shadow ring-2 ${isWon ? 'bg-white ring-white/50' : 'bg-brand-primary ring-brand-primary/50'}`}
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
@@ -124,11 +126,12 @@ const HJKLMaze = ({ onComplete, onCompleteId }) => {
 
         {/* Win Overlay */}
         <AnimatePresence>
-          {isWon && (
+          {showWinOverlay && (
             <MMotionDiv 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 bg-brand-bg/90 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center p-6 text-center z-30 border border-brand-primary/30"
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="absolute inset-x-[-10px] inset-y-[-10px] bg-brand-bg/90 backdrop-blur-md rounded-3xl flex flex-col items-center justify-center p-6 text-center z-30 border border-brand-primary/30"
             >
               <MMotionDiv 
                 initial={{ y: 20, opacity: 0 }}
@@ -154,7 +157,7 @@ const HJKLMaze = ({ onComplete, onCompleteId }) => {
                 </button>
                 <button 
                   className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-brand-primary hover:bg-brand-primary/80 transition-all text-[10px] font-black uppercase tracking-widest text-brand-bg shadow-[0_4px_15px_rgba(45,212,191,0.3)]"
-                  onClick={nextLesson}
+                  onClick={() => setShowWinOverlay(false)}
                 >
                   <span>{localized.next}</span>
                   <ArrowRight size={14} />
