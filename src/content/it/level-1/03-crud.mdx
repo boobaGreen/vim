@@ -87,12 +87,15 @@ Questi sono i comandi più importanti. Senza di questi, non puoi fare nulla!
   6. Premi `.` per ripetere l'ultimo comando (ri-cancella!)
 </Card>
 
-<Card title="🧠 Simulazione: Cosa Succede?">
-  Immagina di aver aperto un file, scritto del codice, e vuoi salvare ed uscire.
-  - Se premi `:q` → Vim dice **"E37: No write since last change"** e NON esce!
-  - Se premi `:wq` → Vim **salva e esce** correttamente ✅
-  - Se premi `:q!` → Vim **esce senza salvare** (perdi tutto!) ⚠️
-</Card>
+<Simulation 
+  title="🧠 Simulazione: Cosa Succede?"
+  desc="Immagina di aver aperto un file, scritto del codice, e vuoi salvare ed uscire."
+  steps={[
+    { command: ":q", result: <>Vim dice <strong>"E37: No write since last change"</strong> e NON esce!</>, type: "error" },
+    { command: ":wq", result: <>Vim <strong>salva e esce</strong> correttamente.</>, type: "success" },
+    { command: ":q!", result: <>Vim <strong>esce senza salvare</strong> (perdi tutto!).</>, type: "warning" },
+  ]}
+/>
 
 <Quiz 
   id="03-crud"

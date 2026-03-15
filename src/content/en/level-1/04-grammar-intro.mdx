@@ -14,14 +14,7 @@ The true power of Vim lies not in individual keys, but in its **Grammar**. Just 
 Almost every advanced command follows this pattern:
 </Step>
 
-**VERB + COUNT + MOTION**
-
-- **VERB**: What do you want to do? (e.g., `d` for Delete)
-- **COUNT**: How many times? (e.g., `2`)
-- **MOTION**: Where do you want to do it? (e.g., `w` for Word)
-
-### Example: `d2w`
-Means: *Delete (`d`) the next two (`2`) words (`w`)*.
+<GrammarFormula />
 
 ### Experiment with the Command Builder
 Use the tool below to visualize how commands are built. Try different combinations and observe the result.
@@ -77,13 +70,16 @@ Finding text is fundamental for efficient editing:
   ]}
 />
 
-<Card title="🧠 Simulation: Find and Navigate">
-  You have a file with 100 lines and need to find the word "error":
-  1. Press `/error` then `Enter` → Vim takes you to the first match
-  2. Press `n` → go to the next match
-  3. Press `N` → go back to the previous match
-  4. Press `*` on a word → searches for it automatically!
-</Card>
+<Simulation 
+  title="🧠 Simulation: Find and Navigate"
+  desc="You have a file with 100 lines and need to find the word 'error':"
+  steps={[
+    { command: <><Kbd>/</Kbd>error<Kbd>Enter</Kbd></>, result: <>Vim takes you to the <strong>first match</strong>.</>, type: "success" },
+    { command: "n", result: <>Go to the <strong>next</strong> match.</>, type: "success" },
+    { command: "N", result: <>Go back to the <strong>previous</strong> match.</>, type: "success" },
+    { command: "*", result: <>Searches for it <strong>automatically</strong>!</>, type: "success" },
+  ]}
+/>
 
 <InfoBox type="tip" title="PRO TIP">
 The `*` command is incredibly useful in coding: position the cursor on a variable name and press `*` to find all its occurrences in the file.

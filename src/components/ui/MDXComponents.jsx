@@ -1,4 +1,4 @@
-import { Info, AlertTriangle, Lightbulb, CheckCircle } from 'lucide-react';
+import { Info, AlertTriangle, Lightbulb, CheckCircle, ArrowRight, CheckCircle2, XCircle } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
 
 export const Kbd = ({ children }) => (
@@ -154,3 +154,146 @@ export const ShortcutGrid = ({ data }) => (
     ))}
   </div>
 );
+
+export const Simulation = ({ title, desc, steps }) => {
+  const getIcon = (type) => {
+    switch (type) {
+      case 'success': return <CheckCircle2 className="text-green-400" size={20} />;
+      case 'error': return <XCircle className="text-red-400" size={20} />;
+      case 'warning': return <AlertTriangle className="text-orange-400" size={20} />;
+      default: return <ArrowRight className="text-brand-primary" size={20} />;
+    }
+  };
+
+  const getBorderInfo = (type) => {
+    switch (type) {
+      case 'success': return 'border-green-500/30 bg-green-500/10 shadow-[0_0_15px_rgba(34,197,94,0.1)]';
+      case 'error': return 'border-red-500/30 bg-red-500/10 shadow-[0_0_15px_rgba(239,68,68,0.1)]';
+      case 'warning': return 'border-orange-500/30 bg-orange-500/10 shadow-[0_0_15px_rgba(249,115,22,0.1)]';
+      default: return 'border-brand-primary/20 bg-brand-primary/5';
+    }
+  };
+
+  const getTextColor = (type) => {
+    switch (type) {
+      case 'success': return 'text-green-100';
+      case 'error': return 'text-red-100';
+      case 'warning': return 'text-orange-100';
+      default: return 'text-white/90';
+    }
+  };
+
+  return (
+    <div className="glass-morphism rounded-2xl p-6 md:p-8 mb-10 border border-white/10 relative overflow-hidden">
+      <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
+        <Lightbulb size={120} />
+      </div>
+      <div className="relative z-10">
+        {title && <h4 className="text-brand-primary font-display font-black uppercase tracking-tighter mb-3 italic text-xl">{title}</h4>}
+        {desc && <p className="text-white/70 text-[15px] mb-6 font-sans max-w-2xl">{desc}</p>}
+        
+        <div className="space-y-3">
+          {steps.map((step, i) => (
+            <div key={i} className={`flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-4 rounded-xl border ${getBorderInfo(step.type)} transition-colors backdrop-blur-sm`}>
+              {step.command && (
+                <div className="shrink-0 flex items-center">
+                  {typeof step.command === 'string' ? <Kbd>{step.command}</Kbd> : step.command}
+                </div>
+              )}
+              <div className="hidden sm:flex shrink-0 items-center justify-center bg-white/5 w-8 h-8 rounded-full border border-white/10">
+                 {getIcon(step.type)}
+              </div>
+              <div className={`${getTextColor(step.type)} text-[14px] sm:text-[15px] font-sans flex-1 leading-snug`}>
+                <div className="flex items-center gap-2 sm:hidden mb-2">
+                  {getIcon(step.type)}
+                </div>
+                {step.result}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const GrammarFormula = () => {
+  const language = useProgressStore((state) => state.language);
+  const content = {
+    it: {
+      verb: { title: 'VERBO', desc: 'Cosa vuoi fare?', ex: 'per Delete', key: 'd' },
+      count: { title: 'CONTEGGIO', desc: 'Quante volte?', ex: 'volte', key: '2' },
+      motion: { title: 'MOVIMENTO', desc: 'Dove vuoi farlo?', ex: 'per Word', key: 'w' },
+      exampleTitle: 'Esempio:',
+      exampleParsed: (
+        <>
+          <span className="text-brand-primary font-bold">Cancella (d)</span> le prossime <span className="text-blue-400 font-bold">due (2)</span> <span className="text-purple-400 font-bold">parole (w)</span>.
+        </>
+      )
+    },
+    en: {
+      verb: { title: 'VERB', desc: 'What to do?', ex: 'for Delete', key: 'd' },
+      count: { title: 'COUNT', desc: 'How many times?', ex: 'times', key: '2' },
+      motion: { title: 'MOTION', desc: 'Where to do it?', ex: 'for Word', key: 'w' },
+      exampleTitle: 'Example:',
+      exampleParsed: (
+        <>
+          <span className="text-brand-primary font-bold">Delete (d)</span> the next <span className="text-blue-400 font-bold">two (2)</span> <span className="text-purple-400 font-bold">words (w)</span>.
+        </>
+      )
+    }
+  };
+
+  const t = content[language] || content.en;
+
+  return (
+    <div className="mb-12">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mb-8">
+        <div className="bg-brand-primary/10 border border-brand-primary/30 rounded-xl p-3 sm:p-5 text-center w-full sm:flex-1 shadow-[0_0_15px_rgba(45,212,191,0.1)]">
+          <div className="text-brand-primary font-display font-black uppercase text-sm sm:text-base tracking-widest italic">{t.verb.title}</div>
+        </div>
+        <div className="text-white/30 font-black rotate-90 sm:rotate-0">+</div>
+        <div className="bg-blue-400/10 border border-blue-400/30 rounded-xl p-3 sm:p-5 text-center w-full sm:flex-1 shadow-[0_0_15px_rgba(96,165,250,0.1)]">
+          <div className="text-blue-400 font-display font-black uppercase text-sm sm:text-base tracking-widest italic">{t.count.title}</div>
+        </div>
+        <div className="text-white/30 font-black rotate-90 sm:rotate-0">+</div>
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-3 sm:p-5 text-center w-full sm:flex-1 shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+          <div className="text-purple-400 font-display font-black uppercase text-sm sm:text-base tracking-widest italic">{t.motion.title}</div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="glass-morphism rounded-xl p-5 border-brand-primary/20 relative overflow-hidden group hover:border-brand-primary/40 transition-colors">
+          <div className="text-brand-primary font-display font-black text-[11px] sm:text-xs uppercase tracking-widest mb-2 italic">1. {t.verb.title}</div>
+          <div className="text-white/80 text-[14px] sm:text-[15px] mb-2 font-sans">{t.verb.desc}</div>
+          <div className="text-white/40 text-[12px] sm:text-[13px] flex items-center gap-1.5"><span className="italic">es.</span><Kbd>{t.verb.key}</Kbd> <span>{t.verb.ex}</span></div>
+        </div>
+        <div className="glass-morphism rounded-xl p-5 border-blue-400/20 relative overflow-hidden group hover:border-blue-400/40 transition-colors">
+          <div className="text-blue-400 font-display font-black text-[11px] sm:text-xs uppercase tracking-widest mb-2 italic">2. {t.count.title}</div>
+          <div className="text-white/80 text-[14px] sm:text-[15px] mb-2 font-sans">{t.count.desc}</div>
+          <div className="text-white/40 text-[12px] sm:text-[13px] flex items-center gap-1.5"><span className="italic">es.</span><Kbd>{t.count.key}</Kbd> <span>{t.count.ex}</span></div>
+        </div>
+        <div className="glass-morphism rounded-xl p-5 border-purple-500/20 relative overflow-hidden group hover:border-purple-500/40 transition-colors">
+          <div className="text-purple-400 font-display font-black text-[11px] sm:text-xs uppercase tracking-widest mb-2 italic">3. {t.motion.title}</div>
+          <div className="text-white/80 text-[14px] sm:text-[15px] mb-2 font-sans">{t.motion.desc}</div>
+          <div className="text-white/40 text-[12px] sm:text-[13px] flex items-center gap-1.5"><span className="italic">es.</span><Kbd>{t.motion.key}</Kbd> <span>{t.motion.ex}</span></div>
+        </div>
+      </div>
+
+      <div className="glass-morphism border border-white/10 rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/5 via-blue-400/5 to-purple-500/5 opacity-50 pointer-events-none" />
+        <div className="shrink-0 flex items-center space-x-0.5 p-3 sm:p-4 bg-black/40 rounded-xl relative z-10 border border-white/5 shadow-inner">
+          <span className="text-brand-primary font-mono text-xl sm:text-2xl font-black">d</span>
+          <span className="text-blue-400 font-mono text-xl sm:text-2xl font-black">2</span>
+          <span className="text-purple-400 font-mono text-xl sm:text-2xl font-black">w</span>
+        </div>
+        <div className="text-center sm:text-left relative z-10 flex-1">
+          <div className="text-white/40 text-[11px] sm:text-xs uppercase tracking-widest font-black mb-1.5 italic">{t.exampleTitle}</div>
+          <div className="text-white/90 text-[14px] sm:text-[15px] font-sans leading-relaxed">
+            {t.exampleParsed}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -87,12 +87,15 @@ These are the most important commands. Without them, you can't do anything!
   6. Press `.` to repeat the last command (re-deletes!)
 </Card>
 
-<Card title="🧠 Simulation: What Happens?">
-  Imagine you opened a file, wrote some code, and want to save and exit.
-  - If you press `:q` → Vim says **"E37: No write since last change"** and does NOT exit!
-  - If you press `:wq` → Vim **saves and exits** correctly ✅
-  - If you press `:q!` → Vim **exits without saving** (you lose everything!) ⚠️
-</Card>
+<Simulation 
+  title="🧠 Simulation: What Happens?"
+  desc="Imagine you opened a file, wrote some code, and want to save and exit."
+  steps={[
+    { command: ":q", result: <>Vim says <strong>"E37: No write since last change"</strong> and does NOT exit!</>, type: "error" },
+    { command: ":wq", result: <>Vim <strong>saves and exits</strong> correctly.</>, type: "success" },
+    { command: ":q!", result: <>Vim <strong>exits without saving</strong> (you lose everything!).</>, type: "warning" },
+  ]}
+/>
 
 <Quiz 
   id="03-crud"

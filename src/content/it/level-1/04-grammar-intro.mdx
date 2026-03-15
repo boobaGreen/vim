@@ -14,14 +14,7 @@ La vera potenza di Vim non risiede nei singoli tasti, ma nella sua **Grammatica*
 Quasi ogni comando avanzato segue questo schema:
 </Step>
 
-**VERBO + CONTEGGIO + MOVIMENTO**
-
-- **VERBO**: Cosa vuoi fare? (es. `d` per Delete)
-- **CONTEGGIO**: Quante volte? (es. `2`)
-- **MOVIMENTO**: Dove vuoi farlo? (es. `w` per Word)
-
-### Esempio: `d2w`
-Significa: *Cancella (`d`) le prossime due (`2`) parole (`w`)*.
+<GrammarFormula />
 
 ### Sperimenta con il Command Builder
 Usa il tool qui sotto per visualizzare come si costruiscono i comandi. Prova diverse combinazioni e osserva il risultato.
@@ -77,13 +70,16 @@ Trovare testo è fondamentale per l'editing efficiente:
   ]}
 />
 
-<Card title="🧠 Simulazione: Trovare e Sostituire">
-  Hai un file con 100 righe e devi trovare la parola "errore":
-  1. Premi `/errore` e poi `Enter` → Vim ti porta alla prima occorrenza
-  2. Premi `n` → vai alla prossima
-  3. Premi `N` → torni alla precedente
-  4. Premi `*` su una parola → la cerca automaticamente!
-</Card>
+<Simulation 
+  title="🧠 Simulazione: Trovare e Sostituire"
+  desc="Hai un file con 100 righe e devi trovare la parola 'errore':"
+  steps={[
+    { command: <><Kbd>/</Kbd>errore<Kbd>Enter</Kbd></>, result: <>Vim ti porta alla <strong>prima occorrenza</strong>.</>, type: "success" },
+    { command: "n", result: <>Vai alla occorrenza <strong>successiva</strong>.</>, type: "success" },
+    { command: "N", result: <>Torni alla occorrenza <strong>precedente</strong>.</>, type: "success" },
+    { command: "*", result: <>Cerca <strong>automaticamente</strong> la parola sotto il cursore!</>, type: "success" },
+  ]}
+/>
 
 <InfoBox type="tip" title="PRO TIP">
 Il comando `*` è incredibilmente utile nel coding: posiziona il cursore su un nome di variabile e premi `*` per trovare tutte le sue occorrenze nel file.
