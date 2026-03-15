@@ -1,17 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Star, Target, Zap, Lock } from 'lucide-react';
-import { Card, Badge } from '../ui';
+import { Trophy, Star, Target, Zap, Lock, BookOpen, Trash2, AlertCircle } from 'lucide-react';
+import { Card, Badge, Button } from '../ui';
+import { useProgressStore } from '../../store/useProgressStore';
 
 const ACHIEVEMENTS = [
   { id: 'first-step', title: { en: 'First Step', it: 'Primo Passo' }, desc: { en: 'Complete Lesson 1', it: 'Completa la Lezione 1' }, icon: Target },
   { id: 'maze-runner', title: { en: 'Maze Runner', it: 'Corridore del Labirinto' }, desc: { en: 'Complete the HJKL Maze', it: 'Completa il Labirinto HJKL' }, icon: Zap },
+  { id: 'edit-master', title: { en: 'The Editor', it: 'Lo Scrittore' }, desc: { en: 'Complete the CRUD Lesson', it: 'Completa la Lezione CRUD' }, icon: BookOpen },
   { id: 'grammar-master', title: { en: 'Grammar Master', it: 'Maestro di Grammatica' }, desc: { en: 'Unlock Level 2', it: 'Sblocca il Livello 2' }, icon: Trophy },
+  { id: 'speed-demon', title: { en: 'Speed Demon', it: 'Velocista' }, desc: { en: 'Complete the Speed Racer lesson', it: 'Completa la lezione Velocità' }, icon: Zap },
+  { id: 'halfway-there', title: { en: 'Halfway There', it: 'A Metà Strada' }, desc: { en: 'Complete 6 lessons', it: 'Completa 6 lezioni' }, icon: Target },
   { id: 'wiz-apprentice', title: { en: 'Wizard Apprentice', it: 'Apprendista Mago' }, desc: { en: 'Unlock Level 3', it: 'Sblocca il Livello 3' }, icon: Star },
+  { id: 'macro-master', title: { en: 'Macro Master', it: 'Signore delle Macro' }, desc: { en: 'Learn to use Vim Macros', it: 'Impara ad usare le Macro di Vim' }, icon: Zap },
+  { id: 'expert', title: { en: 'The Expert', it: 'L\'Esperto' }, desc: { en: 'Complete 10 lessons', it: 'Completa 10 lezioni' }, icon: Trophy },
   { id: 'terminator', title: { en: 'The Terminator', it: 'Il Terminatore' }, desc: { en: 'Finish all 12 lessons', it: 'Finisci tutte e 12 le lezioni' }, icon: Star },
 ];
 
 const Achievements = ({ unlockedList, language }) => {
+  const resetProgress = useProgressStore(state => state.resetProgress);
+  const [showConfirm, setShowConfirm] = React.useState(false);
+  
   const MMotionDiv = motion.div;
   const total = ACHIEVEMENTS.length;
   const unlockedCount = unlockedList.length;
@@ -93,6 +102,49 @@ const Achievements = ({ unlockedList, language }) => {
               </MMotionDiv>
             );
           })}
+        </div>
+
+        {/* Reset Section */}
+        <div className="pt-12 mt-12 border-t border-white/5 flex flex-col items-center space-y-6">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/20">
+            {language === 'it' ? 'Zona Pericolo' : 'Danger Zone'}
+          </p>
+          
+          {!showConfirm ? (
+            <Button 
+              onClick={() => setShowConfirm(true)}
+              variant="secondary" 
+              className="group flex items-center space-x-3 px-8 py-4 bg-white/5 border-white/10 hover:bg-red-500/10 hover:border-red-500/30 text-white/40 hover:text-red-400 transition-all cursor-pointer rounded-2xl"
+            >
+              <Trash2 size={18} className="group-hover:animate-bounce" />
+              <span className="font-display font-black uppercase italic tracking-widest text-xs">
+                {language === 'it' ? 'Resetta Tutto' : 'Reset Everything'}
+              </span>
+            </Button>
+          ) : (
+            <div className="flex flex-col items-center space-y-4 animate-in fade-in zoom-in duration-300">
+              <div className="flex items-center space-x-3 text-red-400 mb-2">
+                <AlertCircle size={20} />
+                <span className="text-xs font-bold uppercase tracking-widest">
+                  {language === 'it' ? 'Sei sicuro al 100%?' : 'Are you 100% sure?'}
+                </span>
+              </div>
+              <div className="flex space-x-4">
+                <Button 
+                  onClick={() => { resetProgress(); setShowConfirm(false); }}
+                  className="px-8 py-4 bg-red-500 text-white hover:bg-red-600 transition-all cursor-pointer rounded-2xl font-display font-black uppercase italic tracking-widest text-xs shadow-lg shadow-red-500/20"
+                >
+                  {language === 'it' ? 'SÌ, CANCELLA TUTTO' : 'YES, CLEAR ALL'}
+                </Button>
+                <Button 
+                  onClick={() => setShowConfirm(false)}
+                  className="px-8 py-4 bg-white/5 border border-white/10 text-white/50 hover:bg-white/10 transition-all cursor-pointer rounded-2xl font-display font-black uppercase italic tracking-widest text-xs"
+                >
+                  {language === 'it' ? 'ANNULLA' : 'CANCEL'}
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

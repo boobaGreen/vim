@@ -34,9 +34,15 @@ export const useProgressStore = create(
 
           if (newCompleted.includes('01-zen')) grant('first-step');
           if (newCompleted.includes('02-maze')) grant('maze-runner');
+          if (newCompleted.includes('03-crud')) grant('edit-master');
           if (newCompleted.includes('04-grammar-intro')) grant('grammar-master');
+          if (newCompleted.includes('07-speed-racer')) grant('speed-demon');
           if (newCompleted.includes('08-conclusion')) grant('wiz-apprentice');
+          if (newCompleted.includes('10-macros')) grant('macro-master');
           if (newCompleted.includes('12-global-commands')) grant('terminator');
+          
+          if (newCompleted.length >= 6) grant('halfway-there');
+          if (newCompleted.length >= 10) grant('expert');
 
           return {
             completedLessons: newCompleted,
@@ -55,7 +61,14 @@ export const useProgressStore = create(
       }),
       prevLesson: () => set((state) => ({ currentLessonIndex: Math.max(0, state.currentLessonIndex - 1), view: 'lesson' })),
       goToLesson: (index) => set({ currentLessonIndex: index, view: 'lesson' }),
-      resetProgress: () => set({ currentLessonIndex: 0, completedLessons: [], view: 'home' }),
+      resetProgress: () => set({ 
+        currentLessonIndex: 0, 
+        completedLessons: [], 
+        view: 'home',
+        xp: 0,
+        level: 1,
+        achievements: []
+      }),
       
       unlockAchievement: (achievementId) =>
         set((state) => ({
