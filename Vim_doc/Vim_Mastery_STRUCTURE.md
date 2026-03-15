@@ -8,7 +8,7 @@ vim-mastery/
 │   │   ├── terminal/       # VimTerminal.jsx
 │   │   ├── views/          # Landing.jsx, Achievements.jsx
 │   │   ├── ui/             # MDXComponents.jsx, index.jsx (Button, etc.)
-│   │   │   ├── interactive/    # HJKLMaze, GrammarBuilder, SpeedRacer, Quiz
+│   │   │   ├── interactive/    # HJKLMaze, GrammarBuilder, SpeedRacer, Quiz, OpenQuestion
 │   │   │   ├── layout/         # LessonLayout, CompletionCard, Breadcrumb
 │   ├── hooks/          # useDevice.js (Hardware Detection)
 │   ├── store/          # useProgressStore.js (XP, Level, Progression)
