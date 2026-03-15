@@ -9,11 +9,17 @@ import { Button } from '../ui';
 //   en: {
 //     moduleCompleted: 'Module Completed!',
 //     continueLesson: 'Continue Lesson',
+//     next: "Continue Reading",
+//     moves: "MOVES",
+//     test: "CLICK TO TEST IN TERMINAL",
 //     // ... other localized strings
 //   },
 //   it: {
 //     moduleCompleted: 'Modulo Completato!',
 //     continueLesson: 'Continua Lezione',
+//     next: "Continua Lettura",
+//     moves: "MOSSE",
+//     test: "CLICCA PER TESTARE NEL TERMINALE",
 //     // ... other localized strings
 //   },
 // };
@@ -26,7 +32,9 @@ const Quiz = ({ id, questions, onComplete }) => {
   const [score, setScore] = useState(0);
   const MMotionDiv = motion.div;
   
-  const { language, completeLesson } = useProgressStore();
+  const { language, completeLesson, nextLesson, currentLessonIndex } = useProgressStore();
+  const totalLessons = 12;
+  const isLastLesson = currentLessonIndex >= totalLessons - 1;
 
   const handleAnswer = (index) => {
     if (isCorrect !== null) return;
@@ -69,10 +77,20 @@ const Quiz = ({ id, questions, onComplete }) => {
               : `You answered ${score} out of ${questions.length} questions correctly.`}
           </p>
         </div>
-        <Button onClick={() => setIsFinished(false)} className="w-full sm:w-auto px-10 py-4 rounded-xl">
-          {language === 'it' ? 'Continua Lezione' : 'Continue Lesson'}
-          <ArrowRight size={18} className="ml-2" />
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button onClick={nextLesson} className="px-10 py-4 rounded-xl">
+            {isLastLesson 
+              ? (language === 'it' ? 'Torna alla Home' : 'Back to Home')
+              : (language === 'it' ? 'Prossima Lezione' : 'Next Lesson')
+            } <ArrowRight size={18} className="ml-2" />
+          </Button>
+          <button 
+            onClick={() => setIsFinished(false)}
+            className="px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 text-white/70 text-[10px] font-black uppercase tracking-widest transition-all border border-white/10"
+          >
+            {language === 'it' ? 'Rimani nella Lezione' : 'Stay in Lesson'}
+          </button>
+        </div>
       </MMotionDiv>
     );
   }
