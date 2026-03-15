@@ -4,11 +4,11 @@ import { Trophy, Star, Target, Zap, Lock } from 'lucide-react';
 import { Card, Badge } from '../ui';
 
 const ACHIEVEMENTS = [
-  { id: 'first-step', title: 'First Step', desc: 'Complete Lesson 1', icon: Target },
-  { id: 'maze-runner', title: 'Maze Runner', desc: 'Complete the HJKL Maze', icon: Zap },
-  { id: 'grammar-master', title: 'Grammar Master', desc: 'Unlock Level 2', icon: Trophy },
-  { id: 'wiz-apprentice', title: 'Wizard Apprentice', desc: 'Unlock Level 3', icon: Star },
-  { id: 'terminator', title: 'The Terminator', desc: 'Finish all 12 lessons', icon: Star },
+  { id: 'first-step', title: { en: 'First Step', it: 'Primo Passo' }, desc: { en: 'Complete Lesson 1', it: 'Completa la Lezione 1' }, icon: Target },
+  { id: 'maze-runner', title: { en: 'Maze Runner', it: 'Corridore del Labirinto' }, desc: { en: 'Complete the HJKL Maze', it: 'Completa il Labirinto HJKL' }, icon: Zap },
+  { id: 'grammar-master', title: { en: 'Grammar Master', it: 'Maestro di Grammatica' }, desc: { en: 'Unlock Level 2', it: 'Sblocca il Livello 2' }, icon: Trophy },
+  { id: 'wiz-apprentice', title: { en: 'Wizard Apprentice', it: 'Apprendista Mago' }, desc: { en: 'Unlock Level 3', it: 'Sblocca il Livello 3' }, icon: Star },
+  { id: 'terminator', title: { en: 'The Terminator', it: 'Il Terminatore' }, desc: { en: 'Finish all 12 lessons', it: 'Finisci tutte e 12 le lezioni' }, icon: Star },
 ];
 
 const Achievements = ({ unlockedList, language }) => {
@@ -78,10 +78,10 @@ const Achievements = ({ unlockedList, language }) => {
                   </div>
                   <div className="space-y-1">
                     <h4 className={`font-display font-black uppercase italic tracking-widest text-base ${isUnlocked ? 'text-white' : 'text-white/30'}`}>
-                      {a.title}
+                      {a.title[language]}
                     </h4>
                     <p className={`text-xs font-bold font-sans ${isUnlocked ? 'text-white/50' : 'text-white/20'}`}>
-                      {a.desc}
+                      {a.desc[language]}
                     </p>
                     {isUnlocked && (
                       <div className="inline-flex mt-2 px-2 py-0.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[8px] font-black tracking-widest uppercase shadow-[0_0_10px_rgba(45,212,191,0.1)]">

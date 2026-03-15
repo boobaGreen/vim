@@ -23,12 +23,26 @@ export const useProgressStore = create(
           const isNew = !state.completedLessons.includes(lessonId);
           const xpGain = 100; // Base XP for completing a lesson
           
+          if (!isNew) return state;
+
+          const newCompleted = [...state.completedLessons, lessonId];
+          const calculatedXp = state.xp + xpGain;
+          
+          // Evaluate Achievements
+          const newAchievements = [...state.achievements];
+          const grant = (id) => { if (!newAchievements.includes(id)) newAchievements.push(id) };
+
+          if (newCompleted.includes('01-zen')) grant('first-step');
+          if (newCompleted.includes('02-maze')) grant('maze-runner');
+          if (newCompleted.includes('04-grammar-intro')) grant('grammar-master');
+          if (newCompleted.includes('08-conclusion')) grant('wiz-apprentice');
+          if (newCompleted.includes('12-global-commands')) grant('terminator');
+
           return {
-            completedLessons: isNew
-              ? [...state.completedLessons, lessonId]
-              : state.completedLessons,
-            xp: isNew ? state.xp + xpGain : state.xp,
-            level: Math.floor((state.xp + (isNew ? xpGain : 0)) / 500) + 1
+            completedLessons: newCompleted,
+            xp: calculatedXp,
+            level: Math.floor(calculatedXp / 500) + 1,
+            achievements: newAchievements
           };
         }),
 

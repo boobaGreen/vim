@@ -111,10 +111,12 @@ const Quiz = ({ id, questions, onComplete }) => {
               let statusClasses = "border-white/10 bg-white/[0.02] text-white/70 hover:bg-white/[0.05] hover:border-white/20";
               if (isSelected) {
                 statusClasses = isCorrect 
-                  ? "border-green-500/50 bg-green-500/10 text-green-400" 
-                  : "border-red-500/50 bg-red-500/10 text-red-400";
-              } else if (isCorrect !== null && isCorrectAnswer) {
-                statusClasses = "border-green-500/30 bg-green-500/5 text-green-400/60";
+                  ? "border-green-400/50 bg-green-500/10 text-white shadow-[0_0_15px_rgba(34,197,94,0.15)] font-bold" 
+                  : "border-red-400/50 bg-red-500/10 text-white shadow-[0_0_15px_rgba(239,68,68,0.15)] font-bold";
+              } else if (isCorrect === false && isCorrectAnswer) {
+                statusClasses = "border-brand-primary/60 bg-brand-primary/10 text-brand-primary border-dashed font-bold";
+              } else if (isCorrect !== null) {
+                statusClasses = "border-white/5 bg-transparent text-white/30 opacity-40";
               }
 
               return (
@@ -122,21 +124,21 @@ const Quiz = ({ id, questions, onComplete }) => {
                   key={index}
                   onClick={() => handleAnswer(index)}
                   disabled={isCorrect !== null}
-                  className={`flex items-center justify-between p-5 rounded-2xl border transition-all text-left group overflow-hidden relative ${statusClasses}`}
+                  className={`flex items-center justify-between p-5 rounded-xl border transition-all text-left group overflow-hidden relative ${statusClasses}`}
                 >
-                  <span className="font-sans font-medium text-[15px] relative z-10">
+                  <span className="font-sans text-[15px] relative z-10 transition-colors">
                     {opt[language] || opt.en}
                   </span>
-                  <div className="relative z-10">
-                    {isSelected && isCorrect && <CheckCircle2 size={20} className="text-green-500" />}
-                    {isSelected && !isCorrect && <XCircle size={20} className="text-red-500" />}
+                  <div className="relative z-10 shrink-0 ml-4">
+                    {isSelected && isCorrect && <CheckCircle2 size={24} className="text-green-400 drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]" />}
+                    {isSelected && !isCorrect && <XCircle size={24} className="text-red-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" />}
                   </div>
                   {isSelected && (
                     <MMotionDiv 
                       layoutId="quiz-indicator"
-                      className={`absolute inset-0 opacity-10 ${isCorrect ? 'bg-green-500' : 'bg-red-500'}`}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
+                      className={`absolute left-0 top-0 bottom-0 w-1 ${isCorrect ? 'bg-green-400' : 'bg-red-400'}`}
+                      initial={{ scaleY: 0 }}
+                      animate={{ scaleY: 1 }}
                     />
                   )}
                 </button>
