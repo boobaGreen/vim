@@ -9,7 +9,7 @@ import SpeedRacer from './components/interactive/SpeedRacer';
 import Quiz from './components/interactive/Quiz';
 import OpenQuestion from './components/interactive/OpenQuestion';
 
-import { Kbd, InfoBox, CommandTable, Step, DirectionalGrid, ShortcutGrid } from './components/ui/MDXComponents';
+import { Kbd, InfoBox, CommandTable, Step, DirectionalGrid, ShortcutGrid, Simulation, GrammarFormula } from './components/ui/MDXComponents';
 
 const components = {
   wrapper: ({ children, isCompleted, onNext, language, isLastLesson }) => (
@@ -36,7 +36,9 @@ const components = {
   CommandTable,
   Step,
   DirectionalGrid,
-  ShortcutGrid
+  ShortcutGrid,
+  Simulation,
+  GrammarFormula
 };
 
 const lessons = import.meta.glob('./content/**/*.mdx');
