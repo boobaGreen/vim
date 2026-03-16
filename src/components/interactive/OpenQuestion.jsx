@@ -35,7 +35,7 @@ const OpenQuestion = ({ question, answer, hint }) => {
       </h4>
 
       <form onSubmit={checkAnswer} className="relative">
-        <div className={`flex rounded-xl overflow-hidden transition-all duration-300 border ${
+        <div className={`flex flex-col sm:flex-row rounded-xl overflow-hidden transition-all duration-300 border ${
           status === 'correct' ? 'bg-green-500/10 border-green-400/50 shadow-[0_0_15px_rgba(34,197,94,0.15)]' :
           status === 'incorrect' ? 'bg-red-500/10 border-red-400/50 shadow-[0_0_15px_rgba(239,68,68,0.15)]' : 
           'bg-white/[0.03] border-white/10 focus-within:border-brand-primary/50'
@@ -62,7 +62,7 @@ const OpenQuestion = ({ question, answer, hint }) => {
           {status !== 'correct' && (
             <button 
               type="submit"
-              className="px-6 bg-white/5 hover:bg-white/10 text-white font-bold transition-colors border-l border-white/10"
+              className="px-6 py-4 bg-white/5 hover:bg-white/10 text-white font-bold transition-colors border-t sm:border-t-0 sm:border-l border-white/10"
             >
               {language === 'it' ? 'VERIFICA' : 'CHECK'}
             </button>
