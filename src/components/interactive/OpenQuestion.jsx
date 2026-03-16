@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { CheckCircle2, XCircle } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
 

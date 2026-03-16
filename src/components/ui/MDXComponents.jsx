@@ -1,4 +1,5 @@
 import { Info, AlertTriangle, Lightbulb, CheckCircle, ArrowRight, CheckCircle2, XCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useProgressStore } from '../../store/useProgressStore';
 
 export const Kbd = ({ children }) => (
