@@ -9,7 +9,13 @@ const CONTENT = {
       { id: 1, source: "hello world vim", target: "vim", hint: "Usa d2w", par: 3 },
       { id: 2, source: "apple orange banana", target: "apple banana", hint: "Usa dw su orange", par: 2 },
       { id: 3, source: "uno due tre quattro", target: "tre quattro", hint: "Usa d2w", par: 2 },
-      { id: 4, source: "cancella tutto questo", target: "", hint: "Usa d3w", par: 2 }
+      { id: 4, source: "cancella tutto questo", target: "", hint: "Usa d3w", par: 2 },
+      { id: 5, source: "testo da pulire", target: "pulire", hint: "Usa dw", par: 2 },
+      { id: 6, source: "vim is extreme", target: "vim extreme", hint: "Usa dw su is", par: 2 },
+      { id: 7, source: "1 2 3 4 5", target: "4 5", hint: "Usa d3w", par: 2 },
+      { id: 8, source: "elimina la x", target: "limina la x", hint: "Usa x", par: 1 },
+      { id: 9, source: "salva il mondo", target: "mondo", hint: "Usa d2w", par: 2 },
+      { id: 10, source: "viva il re", target: "", hint: "Usa d3w", par: 2 }
     ],
     ui: {
       title: "Sfida Speed Racer",
@@ -22,7 +28,8 @@ const CONTENT = {
       reset: "Resetta",
       winTitle: "Record Battuto!",
       winDesc: "Efficienza Massima Raggiunta",
-      next: "Prossima Sfida"
+      next: "Prossima Sfida",
+      showHint: "Mostra Suggerimento"
     }
   },
   en: {
@@ -30,7 +37,13 @@ const CONTENT = {
       { id: 1, source: "hello world vim", target: "vim", hint: "Use d2w", par: 3 },
       { id: 2, source: "apple orange banana", target: "apple banana", hint: "Use dw on orange", par: 2 },
       { id: 3, source: "one two three four", target: "three four", hint: "Use d2w", par: 2 },
-      { id: 4, source: "delete all this", target: "", hint: "Use d3w", par: 2 }
+      { id: 4, source: "delete all this", target: "", hint: "Use d3w", par: 2 },
+      { id: 5, source: "text to clean", target: "clean", hint: "Use dw", par: 2 },
+      { id: 6, source: "vim is extreme", target: "vim extreme", hint: "Use dw on is", par: 2 },
+      { id: 7, source: "1 2 3 4 5", target: "4 5", hint: "Use d3w", par: 2 },
+      { id: 8, source: "delete the x", target: "elete the x", hint: "Use x", par: 1 },
+      { id: 9, source: "save the world", target: "world", hint: "Use d2w", par: 2 },
+      { id: 10, source: "long live king", target: "", hint: "Use d3w", par: 2 }
     ],
     ui: {
       title: "Speed Racer Challenge",
@@ -43,38 +56,26 @@ const CONTENT = {
       reset: "Reset",
       winTitle: "Record Broken!",
       winDesc: "Maximum Efficiency Reached",
-      next: "Next Challenge"
+      next: "Next Challenge",
+      showHint: "Show Hint"
     }
   }
 };
 
-const SpeedRacer = ({ onComplete, onCompleteId }) => {
+const SpeedRacerGame = ({ challenge, onWin, currentIdx, totalChallenges, resetGlobal, keystrokes, setKeystrokes }) => {
   const language = useProgressStore((state) => state.language);
   const localized = CONTENT[language] || CONTENT.en;
-
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [keystrokes, setKeystrokes] = useState(0);
-  const [showWinOverlay, setShowWinOverlay] = useState(false);
-  
-  const challenge = localized.challenges[currentIdx];
 
   const [currentText, setCurrentText] = useState(challenge.source);
   const [cursorPos, setCursorPos] = useState(0);
   const [commandBuffer, setCommandBuffer] = useState("");
-
-  // Update text when challenge index changes
-  useEffect(() => {
-    setCurrentText(localized.challenges[currentIdx].source);
-    setCursorPos(0);
-    setKeystrokes(0);
-    setCommandBuffer("");
-  }, [currentIdx, localized.challenges]);
+  const [showHint, setShowHint] = useState(false);
+  const [showWinOverlay, setShowWinOverlay] = useState(false);
 
   const handleWin = useCallback(() => {
     setShowWinOverlay(true);
-    if (onComplete) onComplete();
-    useProgressStore.getState().completeLesson(onCompleteId || '07-speed-racer');
-  }, [onComplete, onCompleteId]);
+    onWin();
+  }, [onWin]);
 
   const processVimCommand = useCallback((cmd) => {
     let newText = currentText;
@@ -83,7 +84,6 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
 
     const fullCmd = commandBuffer + cmd;
     
-    // Command: x (delete char)
     if (fullCmd === 'x') {
       newText = currentText.slice(0, cursorPos) + currentText.slice(cursorPos + 1);
       newPos = Math.min(cursorPos, newText.length - 1);
@@ -91,7 +91,6 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
       valid = true;
       setCommandBuffer("");
     }
-    // Command: dw or d[n]w
     else if (fullCmd.startsWith('d')) {
       const match = fullCmd.match(/^d(\d*)w$/);
       if (match) {
@@ -106,7 +105,6 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
             tempText = tempText.slice(0, tempPos);
             break;
           } else {
-            // Include the space
             tempText = tempText.slice(0, tempPos) + tempText.slice(tempPos + nextSpace + 1);
           }
         }
@@ -117,12 +115,11 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
         setCommandBuffer("");
       } else if (fullCmd === 'd' || /d\d+$/.test(fullCmd)) {
         setCommandBuffer(fullCmd);
-        return; // Wait for 'w'
+        return;
       } else {
-        setCommandBuffer(""); // Invalid start
+        setCommandBuffer("");
       }
     }
-    // Basic movements for convenience in simulation
     else if (fullCmd === 'h') {
       newPos = Math.max(0, cursorPos - 1);
       valid = true;
@@ -144,7 +141,7 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
         handleWin();
       }
     }
-  }, [currentText, cursorPos, commandBuffer, handleWin, challenge.target]);
+  }, [currentText, cursorPos, commandBuffer, handleWin, challenge.target, setKeystrokes]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -164,16 +161,8 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
     setCursorPos(0);
     setKeystrokes(0);
     setCommandBuffer("");
+    setShowHint(false);
     setShowWinOverlay(false);
-  };
-
-  const nextChallenge = () => {
-    if (currentIdx < localized.challenges.length - 1) {
-      setCurrentIdx(prev => prev + 1);
-      setShowWinOverlay(false);
-    } else {
-        setShowWinOverlay(false);
-    }
   };
 
   const MMotionDiv = motion.div;
@@ -236,9 +225,19 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
           </div>
         </div>
         
-        <div className="bg-white/[0.02] p-4 rounded-2xl border border-dashed border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 group hover:bg-white/5 transition-colors">
-          <div className="text-[10px] font-bold text-white/30 uppercase tracking-widest">
-            {localized.ui.hint}: <span className="text-white/60 italic">{challenge.hint}</span>
+        <div className="bg-white/[0.02] p-4 rounded-2xl border border-dashed border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 group hover:bg-white/5 transition-colors min-h-[56px]">
+          <div className="text-[10px] font-bold text-white/30 uppercase tracking-widest flex items-center gap-2">
+            {localized.ui.hint}: 
+            {showHint ? (
+              <span className="text-white/60 italic lowercase">{challenge.hint}</span>
+            ) : (
+              <button 
+                onClick={() => setShowHint(true)}
+                className="text-[9px] text-brand-primary border border-brand-primary/30 px-2 py-0.5 rounded-full hover:bg-brand-primary/10 transition-colors"
+              >
+                {localized.ui.showHint}
+              </button>
+            )}
           </div>
           <div className="text-[9px] font-black text-brand-primary px-2 py-1 bg-brand-primary/10 rounded uppercase tracking-tighter">
             {localized.ui.par.replace('{n}', challenge.par || 3)}
@@ -247,14 +246,13 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
       </div>
 
       <div className="pt-6 border-t border-white/5 flex justify-between items-center text-[10px] font-bold uppercase tracking-widest relative z-10">
-        <div className="text-white/40">{localized.ui.challengeCount.replace('{x}', currentIdx + 1).replace('{y}', localized.challenges.length)}</div>
+        <div className="text-white/40">{localized.ui.challengeCount.replace('{x}', currentIdx + 1).replace('{y}', totalChallenges)}</div>
         <button onClick={resetChallenge} className="flex items-center space-x-1 hover:text-white transition-colors">
           <RotateCcw size={12} />
           <span>{localized.ui.reset}</span>
         </button>
       </div>
 
-      {/* Completion Overlay */}
       <AnimatePresence>
         {showWinOverlay && (
           <MMotionDiv 
@@ -274,7 +272,7 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
                 {localized.ui.reset}
               </button>
               <button 
-                onClick={nextChallenge}
+                onClick={resetGlobal}
                 className="px-8 py-3 bg-brand-primary text-brand-bg font-black rounded-2xl uppercase tracking-widest text-xs shadow-[0_10px_30px_rgba(45,212,191,0.3)] hover:scale-105 transition-transform"
               >
                 {localized.ui.next}
@@ -284,11 +282,43 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
         )}
       </AnimatePresence>
 
-      {/* Touch Warning or Hidden interaction aid */}
       <div className="lg:hidden text-[8px] text-white/20 uppercase text-center font-bold tracking-widest">
         Usa la console mobile per inviare i comandi i, x, dw
       </div>
     </div>
+  );
+};
+
+const SpeedRacer = ({ onComplete, onCompleteId }) => {
+  const language = useProgressStore((state) => state.language);
+  const localized = CONTENT[language] || CONTENT.en;
+
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [keystrokes, setKeystrokes] = useState(0);
+
+  const handleGlobalWin = useCallback(() => {
+    if (onComplete) onComplete();
+    useProgressStore.getState().completeLesson(onCompleteId || '07-speed-racer');
+  }, [onComplete, onCompleteId]);
+
+  const nextChallenge = () => {
+    if (currentIdx < localized.challenges.length - 1) {
+      setCurrentIdx(prev => prev + 1);
+      setKeystrokes(0);
+    }
+  };
+
+  return (
+    <SpeedRacerGame 
+      key={`${currentIdx}-${language}`}
+      currentIdx={currentIdx}
+      totalChallenges={localized.challenges.length}
+      challenge={localized.challenges[currentIdx]}
+      onWin={handleGlobalWin}
+      resetGlobal={nextChallenge}
+      keystrokes={keystrokes}
+      setKeystrokes={setKeystrokes}
+    />
   );
 };
 
