@@ -1,15 +1,16 @@
 # 🧙‍♂️ Vim Mastery: The Universal Editor Trainer
 
 ![Vim Mastery Banner](https://img.shields.io/badge/VIM-MASTERY-2dd4bf?style=for-the-badge&logo=vim&logoColor=white)
-![Version](https://img.shields.io/badge/VERSION-1.21-FFD700?style=for-the-badge)
+![Version](https://img.shields.io/badge/VERSION-1.30-FFD700?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/PLATFORM-CROSS_DEVICE-646cff?style=for-the-badge)
 
 **Vim Mastery** is a premium, gamified educational platform that adapts to your environment. Whether you are on a high-end desktop workstation or a mobile device, Vim Mastery ensures you learn the language of Vim with maximum efficiency.
 
-## 🚀 The Interactivity Overhaul (v1.21)
+## 🚀 The Interactivity Overhaul (v1.30)
 Our latest release redefines how Vim is taught on the web with massive interactivity improvements:
+- **Real Vim Simulation (Speed Racer)**: The Speed Racer challenge is no longer a placeholder. It now features a custom Vim command processor (supporting `x`, `dw`, `d2w`, etc.) with real-time text manipulation and cursor feedback, eliminating the need for external terminal testing for validation.
 - **`OpenQuestion` Typing Component**: Moving beyond multiple-choice, users can now type Vim commands directly into an input to answer questions, simulating the real Vim experience perfectly on both desktop and mobile.
-- **Improved Mobile Responsiveness**: A completely overhauled header with an intelligent auto-resizing layout and glassmorphism legends ensures mobile users have the cleanest experience possible.
+- **Unified Mobile Console**: A persistent, semi-transparent console that bridges the gap between touch input and terminal commands, now fully integrated with interactive challenges.
 - **Smart Hardware Detection**: Leverages the `useDevice` hook to detect physical keyboards, gracefully handling hybrid devices with a smart toggle & legend.
 - **Expanded Quiz Engine**: 100% of the lessons are now verifiable, with expanded quizzes covering all core editing and navigation actions.
 - **Gamified XP System**: Every lesson completed grants **100 XP** with persistent progression.
