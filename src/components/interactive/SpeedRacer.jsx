@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Trophy, RotateCcw } from 'lucide-react';
 import { useProgressStore } from '../../store/useProgressStore';
@@ -6,8 +6,10 @@ import { useProgressStore } from '../../store/useProgressStore';
 const CONTENT = {
   it: {
     challenges: [
-      { id: 1, source: "hello world vim", target: "vim", hint: "Usa d2w" },
-      { id: 2, source: "apple orange banana", target: "apple banana", hint: "Usa dw su orange" }
+      { id: 1, source: "hello world vim", target: "vim", hint: "Usa d2w", par: 3 },
+      { id: 2, source: "apple orange banana", target: "apple banana", hint: "Usa dw su orange", par: 2 },
+      { id: 3, source: "uno due tre quattro", target: "tre quattro", hint: "Usa d2w", par: 2 },
+      { id: 4, source: "cancella tutto questo", target: "", hint: "Usa d3w", par: 2 }
     ],
     ui: {
       title: "Sfida Speed Racer",
@@ -20,14 +22,15 @@ const CONTENT = {
       reset: "Resetta",
       winTitle: "Record Battuto!",
       winDesc: "Efficienza Massima Raggiunta",
-      next: "Prossima Sfida",
-      test: "CLICCA PER TESTARE NEL TERMINALE"
+      next: "Prossima Sfida"
     }
   },
   en: {
     challenges: [
-      { id: 1, source: "hello world vim", target: "vim", hint: "Use d2w" },
-      { id: 2, source: "apple orange banana", target: "apple banana", hint: "Use dw on orange" }
+      { id: 1, source: "hello world vim", target: "vim", hint: "Use d2w", par: 3 },
+      { id: 2, source: "apple orange banana", target: "apple banana", hint: "Use dw on orange", par: 2 },
+      { id: 3, source: "one two three four", target: "three four", hint: "Use d2w", par: 2 },
+      { id: 4, source: "delete all this", target: "", hint: "Use d3w", par: 2 }
     ],
     ui: {
       title: "Speed Racer Challenge",
@@ -40,8 +43,7 @@ const CONTENT = {
       reset: "Reset",
       winTitle: "Record Broken!",
       winDesc: "Maximum Efficiency Reached",
-      next: "Next Challenge",
-      test: "CLICK TO TEST IN TERMINAL"
+      next: "Next Challenge"
     }
   }
 };
@@ -50,16 +52,128 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
   const language = useProgressStore((state) => state.language);
   const localized = CONTENT[language] || CONTENT.en;
 
-  const currentIdx = 0;
+  const [currentIdx, setCurrentIdx] = useState(0);
   const [keystrokes, setKeystrokes] = useState(0);
   const [showWinOverlay, setShowWinOverlay] = useState(false);
-
+  
   const challenge = localized.challenges[currentIdx];
 
-  const handleComplete = () => {
+  const [currentText, setCurrentText] = useState(challenge.source);
+  const [cursorPos, setCursorPos] = useState(0);
+  const [commandBuffer, setCommandBuffer] = useState("");
+
+  // Update text when challenge index changes
+  useEffect(() => {
+    setCurrentText(localized.challenges[currentIdx].source);
+    setCursorPos(0);
+    setKeystrokes(0);
+    setCommandBuffer("");
+  }, [currentIdx, localized.challenges]);
+
+  const handleWin = useCallback(() => {
     setShowWinOverlay(true);
     if (onComplete) onComplete();
     useProgressStore.getState().completeLesson(onCompleteId || '07-speed-racer');
+  }, [onComplete, onCompleteId]);
+
+  const processVimCommand = useCallback((cmd) => {
+    let newText = currentText;
+    let newPos = cursorPos;
+    let valid = false;
+
+    const fullCmd = commandBuffer + cmd;
+    
+    // Command: x (delete char)
+    if (fullCmd === 'x') {
+      newText = currentText.slice(0, cursorPos) + currentText.slice(cursorPos + 1);
+      newPos = Math.min(cursorPos, newText.length - 1);
+      if (newPos < 0) newPos = 0;
+      valid = true;
+      setCommandBuffer("");
+    }
+    // Command: dw or d[n]w
+    else if (fullCmd.startsWith('d')) {
+      const match = fullCmd.match(/^d(\d*)w$/);
+      if (match) {
+        const count = parseInt(match[1] || "1");
+        let tempText = currentText;
+        let tempPos = cursorPos;
+        
+        for (let i = 0; i < count; i++) {
+          const remaining = tempText.slice(tempPos);
+          const nextSpace = remaining.indexOf(" ");
+          if (nextSpace === -1) {
+            tempText = tempText.slice(0, tempPos);
+            break;
+          } else {
+            // Include the space
+            tempText = tempText.slice(0, tempPos) + tempText.slice(tempPos + nextSpace + 1);
+          }
+        }
+        newText = tempText;
+        newPos = Math.min(tempPos, newText.length - 1);
+        if (newPos < 0) newPos = 0;
+        valid = true;
+        setCommandBuffer("");
+      } else if (fullCmd === 'd' || /d\d+$/.test(fullCmd)) {
+        setCommandBuffer(fullCmd);
+        return; // Wait for 'w'
+      } else {
+        setCommandBuffer(""); // Invalid start
+      }
+    }
+    // Basic movements for convenience in simulation
+    else if (fullCmd === 'h') {
+      newPos = Math.max(0, cursorPos - 1);
+      valid = true;
+      setCommandBuffer("");
+    } else if (fullCmd === 'l') {
+      newPos = Math.min(currentText.length - 1, cursorPos + 1);
+      valid = true;
+      setCommandBuffer("");
+    } else {
+        setCommandBuffer("");
+    }
+
+    if (valid) {
+      setCurrentText(newText);
+      setCursorPos(newPos);
+      setKeystrokes(prev => prev + 1);
+      
+      if (newText.trim() === challenge.target.trim()) {
+        handleWin();
+      }
+    }
+  }, [currentText, cursorPos, commandBuffer, handleWin, challenge.target]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (showWinOverlay) return;
+      if (e.key.length === 1 && /[a-z0-9]/.test(e.key)) {
+        processVimCommand(e.key);
+      } else if (e.key === 'Backspace') {
+        setCommandBuffer("");
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [processVimCommand, showWinOverlay]);
+
+  const resetChallenge = () => {
+    setCurrentText(challenge.source);
+    setCursorPos(0);
+    setKeystrokes(0);
+    setCommandBuffer("");
+    setShowWinOverlay(false);
+  };
+
+  const nextChallenge = () => {
+    if (currentIdx < localized.challenges.length - 1) {
+      setCurrentIdx(prev => prev + 1);
+      setShowWinOverlay(false);
+    } else {
+        setShowWinOverlay(false);
+    }
   };
 
   const MMotionDiv = motion.div;
@@ -69,7 +183,7 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
       <MMotionDiv 
         animate={{ opacity: [0.1, 0.2, 0.1] }} 
         transition={{ repeat: Infinity, duration: 3 }}
-        className="absolute top-0 right-0 p-4"
+        className="absolute top-0 right-0 p-4 pointer-events-none"
       >
         <Zap size={80} className="text-brand-primary" />
       </MMotionDiv>
@@ -88,14 +202,35 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <div className="space-y-2">
             <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest px-1">{localized.ui.source}</p>
-            <div className="bg-white/5 p-4 rounded-2xl border border-white/10 font-mono text-sm sm:text-base text-white/60 min-h-[60px] flex items-center overflow-x-auto">
-              {challenge.source}
+            <div className="bg-white/5 p-4 rounded-2xl border border-white/10 font-mono text-sm sm:text-base text-white/60 min-h-[80px] flex items-center overflow-hidden relative">
+              <div className="flex flex-wrap">
+                {currentText.split("").map((char, i) => (
+                  <span key={i} className={`relative ${i === cursorPos ? 'text-brand-bg bg-brand-primary' : ''}`}>
+                    {char === " " ? "\u00A0" : char}
+                    {i === cursorPos && (
+                      <motion.div 
+                        layoutId="cursor"
+                        className="absolute inset-0 bg-brand-primary -z-10"
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </span>
+                ))}
+                {currentText.length === 0 && cursorPos === 0 && (
+                   <span className="text-brand-bg bg-brand-primary">&nbsp;</span>
+                )}
+              </div>
+              {commandBuffer && (
+                <div className="absolute bottom-1 right-2 text-[9px] font-black text-brand-primary opacity-50 uppercase">
+                  Cmd: {commandBuffer}
+                </div>
+              )}
             </div>
           </div>
 
           <div className="space-y-2">
             <p className="text-[10px] font-bold text-brand-primary uppercase tracking-widest px-1">{localized.ui.target}</p>
-            <div className="bg-brand-primary/5 p-4 rounded-2xl border border-brand-primary/20 font-mono text-sm sm:text-base text-brand-primary min-h-[60px] flex items-center overflow-x-auto">
+            <div className="bg-brand-primary/5 p-4 rounded-2xl border border-brand-primary/20 font-mono text-sm sm:text-base text-brand-primary min-h-[80px] flex items-center overflow-x-auto">
               {challenge.target}
             </div>
           </div>
@@ -106,14 +241,14 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
             {localized.ui.hint}: <span className="text-white/60 italic">{challenge.hint}</span>
           </div>
           <div className="text-[9px] font-black text-brand-primary px-2 py-1 bg-brand-primary/10 rounded uppercase tracking-tighter">
-            {localized.ui.par.replace('{n}', 3)}
+            {localized.ui.par.replace('{n}', challenge.par || 3)}
           </div>
         </div>
       </div>
 
       <div className="pt-6 border-t border-white/5 flex justify-between items-center text-[10px] font-bold uppercase tracking-widest relative z-10">
         <div className="text-white/40">{localized.ui.challengeCount.replace('{x}', currentIdx + 1).replace('{y}', localized.challenges.length)}</div>
-        <button onClick={() => setKeystrokes(0)} className="flex items-center space-x-1 hover:text-white transition-colors">
+        <button onClick={resetChallenge} className="flex items-center space-x-1 hover:text-white transition-colors">
           <RotateCcw size={12} />
           <span>{localized.ui.reset}</span>
         </button>
@@ -133,13 +268,13 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
             <p className="text-white/50 text-xs uppercase tracking-[0.2em] font-bold mb-8">{localized.ui.winDesc}</p>
             <div className="flex gap-4">
                <button 
-                onClick={() => { setKeystrokes(0); setShowWinOverlay(false); }}
+                onClick={resetChallenge}
                 className="px-6 py-3 bg-white/10 text-white font-black rounded-2xl uppercase tracking-widest text-xs hover:bg-white/20 transition-all border border-white/10"
               >
                 {localized.ui.reset}
               </button>
               <button 
-                onClick={() => setShowWinOverlay(false)}
+                onClick={nextChallenge}
                 className="px-8 py-3 bg-brand-primary text-brand-bg font-black rounded-2xl uppercase tracking-widest text-xs shadow-[0_10px_30px_rgba(45,212,191,0.3)] hover:scale-105 transition-transform"
               >
                 {localized.ui.next}
@@ -149,15 +284,9 @@ const SpeedRacer = ({ onComplete, onCompleteId }) => {
         )}
       </AnimatePresence>
 
-      {/* Interactive Bridge Placeholder */}
-      <div 
-        className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brand-bg to-transparent z-20 flex flex-col items-center justify-end pb-8 cursor-pointer group"
-        onClick={handleComplete}
-      >
-         <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-[9px] font-black text-white flex items-center space-x-3 group-hover:bg-brand-primary group-hover:text-brand-bg transition-all uppercase">
-            <span className="animate-pulse">●</span>
-            <span>{localized.ui.test}</span>
-         </div>
+      {/* Touch Warning or Hidden interaction aid */}
+      <div className="lg:hidden text-[8px] text-white/20 uppercase text-center font-bold tracking-widest">
+        Usa la console mobile per inviare i comandi i, x, dw
       </div>
     </div>
   );
